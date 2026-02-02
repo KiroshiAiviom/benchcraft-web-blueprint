@@ -1,115 +1,81 @@
-# UI_FOUNDATION_PACK.md — Benchcraft Web (v1.1)
+# UI Foundation Pack (Benchcraft Web)
 
-Этот документ — **единая база** для UI во всех наших web‑проектах (Next.js App Router).
+A shared baseline for building **distinctive, production-grade** UI across Benchcraft web projects.
 
-Цель: чтобы Codex мог делать UI **высокого уровня** (профессионально, аккуратно, приятно),
-а не “типичный AI‑лендинг”.
-
----
-
-## 1) Принципы (то, что тебе важно)
-
-Мы целимся в ощущения уровня **Factory AI / Relume**:
-- сильная **типографика** + осмысленная палитра,
-- интересные **визуальные детали** (не “блики ради бликов”),
-- интерактивные элементы при hover/scroll,
-- **плавность** (анимации не должны лагать),
-- **compact** композиция (не огромные пустоты, но и не теснота),
-- высокий **text/vision clarity**,
-- профессиональный UX (понятная иерархия, states, доступность).
+This is not a component library. It is a set of **constraints, tokens, primitives, and QA checks**
+that keeps interfaces professional and consistent without making projects look identical.
 
 ---
 
-## 2) Не делаем (анти‑паттерны)
+## 1) Principles
 
-- “AI‑slop UI”: шаблонные карточки + шаблонный hero + градиент “фиолетовый на белом”.
-- Случайные эффекты (glow/blur/noise) без общей идеи.
-- Слишком много анимаций (везде и сразу).
-- **7 nested div** и загадочные wrapper’ы, которые потом невозможно поправить.
-- “Победить spacing” добавлением ещё одного `px-6` поверх `px-6`.
-
----
-
-## 3) Процесс: как стартовать дизайн быстро и качественно (в проекте)
-
-### Шаг 1 — выбрать стиль (10–15 минут)
-Запиши в `docs/STYLE_GUIDE.md`:
-- 3–5 прилагательных (например: *editorial, precise, calm, industrial, premium*)
-- “что запомнят”: 1 главный “signature element” (например: сетка + шум + интерактивные карточки)
-- light/dark тему (или обе)
-
-### Шаг 2 — типографика (10 минут)
-- Выбираем **2 шрифта**: display + body
-- Фиксируем:
-  - базовый размер, line-height, tracking
-  - размеры заголовков (H1/H2/H3)
-- Никаких “случайных” шрифтов в середине проекта.
-
-> Если проект enterprise/dashboard — body может быть более нейтральным, но display всё равно должен давать характер.
-
-
+- **Typography-first.** The interface should feel designed even before color and motion.
+- **Cohesive palette.** Neutrals + one strong accent beats “many timid accents”.
+- **Compact, tidy composition.** Avoid “half-screen padding”; keep rhythm and density intentional.
+- **Intentional motion.** A few high-impact moments beat many small, noisy animations.
+- **Clarity over decoration.** Visual details must support hierarchy and usability.
+- **Maintainability.** Minimal DOM nesting, reusable primitives, tokens over hardcoded values.
 
 ---
 
-## 4.1 Быстрый shortlist по шрифтам (чтобы не зависать на выборе)
+## 2) Anti-patterns
 
-> Это не “обязательные шрифты”, а список для старта.  
-> **Перед фиксацией проверь**, что шрифт поддерживает нужные символы (например, кириллицу) и веса.
+Avoid these by default:
 
-### Пары “display + body” (профессионально, без клише)
-- **IBM Plex Sans** (body) + **IBM Plex Serif** (display) — очень взрослый, “enterprise‑editorial”
-- **Fira Sans** (body) + **Alegreya** (display) — спокойная читабельность + характер
-- **Source Sans 3** (body) + **Source Serif 4** (display) — чисто, системно, но не скучно
-- **PT Sans** (body) + **PT Serif** (display) — отличная кириллица, нейтрально‑премиально
-- **Noto Sans** (body) + **Noto Serif** (display) — безопасный fallback, если нужно “везде работает”
-- **Manrope** (body) + **Spectral** (display) — современно и “чуть‑чуть editorial”
-
-### Быстрый критерий выбора
-- Маркетинг/лендинг: display должен быть ощутимым (но не цирк)
-- SaaS/дашборд: body важнее, display — для заголовков/бренда
-- Мультиязычность: лучше выбрать семейства с широким покрытием
+- Generic landing patterns: predictable hero + feature cards + gradient wash.
+- Random effects (glow/blur/noise) without a coherent direction.
+- “Motion everywhere” (especially JS-driven animation for simple interactions).
+- Wrapper-only DOM nesting (deep `<div>` stacks with padding on every layer).
+- Fixing spacing problems by adding more spacing instead of simplifying structure.
 
 ---
 
-### Шаг 3 — палитра (10 минут)
-- Нужны:
-  - нейтрали (фон/поверхности/границы)
-  - **1 accent** (и optionally “danger”)
-- Палитра должна работать и для UI‑states (hover/focus/disabled).
+## 3) Typography
 
-### Шаг 4 — токены
-Все цвета/радиусы/тени/анимации → через **CSS variables** (и уже ими управляет Tailwind/shadcn).
+### 3.1 Rules
 
----
+- Use **max 2 font families**: a display face + a body face.
+- Define a **small type scale** and stick to it:
+  - H1 / H2 / H3 / body / small
+  - line-height and letter-spacing included
+- Prefer variable fonts where possible.
+- Ensure language coverage (Cyrillic/extended Latin/etc.) before committing.
 
-## 4) “Style recipes” (готовые направления, чтобы не думать каждый раз с нуля)
+### 3.2 Quick shortlist (display + body pairs)
 
-Это **не шаблоны**, а “рельсы”, которые дают стабильный высокий уровень.
+These are “good defaults” that avoid common AI-generated aesthetics. Use them as a starting point.
 
-### Recipe A — Editorial Tech (dark, Factory‑adjacent)
-- Фон: тёмный нейтрал, лёгкая текстура (noise), аккуратные границы
-- Акцент: один “электрический” или “кислотно‑холодный”, но дозировано
-- Типографика: сильный display, спокойный body
-- Мотив: тонкая сетка, диаграммные элементы, аккуратные glow‑моменты
-
-### Recipe B — Clean Studio (light, Relume‑adjacent)
-- Белые/молочные поверхности + тонкие тени
-- Акцент: “чистый” (синий/зелёный/красный), без “фиолетового клише”
-- Интерактивность: hover‑states на карточках (subtle lift), микро‑анимации
-- Мотив: интерактивные блоки, которые приятно “трогать”
-
-### Recipe C — Industrial Utility (enterprise)
-- Сильная сетка, строгая иерархия, ясные компоненты
-- Палитра: нейтраль + один акцент
-- Минимум декоративки, максимум ясности
-- Мотив: аккуратные таблицы/панели/инфо‑карточки, понятные состояния
+- IBM Plex Sans (body) + IBM Plex Serif (display)
+- Source Sans 3 (body) + Source Serif 4 (display)
+- Fira Sans (body) + Alegreya (display)
+- PT Sans (body) + PT Serif (display) — strong Cyrillic support
+- Noto Sans (body) + Noto Serif (display) — broad language support
+- Manrope (body) + Spectral (display)
 
 ---
 
-## 5) Токены (минимальный контракт)
+## 4) Palette
 
-### 5.1 Цвета (семантические)
-Обязательный минимум:
+### 4.1 Baseline structure
+
+- **Neutrals:** background / surfaces / borders / muted text
+- **One accent:** accent + accent-foreground
+- Optional: **danger** (error states)
+
+### 4.2 Rules
+
+- Build palettes for **states** (hover/focus/disabled), not just static screenshots.
+- Avoid low-contrast “gray on gray” text.
+- Use tokens; do not sprinkle arbitrary hex values across components.
+
+---
+
+## 5) Tokens
+
+### 5.1 Minimal token set (semantic)
+
+Colors (minimum):
+
 - `--background`, `--foreground`
 - `--card`, `--card-foreground`
 - `--muted`, `--muted-foreground`
@@ -117,109 +83,232 @@
 - `--accent`, `--accent-foreground`
 - `--ring` (focus)
 
-### 5.2 Радиусы
-- базовый `--radius`
-- (опционально) 2 дополнительных уровня
+Shape:
 
-### 5.3 Тени
-- 0–2 уровня
-- тени должны быть чистыми (не грязь/мыло)
+- `--radius` (base)
 
-### 5.4 Motion tokens
-- duration: fast / normal / slow
-- easing: один основной
-- stagger interval (если есть entry‑анимации)
+Motion:
+
+- `--motion-fast`, `--motion-normal`, `--motion-slow`
+- `--ease-out` (single primary easing)
+
+### 5.2 Implementation contract (copy/paste baseline)
+
+**Contract:** tokens live in CSS variables (single source of truth). Tailwind maps to those variables.
+Components use Tailwind semantic classes (e.g., `bg-background`, `text-foreground`).
+
+**`app/globals.css` (or `src/app/globals.css`)**
+```css
+:root {
+  /* colors (HSL components; compatible with shadcn/ui conventions) */
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --ring: 240 5% 64.9%;
+
+  /* shape */
+  --radius: 0.75rem;
+
+  /* motion */
+  --motion-fast: 120ms;
+  --motion-normal: 180ms;
+  --motion-slow: 260ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+}
+```
+
+**`tailwind.config.ts` (extend mapping)**
+```ts
+export default {
+  theme: {
+    extend: {
+      colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        card: "hsl(var(--card))",
+        "card-foreground": "hsl(var(--card-foreground))",
+        muted: "hsl(var(--muted))",
+        "muted-foreground": "hsl(var(--muted-foreground))",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        accent: "hsl(var(--accent))",
+        "accent-foreground": "hsl(var(--accent-foreground))",
+        ring: "hsl(var(--ring))",
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      transitionTimingFunction: {
+        "ease-out": "var(--ease-out)",
+      },
+      transitionDuration: {
+        fast: "var(--motion-fast)",
+        normal: "var(--motion-normal)",
+        slow: "var(--motion-slow)",
+      },
+    },
+  },
+};
+```
+
+**Component usage (example)**
+```tsx
+<button className="rounded-lg bg-accent text-accent-foreground transition-[transform,opacity] duration-normal ease-ease-out hover:-translate-y-0.5">
+  Continue
+</button>
+```
 
 ---
 
-## 6) Layout primitives (чтобы не плодить wrapper’ы)
+## 6) Style recipes (direction rails)
 
-Если мы не хотим “кривых паддингов” — нам нужны примитивы:
+Recipes are not templates. They are constraints that help you pick coherent defaults quickly.
 
-- **Container**: ширина + горизонтальные отступы
-- **Section**: вертикальный ритм (padding top/bottom)
-- **Stack**: вертикальный gap
-- **Cluster**: горизонтальные группы (wrap)
-- **Grid**: адаптивные колонки
+### 6.1 Editorial Tech (dark)
 
-Правило:
-- spacing между блоками → через `gap`
-- внутренний spacing карточек → 1 место, не “везде по чуть‑чуть”
+- Dark neutral base with subtle texture and crisp borders.
+- One cool accent used sparingly.
+- Strong display type; calm, readable body type.
+- One “signature” interaction (e.g., staggered hero reveal).
+
+### 6.2 Clean Studio (light)
+
+- Bright surfaces, thin shadows, strong whitespace discipline.
+- One clean accent (blue/green/red), no gradient clichés.
+- Hover micro-interactions (lift, underline, icon shift) kept subtle.
+
+### 6.3 Industrial Utility (enterprise)
+
+- Grid-driven layout, strict hierarchy, readable density.
+- Neutral palette + one accent.
+- Minimal decoration; maximum clarity and predictability.
 
 ---
 
+## 7) Layout primitives (avoid wrapper-only nesting)
 
+Use a small set of primitives consistently:
+
+- **Container:** max width + horizontal padding
+- **Section:** vertical rhythm (top/bottom spacing)
+- **Stack:** vertical layout using `gap`
+- **Cluster:** horizontal groups using `gap` + wrap
+- **Grid:** responsive columns (avoid per-card hacks)
+
+Rules:
+
+- Spacing *between* blocks → `gap` on the parent (Stack/Grid).
+- Padding *inside* cards → one place (don’t “sprinkle padding” on every nested layer).
+- Prefer 2–4 nesting levels; deeply nested wrappers must justify themselves.
+
+### 7.1 Fix spacing/alignment quickly (debug protocol)
+
+When something looks “off”:
+
+1) Remove wrapper-only nodes first (if it adds no layout/semantics, it is noise).
+2) Re-establish a single spacing source of truth:
+   - between blocks → `gap`
+   - inside cards → one padding layer
+3) Temporarily enable debug styling (dev-only):
+   - `outline: 1px solid ...` or `ring-1`
+   - highlight containers vs content
+4) Only then adjust cosmetics (shadows, gradients, borders).
 
 ---
 
-## 6.1 Как быстро чинить “кривые отступы” (практика)
+## 8) Component baseline (minimum)
 
-Когда визуально “что-то не так”, действуй по порядку:
+Even before a full UI kit exists, keep these stable:
 
-1) **Убери лишние wrapper’ы** (если wrapper не даёт layout/семантику — он лишний).  
-2) Приведи spacing к источнику правды:
-   - между блоками → `gap` (Stack/Grid)
-   - внутри карточек → один padding, без “везде по чуть‑чуть”
-3) Временно включи “debug‑режим”:
-   - обводка контейнеров (`outline`, `ring-1`)
-   - подсветка baseline/grid (dev-only)
-4) Только потом — косметика (тени/градиенты/декор).
-
-Если правки неочевидны — добавь в отчёт “что проверить руками” с 5–10 пунктами.
-
-## 7) Компоненты (минимальный фундамент)
-
-Даже без полного UI‑кита, базовый набор должен быть стабилен:
 - Button (variants + sizes)
 - Input / Textarea / Select
-- Card (минимум 2 уровня)
-- Badge / Tag
+- Card (at least 2 elevation levels)
+- Badge/Tag
 - Tabs
-- Dialog / Drawer
+- Dialog/Drawer
 - Tooltip
-- Data table (когда нужно)
-- Toast
+- Toast/Notification
+- Data table (when required)
 
-Если используем shadcn/ui — компоненты берём оттуда и кастомизируем через токены/variants.
-
----
-
-## 8) Motion (плавность и “signature moments”)
-
-- Приоритет: 60fps, `transform` + `opacity`
-- Ставим 1–2 “signature moments” на страницу:
-  - entry‑stagger у hero
-  - 1–2 hover‑интерактивных блока
-- Везде поддерживаем `prefers-reduced-motion`
+If using shadcn/ui, prefer generating components from it and customizing via tokens and variants.
 
 ---
 
-## 9) UI QA чеклист (перед тем как сказать “готово”)
+## 9) Motion (smooth, deliberate)
 
-**Clarity**
-- заголовки читаются, иерархия ясна
-- контраст достаточный, текст не “серый на сером”
-
-**Spacing**
-- нет случайных отступов
-- одинаковые карточки имеют одинаковые paddings
-- элементы выровнены по сетке
-
-**States**
-- hover/focus/active/disabled предусмотрены
-- есть нормальные focus‑styles (ring)
-
-**Responsive**
-- mobile не ломается
-- плотность/композиция на 2–3 брейкпоинтах разумная
-
-**Performance**
-- нет тяжёлых blur/glow на больших слоях
-- анимации не дёргаются
+- Prefer `transform` + `opacity` for 60fps.
+- Use **1–2 signature moments** per page:
+  - hero entry stagger
+  - a small set of interactive blocks
+- Always respect `prefers-reduced-motion` (disable non-essential motion).
 
 ---
 
-## 10) Как просить Codex делать UI правильно (короткая формула)
+## 10) UI QA checklist
 
-- “Сделай 2 style directions → выбери 1 → зафиксируй tokens + typography → собери секции → в конце дай diff + чеклист ручной проверки.”
+### Visual clarity
+
+- Hierarchy is obvious (headings, subheadings, body).
+- Body text is readable: comfortable line-height and no low-contrast gray-on-gray.
+
+### Spacing consistency
+
+- Similar components have identical paddings and gaps.
+- Layout aligns to a consistent grid/container.
+
+### Interaction states
+
+- Hover/focus/active/disabled states are defined where applicable.
+- Keyboard navigation works for interactive elements.
+
+### Accessibility baseline (practical, numeric)
+
+- Color contrast meets **WCAG AA** for text (or better).
+- Focus ring is visible: **≥ 2px** thickness with an offset (avoid “inset-only” focus).
+- Minimum interactive hit target: **44×44px** for touch targets.
+- `prefers-reduced-motion`: disable non-essential animations and remove large parallax effects.
+
+### Responsive
+
+- No broken layout on mobile.
+- Density is intentional across 2–3 breakpoints (not “shrunk desktop”).
+
+### Performance
+
+- Avoid heavy, large-area blur/glow layers.
+- No janky animation: avoid animating layout properties (`width`, `height`, `top`, etc.) when possible.
+
+---
+
+## 11) Prompt formula (how to ask Codex for UI work)
+
+Use a short, structured request:
+
+1) Propose 2 style directions (name + 5 bullets each).
+2) Pick 1 direction and write/update `docs/STYLE_GUIDE.md` tokens + typography.
+3) Implement the UI in small checkpoints.
+4) End with diff + checklist of manual UI verifications.
 

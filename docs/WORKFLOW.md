@@ -1,105 +1,49 @@
-# WORKFLOW.md — Benchcraft Web (v1.1)
+# Workflow (Benchcraft Web)
 
-Эта инструкция описывает **как мы работаем с Codex**, чтобы:
-- ускоряться через параллельность,
-- не терять качество,
-- не засорять контекст,
-- получать маленькие диффы и предсказуемые результаты.
+This document defines how we work with Codex to keep quality high while moving fast:
+small checkpoints, parallel review/testing, and clean context management.
 
----
+## Core loop (one checkpoint)
 
-## 0) TL;DR (ритуал одной итерации)
+Every iteration is:
 
-Каждая итерация = **1 задача → 1 чекпоинт → отчёт → стоп**.
+**1 task → 1 checkpoint → report → stop**
 
-1) Открой `plans/NOW.md` и выполни **только следующий шаг**.
-2) Запусти Codex и дай команду: *“работай 25 минут, в конце diff + отчёт, не коммить”*.
-3) Прими/отклони изменения.
-4) Обнови `plans/NOW.md` и/или создай новый ExecPlan.
-5) Повтори.
+1) Read `plans/NOW.md` and execute **only the single next step**.
+2) Timebox the checkpoint to **15–30 minutes**.
+3) End the checkpoint with:
+   - a reviewable diff,
+   - a short checkpoint report (`reports/`),
+   - plan updates that reflect reality,
+   - quality gates (lint/typecheck; tests when appropriate),
+   - then **stop** for human review.
 
----
+## Parallel lanes (v1.0)
 
-## 1) Почему “1 шаг = 1 сессия”
+We run three lanes to increase throughput without losing control:
 
-Чтобы не терять качество из-за переполнения контекста:
-- **Состояние** хранится в репозитории (plans/docs/reports).
-- **Сессии** короткие и легко перезапускаемые.
-- При необходимости можно пользоваться `codex resume`, но базовый поток остаётся “одно действие за раз”.
+- **Lane A — Local Builder:** implementation in small checkpoints.
+- **Lane B — Reviewer:** independent review of diffs/PRs (local `/review` and/or GitHub review).
+- **Lane C — Tests/QA:** add/update tests and run them independently.
 
----
+Keep lanes isolated by file ownership. Avoid multiple lanes changing dependencies or lockfiles.
 
-## 2) Три параллельных lane’а (скорость без хаоса)
+## Branching and PRs
 
-### Lane A — Local Builder (основной)
-- Пишет/правит код маленькими диффами (15–30 минут).
-- В конце каждого чекпоинта делает отчёт + гейты качества.
+- Work on a feature branch.
+- Push when the checkpoint is reviewable.
+- Use the PR template (`.github/PULL_REQUEST_TEMPLATE.md`).
+- Merge only when quality gates pass and review is clean.
 
-### Lane B — Reviewer (параллельно)
-- Делает review диффа/PR.
-- Идеально запускать через:
-  - локальный `/review` в Codex CLI (быстро, до PR),
-  - или через PR review в GitHub (когда PR уже создан).
+## Dependency policy
 
-### Lane C — Tests (параллельно)
-- Добавляет/обновляет тесты, гоняет их, делает triage и рекомендации.
+- Dependency changes are approval-gated.
+- Serialize dependency changes: one active dependency-changing effort at a time.
+- Always record dependency rationale in the checkpoint report.
 
-> Правило: параллельность = разные зоны ответственности. Не трогаем одни и те же файлы одновременно.
+## Context hygiene
 
----
-
-## 3) Чекпоинты (15–30 минут)
-
-### Что должно быть в конце чекпоинта
-- **Что сделано** (коротко)
-- **Diff** (или список файлов + кратко по каждому)
-- **Команды** (lint/typecheck/tests) и результаты
-- **Что дальше** (1–2 пункта)
-- Запись в `reports/` (по шаблону)
-
-### Когда останавливаться раньше
-- нашёл P0 баг / уязвимость;
-- упёрся в неоднозначность требований;
-- нужна новая зависимость (апрув);
-- требуются большие архитектурные изменения.
-
----
-
-## 4) Использование Codex (CLI/IDE/Cloud)
-
-### CLI (основа)
-- Interactive mode удобно для коротких циклов, где ты сразу видишь действия.
-- `codex resume` полезен, когда хочешь продолжить мысль, но это не обязательная часть потока.
-
-### Локальный review
-- Используй `/review`, чтобы Codex оценил дифф и выдал приоритетные замечания, не трогая рабочую директорию.
-
-### Web search
-- По умолчанию используем **cached** (безопаснее).
-- Для зависимостей — если есть сомнения, просим разрешение на **live** на один шаг.
-
-### IDE extension (точечно)
-- Хорошо для: применить дифф, точечные правки, быстро открыть нужные файлы.
-
-### Cloud
-- Для параллельных задач: review/тесты/поиск проблем в нескольких коммитах.
-
----
-
-## 5) Как формулировать задания для Codex (без простыней)
-
-Идея: **не писать “романы”**, а ссылаться на файлы‑источники правды.
-
-Пример минимального задания:
-- “Следуй `plans/NOW.md`. Чекпоинт 25 минут. В конце: diff, отчёт, остановись. Не добавляй зависимости без апрува.”
-
----
-
-## 6) Что делать, если UI “не сошёлся”
-
-Смотри `docs/UI_FOUNDATION_PACK.md`. Базовый протокол:
-1) нормализуй токены (цвет/типографика/spacing),
-2) упростить DOM (убрать лишние wrapper’ы),
-3) поправить layout примитивами (grid/gap/container),
-4) после — только косметика.
+- Treat the repository as memory. Do not rely on chat history.
+- Keep `plans/NOW.md` short. Link to ExecPlans and docs instead of pasting large context.
+- Prefer one Codex session per checkpoint.
 

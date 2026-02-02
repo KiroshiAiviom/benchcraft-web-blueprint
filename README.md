@@ -1,47 +1,30 @@
-# Benchcraft Web Blueprint v1.1 (docs‑first)
+# Benchcraft Web Blueprint (docs-first)
 
-**Codex‑first workflow** для разработки **Next.js (App Router) + TypeScript + Bun** проектов с упором на:
+A docs-first workflow blueprint for **Codex-first** development of production-grade **Next.js (App Router)** applications.
 
-- качество продакшн‑кода **и** скорость (через маленькие чекпоинты + параллельные проверки),
-- понятный контроль изменений (diff → отчёт → ты принимаешь решение),
-- профессиональный UI (через **UI Foundation Pack** и дизайн‑процесс),
-- чистый контекст (1 шаг = 1 сессия; состояние хранится в репозитории).
+## Baseline stack
 
-> Важно: **Vite не используется**. Этот blueprint — про Next.js App Router.
+- Next.js (App Router) + React + TypeScript
+- Bun (package manager + task runner)
+- Tailwind CSS + shadcn/ui (component baseline)
+- Biome (format/lint) + TypeScript typecheck
 
----
+## What’s included
 
-## Что внутри
+- `AGENTS.md` — concise operating rules for Codex.
+- `.codex/` — project Codex configuration + role skills.
+- `docs/` — workflow documentation, UI Foundation Pack, and templates (BRIEF/UI_SPEC/STYLE_GUIDE/etc.).
+- `plans/` — `WORK_QUEUE.md` and `NOW.md` (drives every Codex session).
+- `reports/` — checkpoint report template.
+- `.github/` — PR template focused on quality gates and UI review.
 
-- `AGENTS.md` — правила работы для Codex (коротко, без простыней).
-- `.codex/` — проектный `config.toml` + skills (роли/поведение).
-- `docs/` — документация процесса, UI‑foundation, шаблоны BRIEF/UI_SPEC/STYLE_GUIDE и т.д.
-- `plans/` — WORK_QUEUE / NOW (то, что заменяет “я каждый раз формулирую задачу с нуля”).
-- `reports/` — шаблон отчёта чекпоинта.
+## How to use this blueprint
 
----
-
-## Как этим пользоваться (прямо сейчас)
-
-### Вариант A — держать blueprint отдельным репозиторием (рекомендовано)
-1. Создай репозиторий `benchcraft-web-blueprint` на GitHub.
-2. Скопируй туда файлы из этого архива и закоммить.
-3. Дальше мы итеративно улучшаем документы, skills и процесс.
-
-### Вариант B — сразу превратить в полноценный Next.js template (позже)
-Когда документы и workflow “устаканятся”, делаем отдельный репозиторий `benchcraft-web-template`:
-
-1. Создаём чистый Next.js проект (Bun) в пустой папке.
-2. Копируем в него: `AGENTS.md`, `.codex/`, `docs/`, `plans/`, `reports/`, `.github/`.
-3. Проверяем, что Codex видит `AGENTS.md` и `plans/NOW.md`, и что чекпоинты работают.
-
-> Сейчас мы **не** генерируем Next.js код — ты правильно сделал, что хочешь сначала “закрыть” процесс/доки.
-
----
-
-## С чего начать (приоритет v1.1)
-
-1) Прочитать `docs/SETUP_MACOS.md` и убедиться, что локальный сетап стабилен.  
-2) Прочитать `docs/WORKFLOW.md` и понять “ритуал” чекпоинтов и параллельных lane’ов.  
-3) Прочитать `docs/UI_FOUNDATION_PACK.md`. Это база, чтобы UI сразу был “как у взрослых”.
+1. Create a new Next.js project (see `docs/PROJECT_BOOTSTRAP.md`).
+2. Copy this repository into that project root (overlay).
+3. Fill project docs using templates:
+   - `docs/BRIEF.md`
+   - `docs/UI_SPEC.md`
+   - `docs/STYLE_GUIDE.md`
+4. Drive each Codex session from `plans/NOW.md`.
 

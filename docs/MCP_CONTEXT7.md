@@ -1,24 +1,18 @@
-# MCP_CONTEXT7.md — Context7 (up-to-date docs)
+# Context7 MCP (up-to-date docs)
 
-**Зачем:** чтобы Codex не “галлюцинировал” API и писал код под **актуальные версии** библиотек.
+Purpose: reduce API drift by letting Codex consult version-specific documentation and examples.
 
-Context7 — MCP‑сервер, который подтягивает актуальную, version‑specific документацию и примеры “из источника”.  
-Он хорошо дополняет web search (особенно когда важны точные сигнатуры/новые API).
+Context7 complements web search, especially when you need exact signatures or recently changed APIs.
 
----
+## Option A — Add via Codex CLI (recommended)
 
-## 1) Подключение в Codex
-
-Codex поддерживает MCP и в CLI, и в IDE extension — конфиг общий.  
-Есть 2 способа подключения:
-
-### Вариант A — через CLI (рекомендовано)
 ```bash
 codex mcp add context7 -- npx -y @upstash/context7-mcp
 ```
 
-### Вариант B — через config.toml
-Добавь в `~/.codex/config.toml` (или в проектный `.codex/config.toml`, если проект trusted):
+## Option B — Configure via `.codex/config.toml`
+
+Example:
 
 ```toml
 [mcp_servers.context7]
@@ -26,23 +20,8 @@ command = "npx"
 args = ["-y", "@upstash/context7-mcp"]
 ```
 
----
+## Usage guidance
 
-## 2) Как просить Codex реально использовать Context7
-
-В prompts добавляй явный триггер, например:
-- “... **use context7**”
-
-И/или добавим правило в наш будущий `AGENTS.md`/skills (после тестов), чтобы Codex вызывал Context7 автоматически, когда:
-- ставит/обновляет зависимости,
-- пишет код по малоизвестной либе,
-- видит компиляционные ошибки из-за устаревшего API.
-
----
-
-## 3) Политика безопасности и контекста
-
-- MCP инструменты — это тоже “внешний контекст”.
-- Не вставляй огромные куски документации целиком — извлекай только нужные фрагменты.
-- Любая новая зависимость всё равно требует апрува пользователя.
+- Use Context7 for non-trivial library usage and when implementing against a specific version.
+- Prefer it for “what is the correct API shape?” questions over guessing.
 

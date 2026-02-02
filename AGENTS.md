@@ -1,51 +1,49 @@
-# AGENTS.md — Benchcraft Web (v1.1)
+# AGENTS.md — Benchcraft Web
 
-Это инструкции для Codex в проектах, использующих Benchcraft Web workflow.
+You are an engineering agent operating inside a **Benchcraft Web** project.
 
-## 0) Контекст и цели
-- Мы делаем **Next.js (App Router) + TypeScript + Bun** проекты.
-- **Vite не используем.**
-- Приоритет: **качество продакшна** + высокая скорость через маленькие, контролируемые итерации.
-- UI должен быть **профессиональным** (типографика/палитра/композиция/анимации), без “AI‑aesthetic”.
+## Goals
 
-## 1) Как ты работаешь (обязательный ритуал)
-1) Всегда начинай с чтения:
-   - `plans/NOW.md`
-   - `docs/DOD.md`
-   - `docs/UI_FOUNDATION_PACK.md`
-   - если есть: `docs/STYLE_GUIDE.md` и `docs/UI_SPEC.md`
-2) Выполняй **только следующий незакрытый шаг** из `plans/NOW.md` / активного ExecPlan.
-3) Работай **чекпоинтами по 15–30 минут**.
-4) В конце каждого чекпоинта:
-   - покажи **короткий отчёт** (что сделал, что не сделал, риски),
-   - покажи **diff / список изменённых файлов**,
-   - обнови `plans/NOW.md` (если шаг продвинулся) и добавь отчёт в `reports/` по шаблону,
-   - предложи **краткое сообщение коммита**, но **НЕ коммить**, пока пользователь не скажет.
+- Build production-grade **Next.js (App Router)** code in **TypeScript**.
+- Keep changes small, reviewable, and auditable.
+- Maintain a high UI quality bar using the project’s UI specs and tokens.
 
-## 2) “Без самоволки” (quality & control)
-- **Никаких новых зависимостей без апрува.**
-  - Если зависимость уже есть в плане → спроси “OK?”.
-  - Если зависимости нет в плане → объясни: зачем, альтернативы, цена (DX/размер/риски), и спроси апрув.
-- Не изменяй архитектуру “втихаря”. Если видишь необходимость — предложи отдельный `REFACTOR-*.md` ExecPlan.
-- Если не уверен — остановись и спроси, вместо того чтобы гадать.
+## Operating protocol (mandatory)
 
-## 3) UI и дизайн (основное)
-- Для любого UI‑таска применяй skill: `.codex/skills/ui-foundation-pack/`.
-- Дизайн должен быть:
-  - профессиональный, “compact”, с высокой text/vision clarity,
-  - с аккуратными интерактивными моментами (hover/scroll/entry),
-  - без кричащего золота/кислоты/клише “purple gradient on white”.
-- Код должен избегать “7 div’ов друг в друге”. Используй layout‑примитивы и ясную структуру.
+1) Read (in this order):
+- `plans/NOW.md`
+- `docs/DOD.md`
+- `docs/UI_FOUNDATION_PACK.md`
+- If present: `docs/STYLE_GUIDE.md` and `docs/UI_SPEC.md`
 
-## 4) Проверки (Definition of Done)
-Смотри `docs/DOD.md`. Минимум для любого чекпоинта: **lint + typecheck** (когда появится кодовая база).
+2) Execute **only the single next step** from `plans/NOW.md` / the active ExecPlan.
 
-## 5) Web search
-- По умолчанию используй cached web search.
-- Для зависимостей/версий: если cached даёт сомнительный/устаревший ответ — попроси разрешение на live‑поиск для этого шага.
+3) Work in **15–30 minute checkpoints**.
 
-## 6) Вывод
-Твой результат должен быть легко ревьюиться человеком:
-- маленький дифф,
-- понятный отчёт,
-- понятное “что дальше”.
+4) End every checkpoint with all of the following:
+- A concise summary: what changed, why, what remains, and risks.
+- A reviewable diff (or a file list + key snippets if a diff is not available).
+- Run quality gates when available:
+  - `lint`
+  - `typecheck`
+  - tests when the change is risky or user-facing
+- Update the active plan (`plans/NOW.md` / ExecPlan checkboxes) to reflect reality.
+- Write a checkpoint report in `reports/` (use `reports/TEMPLATE.md`).
+- **Stop** and wait for user review.
+
+## Constraints
+
+- Do not commit, merge, rebase, or force-push unless explicitly instructed.
+- Do not add/upgrade/remove dependencies without explicit approval. Before asking for approval:
+  - explain why the dependency is needed,
+  - list at least one alternative,
+  - verify the API against current documentation when the usage is non-trivial.
+- Avoid wrapper-only DOM nesting. Prefer layout primitives (`Container`, `Section`, `Stack`, `Grid`) and semantic HTML.
+- If requirements are unclear, propose a plan update instead of guessing.
+
+## UI quality bar
+
+- Prefer design tokens (CSS variables) over hardcoded colors/spacing in components.
+- Provide complete interaction states where applicable: hover, focus, active, disabled, loading, empty, error.
+- Ensure keyboard navigation works and respect `prefers-reduced-motion`.
+

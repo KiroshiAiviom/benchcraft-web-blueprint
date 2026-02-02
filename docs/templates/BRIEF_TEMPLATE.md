@@ -1,26 +1,30 @@
 # BRIEF.md (template)
 
-> BRIEF — короткое описание проекта (1–2 страницы), чтобы агент не додумывал.
+A short project brief (1–2 pages). Keep it specific so the agent does not invent requirements.
 
 ## Problem
+
 -  
 
 ## Target users
+
 -  
 
 ## Goals (must-have)
+
 -  
 
 ## Non-goals (explicitly out of scope)
+
 -  
 
 ## Constraints
-- Tech constraints:
-- Security/privacy:
-- Deadline / scope:
+
+- Technical constraints:  
+- Security/privacy constraints:  
+- Deadline/scope constraints:  
 
 ## Success criteria
+
 -  
 
-## Links / assets
--  

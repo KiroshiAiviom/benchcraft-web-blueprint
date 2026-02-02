@@ -1,43 +1,23 @@
-# AGENTS_HIERARCHY.md — как Codex читает инструкции
+# AGENTS hierarchy (how Codex loads instructions)
 
-Codex умеет читать инструкции из нескольких мест (глобальные и проектные), чтобы:
-- не держать всё в одном гигантском файле,
-- локально переопределять правила для подпапок.
+Codex can load instructions from multiple locations so rules can stay small and scoped.
 
----
+## Project-level loading (root → leaf)
 
-## 1) Что именно читает Codex
+Within a project, Codex walks from the project root to the current directory. In each directory it loads **at most one** instruction file:
 
-На уровне проекта Codex проходит путь:
-**project root → текущая папка**, и в каждой директории ищет:
-1) `AGENTS.override.md`
-2) затем `AGENTS.md`
-3) затем fallback‑имена (если настроены)
+1) `AGENTS.override.md` (if present)
+2) otherwise `AGENTS.md`
 
-Codex включает максимум **один** файл на директорию.
+This enables folder-specific rules without keeping everything in a single large file.
 
----
+## When to use `AGENTS.override.md`
 
-## 2) Зачем нужен `AGENTS.override.md`
+Use an override when you need a deliberate, scoped rule swap, for example:
 
-`AGENTS.override.md` — это “жёсткое переопределение” в конкретной папке.
+- stricter rules for a specific subsystem (e.g., security-sensitive code),
+- different conventions in a generated code folder,
+- temporary local hardening (often kept uncommitted).
 
-Используй его, когда:
-- подпапке нужна *другая логика* (например, `backend/` vs `frontend/`),
-- или когда в папке нельзя наследовать правила из корня (например, для рискованных задач).
-
-Пример:
-- В корне — общий стиль.
-- В `apps/web/` — UI правила + Next.js.
-- В `infra/` — строгие правила безопасности и “только terraform”.
-
----
-
-## 3) Практическое правило для нас
-
-- Корневой `AGENTS.md` держим коротким (без простыней).
-- Детальные правила упаковываем в:
-  - skills (`.codex/skills/...`) — чтобы включались только когда нужны,
-  - docs (чтобы люди и агент ссылались на “источник правды”),
-  - и при необходимости в подпапочные `AGENTS.md`.
+Prefer `AGENTS.md` for normal, additive rules.
 

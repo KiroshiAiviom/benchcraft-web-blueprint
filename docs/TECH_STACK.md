@@ -1,22 +1,27 @@
-# TECH_STACK.md — Benchcraft Web baseline
+# Tech stack baseline (Benchcraft Web)
 
-Это “база” для большинства проектов (SaaS/enterprise web).
+This document defines the default baseline used for most production web projects.
 
-## Baseline (фиксируем)
+## Baseline (default)
+
 - Framework: **Next.js** (App Router)
 - Language: **TypeScript**
 - Package manager / runner: **Bun**
 - Styling: **Tailwind CSS**
-- Component baseline: **shadcn/ui** (с кастомизацией под STYLE_GUIDE + tokens)
-- Lint / format: **Biome** (где уместно)
-- Deployment: varies (Vercel для личного, иначе инфраструктура заказчика)
-- Docker: часто нужен для enterprise (локальные сервисы / совместимость окружений)
+- Component baseline: **shadcn/ui** (customized via project tokens)
+- Format/lint: **Biome** (when applicable)
+- Workflow: Codex-first checkpoints + PR-based review
 
-## Varies per-project (не фиксируем заранее)
-- Database: Postgres / Convex / …
-- ORM / query: зависит от проекта
-- Auth: зависит от проекта
-- E2E: по размеру изменений/рискам
+## Quality gates (default expectations)
 
-## Non-goals
-- Vite-based templates
+- Lint and typecheck run frequently (at least per checkpoint).
+- Tests are added when a change is risky, user-facing, or hard to reason about.
+
+## Not fixed by this baseline (project-specific)
+
+- Database (Postgres / Convex / etc.)
+- ORM/query layer
+- Authentication/authorization approach
+- Deployment target (Vercel, internal infrastructure, customer-managed servers)
+- E2E strategy (depends on project size and risk)
+

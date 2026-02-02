@@ -1,27 +1,32 @@
 # ARCHITECTURE.md (template)
 
-> Обновляй только когда решения реально меняются.
+Keep this document high-signal. Update it only when decisions change.
 
 ## System overview
+
 -  
 
-## Key decisions
+## Module boundaries (high level)
+
+-  
+
+## Key decisions (ADR links)
+
 -  
 
 ## Data model (high level)
+
 -  
 
 ## API / integration points
+
 -  
 
 ## Security considerations
+
 -  
 
 ## Performance considerations
+
 -  
 
-## Testing strategy
--  
-
-## Deployment notes
--  

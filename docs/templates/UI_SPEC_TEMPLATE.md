@@ -1,13 +1,13 @@
 # UI_SPEC.md (template)
 
-> UI_SPEC — это “что должно получиться” со стороны UX/UI, без углубления в код.
-> Он помогает Codex не делать расплывчатые шаги и не изобретать интерфейс “как получится”.
+UI_SPEC describes **what the UI should be** (UX + UI outcomes) without prescribing implementation details.
+It prevents vague planning and reduces “design by guessing”.
 
 ---
 
-## 1) Screens / Pages
+## 1) Screens / pages
 
-Перечисли экраны (или секции страницы):
+List screens (or landing sections):
 
 1.  
 2.  
@@ -17,52 +17,55 @@
 
 ## 2) Key flows
 
-Опиши 2–5 ключевых сценариев пользователя:
+Describe 2–5 core user flows:
 
--  
--  
--  
-
----
-
-## 3) Components & states
-
-Какие ключевые компоненты нужны и какие состояния важны:
-- buttons: hover/focus/disabled/loading
-- forms: validation states
-- tables: empty/loading/error
-- auth: signed-in / signed-out
+- Flow A:  
+- Flow B:  
+- Flow C:  
 
 ---
 
-## 4) Layout & density
+## 3) States
 
-- “compactness” уровень: low / medium / high
-- max width / container:
-- spacing rhythm:
+For each screen/flow, note required states:
 
----
-
-## 5) Motion (если нужно)
-
-- entry animation:
-- hover interactions:
-- scroll reveals:
+- loading
+- empty
+- error
+- success
+- disabled
+- permission denied (if applicable)
 
 ---
 
-## 6) Accessibility baseline
+## 4) Components
 
-- keyboard navigation
-- focus styles
-- contrast
-- reduced motion
+List key components and their variants:
+
+- Component: variants / sizes / states  
+- Component: variants / sizes / states  
 
 ---
 
-## 7) Manual QA checklist
+## 5) Content and copy
 
-Перед сдачей:
--  
--  
--  
+- Tone:  
+- Key headings:  
+- CTA labels:  
+- Error messages (high level):  
+
+---
+
+## 6) Responsive behavior
+
+- Breakpoints to validate:  
+- Layout changes (mobile vs desktop):  
+
+---
+
+## 7) Accessibility baseline (practical)
+
+- Keyboard navigation required for:  
+- Focus styles:  
+- Reduced motion policy:  
+

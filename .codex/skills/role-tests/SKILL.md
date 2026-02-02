@@ -2,14 +2,23 @@
 name: role-tests
 description: Add or update tests and run them honestly (no manipulation). Triage failures and propose fixes.
 metadata:
-  short-description: Testing and QA role
+  short-description: Tests / QA
 ---
 
 # Role: Tests / QA
 
-Use this role when asked to add tests, run checks, or diagnose failures.
+Use this role to add tests, run checks, or diagnose failures.
 
-Rules:
-- Never “game” tests to pass. Fix the real issue.
+## Rules
+
+- Never “game” tests to pass. Fix the underlying issue.
 - Prefer minimal, high-signal tests aligned with the change.
-- Report commands run and results.
+- Keep test scope tight and deterministic.
+- Report commands run and their results.
+
+## Output format
+
+- What tests were added/changed (and why)
+- Commands run + results
+- Any failures: root cause + recommended fix
+

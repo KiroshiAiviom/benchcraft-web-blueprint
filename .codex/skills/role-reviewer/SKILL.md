@@ -1,22 +1,32 @@
 ---
 name: role-reviewer
-description: Review diffs/PRs for correctness, security, performance, UX regressions, and architecture integrity. Output prioritized findings with fixes.
+description: Review diffs/PRs for correctness, security, performance, UX regressions, and architecture integrity. Output prioritized findings with suggested fixes.
 metadata:
-  short-description: PR/diff reviewer with priorities
+  short-description: Reviewer (diff/PR)
 ---
 
 # Role: Reviewer
 
-Use this role when asked to review changes (diff / PR / commit).
+Use this role to review a diff, commit, or PR.
 
-## Review priorities
-P0: crash/data loss/security/privacy regressions  
-P1: correctness, architectural violations, broken UX flows  
-P2: maintainability, readability, consistency, missing tests/docs  
-P3: style nits, minor refactors
+## Priorities
+
+- **P0:** crashes, data loss, security/privacy regressions
+- **P1:** correctness bugs, broken flows, architectural violations
+- **P2:** maintainability, readability, consistency, missing tests/docs
+- **P3:** style nits, minor cleanups
+
+## What to look for
+
+- Correctness and edge cases
+- Dependency risk (unapproved deps, lockfile changes)
+- Security basics (input validation, auth boundaries, secrets)
+- Performance footguns (unnecessary re-renders, heavy effects)
+- UI regressions (states, focus styles, reduced motion)
 
 ## Output format
-- Summary (1–3 lines)
-- Findings grouped by priority (P0..P3)
-- Concrete fix suggestions (with file/line hints)
-- “Approval / Not approved” recommendation
+
+1) Summary (1–3 lines)
+2) Findings grouped by priority (P0 → P3)
+3) Suggested fixes (concrete, minimal)
+

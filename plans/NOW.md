@@ -1,29 +1,38 @@
 # NOW.md (template)
 
-> Этот файл — “единственная правда” для текущей сессии Codex.
-> Если сомневаешься, что делать — смотри сюда.
+This file is the single source of truth for the **current Codex session**.
+If anything is unclear, update this file before continuing.
 
-## Context files (read first)
-- docs/BRIEF.md (or templates/BRIEF_TEMPLATE.md)
-- docs/UI_SPEC.md (or templates/UI_SPEC_TEMPLATE.md)
-- docs/STYLE_GUIDE.md (or templates/STYLE_GUIDE_TEMPLATE.md)
-- docs/DOD.md
-- docs/UI_FOUNDATION_PACK.md
-- plans/WORK_QUEUE.md
+## Read first (context files)
 
-## Current objective
-- (one sentence)
+- `docs/BRIEF.md` (or `docs/templates/BRIEF_TEMPLATE.md`)
+- `docs/UI_SPEC.md` (or `docs/templates/UI_SPEC_TEMPLATE.md`)
+- `docs/STYLE_GUIDE.md` (or `docs/templates/STYLE_GUIDE_TEMPLATE.md`)
+- `docs/DOD.md`
+- `docs/UI_FOUNDATION_PACK.md`
+- `plans/WORK_QUEUE.md`
+
+## Current objective (one sentence)
+
+-  
 
 ## Active ExecPlan
-- (link to docs/execplans/EXECPLAN-*.md)
 
-## Next step (only one!)
-1) …
-   - Definition of Done for this step:
-   - Commands to run (if applicable):
-   - Notes / constraints:
+- (link to `docs/EXECPLAN-*.md` or similar)
 
-## After this step
-- Update this file
-- Add a report in reports/
-- Stop (no auto-commit)
+## Next step (only one)
+
+- [ ]  
+
+### Timebox
+
+- 15–30 minutes
+
+### Expected deliverables at checkpoint end
+
+- Reviewable diff
+- Checkpoint report in `reports/`
+- Quality gates run (lint/typecheck; tests if applicable)
+- Plan updated to reflect reality
+- Stop for human review
+

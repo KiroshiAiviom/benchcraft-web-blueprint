@@ -1,7 +1,7 @@
 # STYLE_GUIDE.md (template)
 
-> Заполни этот файл **в начале проекта**. Это “source of truth” для типографики/палитры/токенов.
-> После заполнения: внедри токены в код (CSS variables + Tailwind/shadcn).
+This file is the source of truth for **typography, palette, tokens, and motion**.
+Fill it early. Keep it updated when decisions change.
 
 ---
 
@@ -9,18 +9,18 @@
 
 **Project:**  
 **Audience:**  
-**Primary use:** (marketing / SaaS app / dashboard / etc.)
+**Primary use:** (marketing / SaaS app / dashboard / internal tool)
 
-**3–5 adjectives:**  
+**3–5 adjectives:**
 -  
 -  
 -  
 -  
 
-**Signature element (1 шт):**  
-(например: интерактивные карточки с micro‑motion, noise‑background, диаграммные детали)
+**Signature element (one memorable thing):**
+-  
 
-**Theme:** light / dark / both
+**Theme:** (light / dark / both)
 
 ---
 
@@ -28,72 +28,75 @@
 
 **Display font:**  
 **Body font:**  
+**Fallback strategy:**  
 
-**Scale (пример):**
-- H1:
-- H2:
-- H3:
-- Body:
-- Small:
+**Type scale (define actual sizes and line-heights):**
+- H1:  
+- H2:  
+- H3:  
+- Body:  
+- Small:  
 
-**Rules:**
-- max 2 font families
-- consistent letter-spacing and line-height
-- no random font usage
-
----
-
-## 3) Color system (semantic)
-
-Запиши значения токенов (hex/oklch/hsl) и коротко зачем они такие.
-
-- --background:
-- --foreground:
-- --card:
-- --card-foreground:
-- --muted:
-- --muted-foreground:
-- --border:
-- --input:
-- --accent:
-- --accent-foreground:
-- --ring:
-
-**Notes (contrast / accessibility):**
+**Notes (tracking, caps usage, numeric style, etc.):**
+-  
 
 ---
 
-## 4) Radii & Shadows
+## 3) Palette (semantic)
 
-- --radius:
-- shadow level 1:
-- shadow level 2 (optional):
+Define semantic intent first, then actual values.
 
----
+- Background:  
+- Surface/Card:  
+- Foreground/Text:  
+- Muted text:  
+- Border/Input:  
+- Accent:  
+- Accent foreground:  
+- Ring (focus):  
 
-## 5) Motion tokens
-
-- duration-fast:
-- duration-normal:
-- duration-slow (optional):
-- easing:
-- stagger:
-
-**Reduced motion behavior:**
-
----
-
-## 6) Components (style notes)
-
-Button:
-Card:
-Input:
-Dialog:
-Table (if needed):
+Optional:
+- Danger:  
+- Danger foreground:  
 
 ---
 
-## 7) References (inspiration only)
+## 4) Tokens (implementation notes)
 
-- (links / notes)
-- Важно: не копировать 1-в-1
+Where tokens live:
+- CSS variables in `globals.css` (`:root` and `.dark`)
+- Tailwind maps semantic color names to CSS variables
+
+Rules:
+- No raw hex values in components unless explicitly justified.
+- One accent is usually enough.
+
+---
+
+## 5) Motion language
+
+**Primary easing:**  
+**Durations:** fast / normal / slow  
+**Signature moments:** (1–2 only)
+
+Reduced motion policy:
+- what gets disabled or simplified when `prefers-reduced-motion` is enabled?
+
+---
+
+## 6) Layout density
+
+- Container max width:  
+- Default section spacing (top/bottom):  
+- Default vertical rhythm (stack gap):  
+
+---
+
+## 7) Component style notes (optional)
+
+- Buttons:  
+- Cards:  
+- Inputs:  
+- Tables:  
+- Toasts:  
+

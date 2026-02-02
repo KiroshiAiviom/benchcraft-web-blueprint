@@ -1,37 +1,42 @@
-# PROJECT_BOOTSTRAP.md — как превратить blueprint в Next.js template
+# Project bootstrap (from blueprint to a Next.js project)
 
-> Этот файл пригодится позже, когда мы будем собирать “реальный” шаблон проекта.
+This document describes how to apply this blueprint to a new Next.js codebase.
 
-## 1) Создать новый проект (Bun + Next.js)
+## 1) Create a new project (Next.js + Bun)
 
-Пример (флаги могут меняться между версиями — проверь `--help`):
 ```bash
-bun create next-app@latest my-app \
-  --typescript \
-  --tailwind \
-  --biome \
-  --app \
-  --src-dir \
-  --import-alias "@/*" \
-  --use-bun \
-  --empty
+bun create next-app@latest my-app   --typescript   --tailwind   --biome   --app   --src-dir   --import-alias "@/*"   --use-bun   --empty
 ```
 
-## 2) Наложить Benchcraft overlay
+Then:
 
-Скопировать в корень проекта:
+```bash
+cd my-app
+bun install
+```
+
+## 2) Apply the blueprint overlay
+
+Copy the following into the project root:
+
 - `AGENTS.md`
 - `.codex/`
 - `docs/`
 - `plans/`
 - `reports/`
-- `.github/` (опционально)
+- `.github/` (optional, but recommended)
 
-## 3) Инициализировать UI основу
-- Настроить tokens и theme (см. `docs/UI_FOUNDATION_PACK.md`)
-- Создать `docs/STYLE_GUIDE.md` из шаблона и заполнить
-- Установить shadcn/ui и синхронизировать variants с tokens
+## 3) Initialize project docs (before major implementation)
 
-## 4) Проверить workflow
-- Запустить Codex (CLI/IDE), убедиться что он читает `AGENTS.md`
-- Сделать первый маленький чекпоинт: “создай STYLE_GUIDE.md и базовые tokens”
+Create and fill these files using templates:
+
+- `docs/BRIEF.md` (from `docs/templates/BRIEF_TEMPLATE.md`)
+- `docs/UI_SPEC.md` (from `docs/templates/UI_SPEC_TEMPLATE.md`)
+- `docs/STYLE_GUIDE.md` (from `docs/templates/STYLE_GUIDE_TEMPLATE.md`)
+
+## 4) Run the workflow
+
+- Update `plans/WORK_QUEUE.md` with the top-level tasks.
+- Set the current session objective in `plans/NOW.md`.
+- Run Codex in checkpoint mode (15–30 min), then review diffs and iterate.
+
