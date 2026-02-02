@@ -12,8 +12,8 @@ The goal is to prevent “massive fix-up phases” by keeping quality high at ev
    - the app does not crash on the basic flow (when applicable),
    - no obvious runtime errors introduced by the change.
 3) Quality gates (when available in the codebase):
-   - `lint` passes,
-   - `typecheck` passes.
+   - `lint` passes (or `N/A` with a reason),
+   - `typecheck` passes (or `N/A` with a reason).
 4) Changes are reviewable:
    - diff is reasonably small,
    - changes are explained in a checkpoint report.
@@ -40,7 +40,7 @@ The goal is to prevent “massive fix-up phases” by keeping quality high at ev
    - why this dependency is needed,
    - alternatives considered,
    - any relevant breaking changes.
-3) All quality gates still pass.
+3) All quality gates still pass (or are explicitly `N/A`).
 
 ---
 
@@ -49,4 +49,3 @@ The goal is to prevent “massive fix-up phases” by keeping quality high at ev
 1) Refactor is driven by an explicit refactor plan (`REFACTOR-*.md`).
 2) Behavior is preserved (or the behavior change is split into a separate feature/bug plan).
 3) Quality gates pass; tests are updated/added when risk warrants it.
-

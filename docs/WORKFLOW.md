@@ -15,7 +15,7 @@ Every iteration is:
    - a reviewable diff,
    - a short checkpoint report (`reports/`),
    - plan updates that reflect reality,
-   - quality gates (lint/typecheck; tests when appropriate),
+   - quality gates (lint/typecheck; tests when appropriate; or `N/A` with a reason),
    - then **stop** for human review.
 
 ## Parallel lanes (v1.0)
@@ -33,6 +33,7 @@ Keep lanes isolated by file ownership. Avoid multiple lanes changing dependencie
 - Work on a feature branch.
 - Push when the checkpoint is reviewable.
 - Use the PR template (`.github/PULL_REQUEST_TEMPLATE.md`).
+- Commit, merge, and rebases are user-controlled unless explicitly delegated.
 - Merge only when quality gates pass and review is clean.
 
 ## Dependency policy
@@ -46,4 +47,3 @@ Keep lanes isolated by file ownership. Avoid multiple lanes changing dependencie
 - Treat the repository as memory. Do not rely on chat history.
 - Keep `plans/NOW.md` short. Link to ExecPlans and docs instead of pasting large context.
 - Prefer one Codex session per checkpoint.
-

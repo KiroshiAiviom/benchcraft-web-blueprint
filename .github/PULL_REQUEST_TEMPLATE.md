@@ -15,6 +15,7 @@
 - [ ] lint
 - [ ] typecheck
 - [ ] tests (if applicable)
+- [ ] dependencies unchanged (or explicitly approved)
 
 ## UI / UX (if applicable)
 
@@ -22,8 +23,8 @@
 - [ ] Focus states / keyboard navigation checked
 - [ ] Reduced motion considered (`prefers-reduced-motion`)
 - [ ] Touch targets are reasonable (44×44px where applicable)
+- [ ] Tokens used (no one-off hex colors / spacing hacks)
 
 ## Risks / rollout notes
 
 -  
-

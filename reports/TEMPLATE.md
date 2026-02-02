@@ -1,5 +1,7 @@
 # Checkpoint Report — YYYY-MM-DD — <title>
 
+If a section does not apply, write `N/A`.
+
 ## Objective
 
 -  
@@ -22,9 +24,9 @@
 
 ## Definition of Done check
 
-- Minimum checkpoint DoD: (pass/fail + notes)  
-- UI DoD (if applicable): (pass/fail + notes)  
-- Dependency DoD (if applicable): (pass/fail + notes)  
+- Minimum checkpoint DoD: (pass/fail/N/A + notes)  
+- UI DoD (if applicable): (pass/fail/N/A + notes)  
+- Dependency DoD (if applicable): (pass/fail/N/A + notes)  
 
 ## Risks / open issues
 
@@ -33,4 +35,3 @@
 ## Next step suggestion
 
 -  
-

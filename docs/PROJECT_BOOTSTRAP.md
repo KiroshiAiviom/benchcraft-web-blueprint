@@ -5,7 +5,15 @@ This document describes how to apply this blueprint to a new Next.js codebase.
 ## 1) Create a new project (Next.js + Bun)
 
 ```bash
-bun create next-app@latest my-app   --typescript   --tailwind   --biome   --app   --src-dir   --import-alias "@/*"   --use-bun   --empty
+bun create next-app@latest my-app \
+  --typescript \
+  --tailwind \
+  --biome \
+  --app \
+  --src-dir \
+  --import-alias "@/*" \
+  --use-bun \
+  --empty
 ```
 
 Then:
@@ -15,7 +23,26 @@ cd my-app
 bun install
 ```
 
-## 2) Apply the blueprint overlay
+## 2) Confirm project scripts
+
+Bun recommends prefixing Next commands via `bun --bun next ...` when running Next.js on Bun.
+
+Ensure `package.json` scripts are correct for your setup, e.g.:
+
+```jsonc
+{
+  "scripts": {
+    "dev": "bun --bun next dev",
+    "build": "bun --bun next build",
+    "start": "bun --bun next start",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "typecheck": "tsc --noEmit"
+  }
+}
+```
+
+## 3) Apply the blueprint overlay
 
 Copy the following into the project root:
 
@@ -24,19 +51,19 @@ Copy the following into the project root:
 - `docs/`
 - `plans/`
 - `reports/`
-- `.github/` (optional, but recommended)
+- `.github/` (recommended)
 
-## 3) Initialize project docs (before major implementation)
+## 4) Initialize project docs (before major implementation)
 
 Create and fill these files using templates:
 
 - `docs/BRIEF.md` (from `docs/templates/BRIEF_TEMPLATE.md`)
 - `docs/UI_SPEC.md` (from `docs/templates/UI_SPEC_TEMPLATE.md`)
 - `docs/STYLE_GUIDE.md` (from `docs/templates/STYLE_GUIDE_TEMPLATE.md`)
+- `docs/ARCHITECTURE.md` (from `docs/templates/ARCHITECTURE_TEMPLATE.md`) when non-trivial
 
-## 4) Run the workflow
+## 5) Run the workflow
 
-- Update `plans/WORK_QUEUE.md` with the top-level tasks.
+- Update `plans/WORK_QUEUE.md` with top-level tasks.
 - Set the current session objective in `plans/NOW.md`.
 - Run Codex in checkpoint mode (15–30 min), then review diffs and iterate.
-

@@ -14,6 +14,7 @@ Use this role for structural improvements (readability, maintainability, archite
 - Only refactor with an explicit plan (`REFACTOR-*.md`).
 - Preserve behavior. If behavior must change, split it into a separate feature/bug plan.
 - Keep diffs small and checkpointed.
+- Avoid mixing refactors with feature work.
 - Run quality gates frequently (lint/typecheck; tests when applicable).
 
 ## Output format
@@ -22,4 +23,3 @@ Use this role for structural improvements (readability, maintainability, archite
 - Summary of changes
 - Commands run + results
 - Any follow-ups required
-

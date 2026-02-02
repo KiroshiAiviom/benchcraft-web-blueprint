@@ -37,13 +37,13 @@ Avoid these by default:
 - Use **max 2 font families**: a display face + a body face.
 - Define a **small type scale** and stick to it:
   - H1 / H2 / H3 / body / small
-  - line-height and letter-spacing included
+  - include line-height and letter-spacing
 - Prefer variable fonts where possible.
 - Ensure language coverage (Cyrillic/extended Latin/etc.) before committing.
 
 ### 3.2 Quick shortlist (display + body pairs)
 
-These are “good defaults” that avoid common AI-generated aesthetics. Use them as a starting point.
+Use these as a starting point. Avoid converging on the same pair across projects.
 
 - IBM Plex Sans (body) + IBM Plex Serif (display)
 - Source Sans 3 (body) + Source Serif 4 (display)
@@ -52,6 +52,100 @@ These are “good defaults” that avoid common AI-generated aesthetics. Use the
 - Noto Sans (body) + Noto Serif (display) — broad language support
 - Manrope (body) + Spectral (display)
 
+### 3.3 Typography tokens (implementation contract)
+
+**Contract:** typography is defined in tokens. Components do not invent ad-hoc sizes, line-heights,
+or letter-spacing.
+
+**Minimum token set:**
+
+Fonts:
+
+- `--font-body` (CSS variable set by `next/font`)
+- `--font-display` (CSS variable set by `next/font`)
+
+Scale (example names; tune values per project):
+
+- `--text-h1`, `--leading-h1`, `--tracking-h1`
+- `--text-h2`, `--leading-h2`, `--tracking-h2`
+- `--text-h3`, `--leading-h3`, `--tracking-h3`
+- `--text-body`, `--leading-body`, `--tracking-body`
+- `--text-sm`, `--leading-sm`, `--tracking-sm`
+
+**Tailwind mapping (example)**
+
+```ts
+// tailwind.config.ts (extend)
+export default {
+  theme: {
+    extend: {
+      fontFamily: {
+        body: ["var(--font-body)"],
+        display: ["var(--font-display)"],
+      },
+      fontSize: {
+        h1: [
+          "var(--text-h1)",
+          { lineHeight: "var(--leading-h1)", letterSpacing: "var(--tracking-h1)" },
+        ],
+        h2: [
+          "var(--text-h2)",
+          { lineHeight: "var(--leading-h2)", letterSpacing: "var(--tracking-h2)" },
+        ],
+        h3: [
+          "var(--text-h3)",
+          { lineHeight: "var(--leading-h3)", letterSpacing: "var(--tracking-h3)" },
+        ],
+        body: [
+          "var(--text-body)",
+          { lineHeight: "var(--leading-body)", letterSpacing: "var(--tracking-body)" },
+        ],
+        sm: [
+          "var(--text-sm)",
+          { lineHeight: "var(--leading-sm)", letterSpacing: "var(--tracking-sm)" },
+        ],
+      },
+    },
+  },
+};
+```
+
+### 3.4 Next.js `next/font` wiring (example)
+
+Use `next/font` to set font families as CSS variables (single source of truth).
+
+```ts
+// src/app/fonts.ts
+import { IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
+
+export const fontBody = IBM_Plex_Sans({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+export const fontDisplay = IBM_Plex_Serif({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "600"],
+  variable: "--font-display",
+  display: "swap",
+});
+```
+
+```tsx
+// src/app/layout.tsx
+import { fontBody, fontDisplay } from "./fonts";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={`${fontBody.variable} ${fontDisplay.variable}`}>
+      <body className="font-body bg-background text-foreground">{children}</body>
+    </html>
+  );
+}
+```
+
 ---
 
 ## 4) Palette
@@ -59,8 +153,8 @@ These are “good defaults” that avoid common AI-generated aesthetics. Use the
 ### 4.1 Baseline structure
 
 - **Neutrals:** background / surfaces / borders / muted text
-- **One accent:** accent + accent-foreground
-- Optional: **danger** (error states)
+- **One accent:** primary/accent + foreground
+- **Destructive:** error states
 
 ### 4.2 Rules
 
@@ -72,46 +166,79 @@ These are “good defaults” that avoid common AI-generated aesthetics. Use the
 
 ## 5) Tokens
 
-### 5.1 Minimal token set (semantic)
+### 5.1 Token set (shadcn-compatible)
 
-Colors (minimum):
+For Tailwind + shadcn/ui projects, prefer a shadcn-compatible semantic set:
 
 - `--background`, `--foreground`
 - `--card`, `--card-foreground`
+- `--popover`, `--popover-foreground`
+- `--primary`, `--primary-foreground`
+- `--secondary`, `--secondary-foreground`
 - `--muted`, `--muted-foreground`
-- `--border`, `--input`
 - `--accent`, `--accent-foreground`
-- `--ring` (focus)
+- `--destructive`, `--destructive-foreground`
+- `--border`, `--input`, `--ring`
 
-Shape:
+Optional product state tokens (add only when needed):
+
+- `--success`, `--success-foreground`
+- `--warning`, `--warning-foreground`
+- `--info`, `--info-foreground`
+
+Also define:
 
 - `--radius` (base)
-
-Motion:
-
 - `--motion-fast`, `--motion-normal`, `--motion-slow`
 - `--ease-out` (single primary easing)
 
-### 5.2 Implementation contract (copy/paste baseline)
+### 5.2 State + interaction conventions
+
+- Hover/active should be consistent:
+  - Prefer opacity variants (e.g., `hover:bg-primary/90`, `active:bg-primary/85`) over new hex values.
+  - If you need a specific “tint” behavior across the app, add derived tokens
+    (e.g., `--primary-hover`) computed via `color-mix()` and map them to Tailwind.
+- Disabled state:
+  - Prefer opacity + pointer-events (e.g., `disabled:opacity-50 disabled:pointer-events-none`).
+- Never add “one-off” colors in components. If a new semantic is required, add a token.
+
+### 5.3 Implementation contract (copy/paste baseline)
 
 **Contract:** tokens live in CSS variables (single source of truth). Tailwind maps to those variables.
-Components use Tailwind semantic classes (e.g., `bg-background`, `text-foreground`).
+Components use Tailwind semantic classes (e.g., `bg-background`, `text-foreground`, `bg-primary`).
 
-**`app/globals.css` (or `src/app/globals.css`)**
+**`src/app/globals.css`**
+
 ```css
 :root {
-  /* colors (HSL components; compatible with shadcn/ui conventions) */
+  /* colors (HSL components; shadcn-compatible) */
   --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
+  --foreground: 222.2 84% 4.9%;
+
   --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-  --ring: 240 5% 64.9%;
+  --card-foreground: 222.2 84% 4.9%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
 
   /* shape */
   --radius: 0.75rem;
@@ -124,37 +251,76 @@ Components use Tailwind semantic classes (e.g., `bg-background`, `text-foregroun
 }
 
 .dark {
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --accent: 240 3.7% 15.9%;
-  --accent-foreground: 0 0% 98%;
-  --ring: 240 4.9% 83.9%;
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 212.7 26.8% 83.9%;
 }
 ```
 
 **`tailwind.config.ts` (extend mapping)**
+
 ```ts
 export default {
   theme: {
     extend: {
       colors: {
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        card: "hsl(var(--card))",
-        "card-foreground": "hsl(var(--card-foreground))",
-        muted: "hsl(var(--muted))",
-        "muted-foreground": "hsl(var(--muted-foreground))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
-        accent: "hsl(var(--accent))",
-        "accent-foreground": "hsl(var(--accent-foreground))",
         ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -175,8 +341,9 @@ export default {
 ```
 
 **Component usage (example)**
+
 ```tsx
-<button className="rounded-lg bg-accent text-accent-foreground transition-[transform,opacity] duration-normal ease-ease-out hover:-translate-y-0.5">
+<button className="rounded-lg bg-primary text-primary-foreground transition-[transform,opacity] duration-normal ease-ease-out hover:-translate-y-0.5 hover:bg-primary/90 active:bg-primary/85">
   Continue
 </button>
 ```
@@ -196,7 +363,7 @@ Recipes are not templates. They are constraints that help you pick coherent defa
 
 ### 6.2 Clean Studio (light)
 
-- Bright surfaces, thin shadows, strong whitespace discipline.
+- Bright surfaces, thin shadows, strict whitespace discipline.
 - One clean accent (blue/green/red), no gradient clichés.
 - Hover micro-interactions (lift, underline, icon shift) kept subtle.
 
@@ -224,7 +391,32 @@ Rules:
 - Padding *inside* cards → one place (don’t “sprinkle padding” on every nested layer).
 - Prefer 2–4 nesting levels; deeply nested wrappers must justify themselves.
 
-### 7.1 Fix spacing/alignment quickly (debug protocol)
+### 7.1 Baseline: container widths + spacing scale
+
+**Container baseline (default):**
+
+- Max width: **72rem (1152px)** for marketing pages and general UI.
+- Side padding: `px-4` on mobile; `md:px-6` or `lg:px-8` on larger screens.
+- For long-form text, cap reading width around **65ch**.
+
+**Spacing scale (px → Tailwind):**
+
+- 4 → `1`
+- 8 → `2`
+- 12 → `3`
+- 16 → `4`
+- 24 → `6`
+- 32 → `8`
+- 48 → `12`
+
+**Recommended defaults:**
+
+- Card padding: `p-4` (16px) or `p-6` (24px)
+- Stack gaps: `gap-3` (12px) to `gap-6` (24px)
+- Section spacing: `py-12 md:py-16` (48–64px)
+- Hero spacing (when needed): `py-16 md:py-20` (64–80px)
+
+### 7.2 Fix spacing/alignment quickly (debug protocol)
 
 When something looks “off”:
 
@@ -277,7 +469,7 @@ If using shadcn/ui, prefer generating components from it and customizing via tok
 ### Spacing consistency
 
 - Similar components have identical paddings and gaps.
-- Layout aligns to a consistent grid/container.
+- Layout aligns to a consistent container and spacing scale.
 
 ### Interaction states
 
@@ -308,7 +500,6 @@ If using shadcn/ui, prefer generating components from it and customizing via tok
 Use a short, structured request:
 
 1) Propose 2 style directions (name + 5 bullets each).
-2) Pick 1 direction and write/update `docs/STYLE_GUIDE.md` tokens + typography.
-3) Implement the UI in small checkpoints.
+2) Pick 1 direction and update `docs/STYLE_GUIDE.md` (typography + palette + tokens).
+3) Implement the UI in small checkpoints (primitives → components → polish).
 4) End with diff + checklist of manual UI verifications.
-

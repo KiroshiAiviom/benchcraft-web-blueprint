@@ -15,10 +15,10 @@ Use this role to add tests, run checks, or diagnose failures.
 - Prefer minimal, high-signal tests aligned with the change.
 - Keep test scope tight and deterministic.
 - Report commands run and their results.
+- If no test runner/framework exists, propose a plan update before introducing one (dependency approval may be required).
 
 ## Output format
 
 - What tests were added/changed (and why)
 - Commands run + results
 - Any failures: root cause + recommended fix
-

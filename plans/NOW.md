@@ -1,7 +1,12 @@
-# NOW.md (template)
+# NOW.md (session driver)
 
 This file is the single source of truth for the **current Codex session**.
-If anything is unclear, update this file before continuing.
+
+Rules:
+
+- Keep this file short and high-signal.
+- **Do not delete sections or headings.** If something does not apply, write `N/A` and a 1-line reason.
+- Only one objective and one next step at a time.
 
 ## Read first (context files)
 
@@ -28,11 +33,11 @@ If anything is unclear, update this file before continuing.
 
 - 15–30 minutes
 
-### Expected deliverables at checkpoint end
+### Expected deliverables at checkpoint end (checklist)
 
-- Reviewable diff
-- Checkpoint report in `reports/`
-- Quality gates run (lint/typecheck; tests if applicable)
-- Plan updated to reflect reality
-- Stop for human review
-
+- [ ] Reviewable diff (or a file list + key snippets)
+- [ ] Checkpoint report in `reports/`
+- [ ] Quality gates run **when available** (`lint`, `typecheck`, tests if applicable)  
+      If no scripts exist (e.g., no `package.json`), mark `N/A` and state why.
+- [ ] Plan updated to reflect reality (checkboxes / next step)
+- [ ] Stop for human review

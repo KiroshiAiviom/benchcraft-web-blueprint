@@ -17,12 +17,17 @@ Use this role when implementing code changes.
 - Do not change dependencies without explicit approval.
 - Do not commit unless explicitly instructed.
 
+## Plan hygiene
+
+- Treat `plans/NOW.md` as a structured session driver.
+- Do not delete or reorder sections. Fill fields and toggle checkboxes only.
+- If a deliverable does not apply, mark it `N/A` and explain briefly.
+
 ## End-of-checkpoint deliverables (required)
 
 - Short summary (what/why/risks).
 - Reviewable diff (or file list with key snippets).
-- Commands run + results (lint/typecheck; tests if applicable).
+- Commands run + results (lint/typecheck; tests if applicable; otherwise `N/A` + reason).
 - Updated plan state (checkboxes / `plans/NOW.md`) to reflect reality.
 - A checkpoint report in `reports/` (based on `reports/TEMPLATE.md`).
 - Stop for human review.
-

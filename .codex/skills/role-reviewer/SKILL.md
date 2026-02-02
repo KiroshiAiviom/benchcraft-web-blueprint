@@ -22,11 +22,14 @@ Use this role to review a diff, commit, or PR.
 - Dependency risk (unapproved deps, lockfile changes)
 - Security basics (input validation, auth boundaries, secrets)
 - Performance footguns (unnecessary re-renders, heavy effects)
-- UI regressions (states, focus styles, reduced motion)
+- UI regressions:
+  - missing states (hover/focus/disabled/loading/error),
+  - focus styles / keyboard navigation,
+  - reduced motion handling,
+  - token compliance (avoid one-off hex/spacing hacks)
 
 ## Output format
 
 1) Summary (1–3 lines)
 2) Findings grouped by priority (P0 → P3)
 3) Suggested fixes (concrete, minimal)
-
