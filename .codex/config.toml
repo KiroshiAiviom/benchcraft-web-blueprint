@@ -1,0 +1,9 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+# Benchcraft project-scoped Codex defaults.
+# Loaded when the project is trusted.
+
+web_search = "cached"   # cached | live | disabled
+# model = "gpt-5.2-codex"          # optional: pin model (we’ll decide later)
+# model_reasoning_effort = "high"  # optional: tune later
+# review_model = "gpt-5.2-codex"   # optional: /review override
