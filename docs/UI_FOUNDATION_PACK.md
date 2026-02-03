@@ -148,6 +148,65 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 ---
 
+### 3.3 Typography tokens + Next.js implementation (enforceable baseline)
+
+**Contract:** typography is defined once, then reused everywhere.
+
+- Fonts are loaded via `next/font` and assigned to CSS variables:
+  - `--font-body` (primary UI text)
+  - `--font-display` (headings / brand moments)
+- Tailwind maps to those variables so components never hardcode font names.
+
+**Example (Next.js)**
+
+```ts
+// src/app/fonts.ts
+import { Inter, Fraunces } from "next/font/google";
+
+export const fontBody = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+export const fontDisplay = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+```
+
+```tsx
+// src/app/layout.tsx
+import { fontBody, fontDisplay } from "./fonts";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={`${fontBody.variable} ${fontDisplay.variable}`}>
+      <body className="font-body">{children}</body>
+    </html>
+  );
+}
+```
+
+```ts
+// tailwind.config.ts (extend)
+fontFamily: {
+  body: ["var(--font-body)"],
+  display: ["var(--font-display)"],
+},
+```
+
+**Text scale (rule of thumb)**
+
+- Keep **4–6 sizes total**; declare once and reuse (no ad-hoc sizes per component).
+- Prefer consistent line-height:
+  - headings: ~1.1–1.2
+  - body: ~1.5–1.7
+- If you need a new size, add it to the scale (don’t “just this once” in a component).
+
+---
+
 ## 4) Palette
 
 ### 4.1 Baseline structure
@@ -189,6 +248,7 @@ Optional product state tokens (add only when needed):
 Also define:
 
 - `--radius` (base)
+- `--shadow-sm`, `--shadow-md` (elevation tokens; minimum 2 levels)
 - `--motion-fast`, `--motion-normal`, `--motion-slow`
 - `--ease-out` (single primary easing)
 
@@ -240,6 +300,10 @@ Components use Tailwind semantic classes (e.g., `bg-background`, `text-foregroun
   --input: 214.3 31.8% 91.4%;
   --ring: 222.2 84% 4.9%;
 
+  /* elevation */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.06), 0 1px 1px -1px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.12), 0 4px 6px -4px rgb(0 0 0 / 0.12);
+
   /* shape */
   --radius: 0.75rem;
 
@@ -278,6 +342,10 @@ Components use Tailwind semantic classes (e.g., `bg-background`, `text-foregroun
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
   --ring: 212.7 26.8% 83.9%;
+
+  /* elevation (tune as needed for dark mode) */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.35), 0 1px 1px -1px rgb(0 0 0 / 0.35);
+  --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.45), 0 4px 6px -4px rgb(0 0 0 / 0.45);
 }
 ```
 
@@ -322,6 +390,14 @@ export default {
           foreground: "hsl(var(--destructive-foreground))",
         },
       },
+      fontFamily: {
+        body: ["var(--font-body)"],
+        display: ["var(--font-display)"],
+      },
+      boxShadow: {
+        sm: "var(--shadow-sm)",
+        md: "var(--shadow-md)",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -347,6 +423,20 @@ export default {
   Continue
 </button>
 ```
+
+### 5.4 Focus-visible pattern (copy/paste)
+
+Make focus styles **consistent and visible** across all interactive primitives (buttons, links, inputs):
+
+```txt
+focus-visible:outline-none
+focus-visible:ring-2 focus-visible:ring-ring
+focus-visible:ring-offset-2 focus-visible:ring-offset-background
+```
+
+Use it directly or via shared component variants. Do not ship “invisible focus”.
+
+---
 
 ---
 
@@ -452,10 +542,29 @@ If using shadcn/ui, prefer generating components from it and customizing via tok
 ## 9) Motion (smooth, deliberate)
 
 - Prefer `transform` + `opacity` for 60fps.
-- Use **1–2 signature moments** per page:
-  - hero entry stagger
-  - a small set of interactive blocks
+- Use **1–2 signature moments** per page (hero entry, interactive blocks).
+- Default to subtle motion. If it draws attention, it must earn it.
 - Always respect `prefers-reduced-motion` (disable non-essential motion).
+
+### 9.1 Implementation pattern (Tailwind)
+
+Gate “nice-to-have” animation behind `motion-safe:` and provide `motion-reduce:` fallbacks:
+
+```tsx
+<button
+  className="
+    transition duration-normal ease-ease-out
+    motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-md
+    motion-reduce:transform-none motion-reduce:shadow-none
+    motion-reduce:transition-none
+  "
+>
+  Continue
+</button>
+```
+
+- Use `motion-safe:` for entry transitions, hover transforms, and parallax-like effects.
+- In reduced motion, keep UI responsive: remove transforms and long transitions, but keep clarity.
 
 ---
 

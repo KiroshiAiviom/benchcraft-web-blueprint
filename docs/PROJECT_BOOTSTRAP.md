@@ -53,7 +53,26 @@ Copy the following into the project root:
 - `reports/`
 - `.github/` (recommended)
 
-## 4) Initialize project docs (before major implementation)
+## 4) Open in Codex App (recommended)
+
+1) Ensure the project is a Git repo (`git init` if needed).
+2) Open the project folder in the **Codex app**.
+3) Configure **Local Environments**:
+   - Worktree setup script:
+     ```bash
+     bun install
+     bun run build
+     ```
+   - Actions (quick-run buttons):
+     - `bun run dev`
+     - `bun run lint`
+     - `bun run typecheck`
+     - `bun run test` (if a runner exists)
+     - `bun run build`
+
+The goal is: new worktrees are runnable without manual setup.
+
+## 5) Initialize project docs (before major implementation)
 
 Create and fill these files using templates:
 
@@ -62,8 +81,8 @@ Create and fill these files using templates:
 - `docs/STYLE_GUIDE.md` (from `docs/templates/STYLE_GUIDE_TEMPLATE.md`)
 - `docs/ARCHITECTURE.md` (from `docs/templates/ARCHITECTURE_TEMPLATE.md`) when non-trivial
 
-## 5) Run the workflow
+## 6) Run the workflow
 
 - Update `plans/WORK_QUEUE.md` with top-level tasks.
 - Set the current session objective in `plans/NOW.md`.
-- Run Codex in checkpoint mode (15–30 min), then review diffs and iterate.
+- Execute in 15–30 minute checkpoints (one checkpoint per thread), review diffs, iterate.
