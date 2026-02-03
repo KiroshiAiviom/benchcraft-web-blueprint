@@ -17,6 +17,12 @@ Rules:
 - `docs/UI_FOUNDATION_PACK.md`
 - `plans/WORK_QUEUE.md`
 
+## Session settings (optional)
+
+- Surface:  
+- Worktree (if used):  
+- Model + reasoning effort:  
+
 ## Current objective (one sentence)
 
 -  
@@ -35,7 +41,8 @@ Rules:
 
 ### Expected deliverables at checkpoint end (checklist)
 
-- [ ] Reviewable diff (or a file list + key snippets)
+- [ ] Reviewable diff (or a file list + key snippets)  
+      If this is a read-only checkpoint, write `N/A` and summarize the inspected scope.
 - [ ] Checkpoint report in `reports/`
 - [ ] Quality gates run **when available** (`lint`, `typecheck`, tests if applicable)  
       If no scripts exist (e.g., no `package.json`), mark `N/A` and state why.

@@ -1,24 +1,61 @@
 ---
 name: role-tests
-description: Add or update tests and run them honestly (no manipulation). Triage failures and propose fixes.
+description: Run quality gates and tests honestly (no manipulation). Triage failures, propose fixes, and keep the project shippable at every checkpoint.
 metadata:
   short-description: Tests / QA
+  recommended-model: gpt-5.2-codex
+  recommended-reasoning: medium
 ---
 
 # Role: Tests / QA
 
-Use this role to add tests, run checks, or diagnose failures.
+Use this role to run quality gates, add/update tests (when the plan requires it), or diagnose failures.
 
-## Rules
+## Non-negotiable rules
 
 - Never “game” tests to pass. Fix the underlying issue.
-- Prefer minimal, high-signal tests aligned with the change.
-- Keep test scope tight and deterministic.
-- Report commands run and their results.
-- If no test runner/framework exists, propose a plan update before introducing one (dependency approval may be required).
+- Keep tests deterministic and high-signal.
+- If a test runner does not exist yet, **do not introduce one** unless the plan explicitly says so
+  (it usually requires dependency approval).
 
-## Output format
+## Default model + effort
 
-- What tests were added/changed (and why)
-- Commands run + results
-- Any failures: root cause + recommended fix
+- Default: Codex model at **medium** effort for running gates and basic triage.
+- Escalate to **high** when failures are complex or the fix is non-obvious.
+
+Record model/effort in the checkpoint report.
+
+## Checklist (per checkpoint)
+
+1) Confirm the exact scope from `plans/NOW.md`.
+2) Discover available scripts and tools:
+   - `package.json` scripts (`lint`, `typecheck`, `test`, `e2e`, `build`)
+   - CI config if present
+3) Run the smallest useful set of checks for this step:
+   - Always: lint + typecheck (when available)
+   - Add: unit/integration/e2e only when the plan requires it or the change is risky
+
+## How to handle failures
+
+When a check fails:
+
+1) Capture the failure output (short excerpt) and the command used.
+2) Reduce to a clear root cause:
+   - failing test vs failing runtime error vs type error vs lint
+3) Fix the underlying code first.
+4) Re-run the same check to confirm the fix.
+5) If you must adjust tests:
+   - explain why the previous expectation was wrong,
+   - ensure the revised test still detects real regressions.
+
+## Required outputs
+
+At the end of the checkpoint:
+
+- `plans/NOW.md` updated (checkboxes reflect reality)
+- A checkpoint report (`reports/`) including:
+  - commands run + results
+  - failures + root cause + fix
+  - DoD check status (pass/fail/N/A)
+  - model + effort used
+- Stop for human review

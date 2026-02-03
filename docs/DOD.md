@@ -8,16 +8,19 @@ The goal is to prevent “massive fix-up phases” by keeping quality high at ev
 ## A) Minimum DoD for every checkpoint (15–30 minutes)
 
 1) The checkpoint objective is achieved (as written in `plans/NOW.md`).
-2) No obvious breakage:
-   - the app does not crash on the basic flow (when applicable),
+2) `plans/NOW.md` is updated to reflect reality (checkboxes + next step).
+3) No obvious breakage (when applicable):
+   - the app does not crash on the basic flow,
    - no obvious runtime errors introduced by the change.
-3) Quality gates (when available in the codebase):
+4) Quality gates (when available in the codebase):
    - `lint` passes (or `N/A` with a reason),
    - `typecheck` passes (or `N/A` with a reason).
-4) Changes are reviewable:
-   - diff is reasonably small,
-   - changes are explained in a checkpoint report.
-5) A checkpoint report exists in `reports/` (use `reports/TEMPLATE.md`).
+5) Changes are reviewable:
+   - diff is reasonably small (or `N/A` for read-only checkpoints),
+   - changes/findings are explained in a checkpoint report.
+6) A checkpoint report exists in `reports/` (use `reports/TEMPLATE.md`) and includes:
+   - surface + model (for calibration),
+   - commands run (or `N/A` with a reason).
 
 ---
 
@@ -46,6 +49,6 @@ The goal is to prevent “massive fix-up phases” by keeping quality high at ev
 
 ## D) Additional DoD for refactors
 
-1) Refactor is driven by an explicit refactor plan (`REFACTOR-*.md`).
-2) Behavior is preserved (or the behavior change is split into a separate feature/bug plan).
+1) Refactor is driven by an explicit refactor plan (ExecPlan or a dedicated refactor doc).
+2) Behavior is preserved (or behavior changes are split into a separate feature/bug plan).
 3) Quality gates pass; tests are updated/added when risk warrants it.

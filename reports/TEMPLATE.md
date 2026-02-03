@@ -6,6 +6,12 @@ If a section does not apply, write `N/A`.
 
 -  
 
+## Surface + model
+
+- Surface: (Codex app / IDE / CLI)  
+- Worktree (if used):  
+- Model + reasoning effort:  
+
 ## Summary (2–5 bullets)
 
 -  

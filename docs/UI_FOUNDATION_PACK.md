@@ -36,8 +36,7 @@ Avoid these by default:
 
 - Use **max 2 font families**: a display face + a body face.
 - Define a **small type scale** and stick to it:
-  - H1 / H2 / H3 / body / small
-  - include line-height and letter-spacing
+  - H1 / H2 / H3 / body / small (+ line-height + letter-spacing)
 - Prefer variable fonts where possible.
 - Ensure language coverage (Cyrillic/extended Latin/etc.) before committing.
 
@@ -52,12 +51,12 @@ Use these as a starting point. Avoid converging on the same pair across projects
 - Noto Sans (body) + Noto Serif (display) — broad language support
 - Manrope (body) + Spectral (display)
 
-### 3.3 Typography tokens (implementation contract)
+### 3.3 Typography tokens + implementation contract
 
 **Contract:** typography is defined in tokens. Components do not invent ad-hoc sizes, line-heights,
 or letter-spacing.
 
-**Minimum token set:**
+**Minimum token set**
 
 Fonts:
 
@@ -72,62 +71,20 @@ Scale (example names; tune values per project):
 - `--text-body`, `--leading-body`, `--tracking-body`
 - `--text-sm`, `--leading-sm`, `--tracking-sm`
 
-**Tailwind mapping (example)**
-
-```ts
-// tailwind.config.ts (extend)
-export default {
-  theme: {
-    extend: {
-      fontFamily: {
-        body: ["var(--font-body)"],
-        display: ["var(--font-display)"],
-      },
-      fontSize: {
-        h1: [
-          "var(--text-h1)",
-          { lineHeight: "var(--leading-h1)", letterSpacing: "var(--tracking-h1)" },
-        ],
-        h2: [
-          "var(--text-h2)",
-          { lineHeight: "var(--leading-h2)", letterSpacing: "var(--tracking-h2)" },
-        ],
-        h3: [
-          "var(--text-h3)",
-          { lineHeight: "var(--leading-h3)", letterSpacing: "var(--tracking-h3)" },
-        ],
-        body: [
-          "var(--text-body)",
-          { lineHeight: "var(--leading-body)", letterSpacing: "var(--tracking-body)" },
-        ],
-        sm: [
-          "var(--text-sm)",
-          { lineHeight: "var(--leading-sm)", letterSpacing: "var(--tracking-sm)" },
-        ],
-      },
-    },
-  },
-};
-```
-
-### 3.4 Next.js `next/font` wiring (example)
-
-Use `next/font` to set font families as CSS variables (single source of truth).
+**Next.js `next/font` wiring (example)**
 
 ```ts
 // src/app/fonts.ts
-import { IBM_Plex_Sans, IBM_Plex_Serif } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 
-export const fontBody = IBM_Plex_Sans({
+export const fontBody = Inter({
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600"],
   variable: "--font-body",
   display: "swap",
 });
 
-export const fontDisplay = IBM_Plex_Serif({
+export const fontDisplay = Fraunces({
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "600"],
   variable: "--font-display",
   display: "swap",
 });
@@ -146,58 +103,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
----
-
-### 3.3 Typography tokens + Next.js implementation (enforceable baseline)
-
-**Contract:** typography is defined once, then reused everywhere.
-
-- Fonts are loaded via `next/font` and assigned to CSS variables:
-  - `--font-body` (primary UI text)
-  - `--font-display` (headings / brand moments)
-- Tailwind maps to those variables so components never hardcode font names.
-
-**Example (Next.js)**
-
-```ts
-// src/app/fonts.ts
-import { Inter, Fraunces } from "next/font/google";
-
-export const fontBody = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-export const fontDisplay = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-```
-
-```tsx
-// src/app/layout.tsx
-import { fontBody, fontDisplay } from "./fonts";
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en" className={`${fontBody.variable} ${fontDisplay.variable}`}>
-      <body className="font-body">{children}</body>
-    </html>
-  );
-}
-```
+**Tailwind mapping (example)**
 
 ```ts
 // tailwind.config.ts (extend)
-fontFamily: {
-  body: ["var(--font-body)"],
-  display: ["var(--font-display)"],
-},
+export default {
+  theme: {
+    extend: {
+      fontFamily: {
+        body: ["var(--font-body)"],
+        display: ["var(--font-display)"],
+      },
+      fontSize: {
+        h1: ["var(--text-h1)", { lineHeight: "var(--leading-h1)", letterSpacing: "var(--tracking-h1)" }],
+        h2: ["var(--text-h2)", { lineHeight: "var(--leading-h2)", letterSpacing: "var(--tracking-h2)" }],
+        h3: ["var(--text-h3)", { lineHeight: "var(--leading-h3)", letterSpacing: "var(--tracking-h3)" }],
+        body: ["var(--text-body)", { lineHeight: "var(--leading-body)", letterSpacing: "var(--tracking-body)" }],
+        sm: ["var(--text-sm)", { lineHeight: "var(--leading-sm)", letterSpacing: "var(--tracking-sm)" }],
+      },
+    },
+  },
+};
 ```
 
-**Text scale (rule of thumb)**
+**Text scale rules of thumb**
 
 - Keep **4–6 sizes total**; declare once and reuse (no ad-hoc sizes per component).
 - Prefer consistent line-height:
@@ -225,9 +154,9 @@ fontFamily: {
 
 ## 5) Tokens
 
-### 5.1 Token set (shadcn-compatible)
+### 5.1 Semantic color token set (shadcn-compatible)
 
-For Tailwind + shadcn/ui projects, prefer a shadcn-compatible semantic set:
+Prefer a shadcn-compatible semantic set:
 
 - `--background`, `--foreground`
 - `--card`, `--card-foreground`
@@ -245,69 +174,48 @@ Optional product state tokens (add only when needed):
 - `--warning`, `--warning-foreground`
 - `--info`, `--info-foreground`
 
+### 5.2 Non-color tokens (minimum baseline)
+
 Also define:
 
 - `--radius` (base)
-- `--shadow-sm`, `--shadow-md` (elevation tokens; minimum 2 levels)
-- `--motion-fast`, `--motion-normal`, `--motion-slow`
+- elevation/shadow tokens: `--shadow-sm`, `--shadow-md` (minimum 2 levels)
+- motion tokens: `--motion-fast`, `--motion-normal`, `--motion-slow`
 - `--ease-out` (single primary easing)
 
-### 5.2 State + interaction conventions
+### 5.3 State + interaction conventions
 
 - Hover/active should be consistent:
   - Prefer opacity variants (e.g., `hover:bg-primary/90`, `active:bg-primary/85`) over new hex values.
-  - If you need a specific “tint” behavior across the app, add derived tokens
-    (e.g., `--primary-hover`) computed via `color-mix()` and map them to Tailwind.
+  - If you need app-wide “tint” behavior, add derived tokens (e.g., `--primary-hover`)
+    computed via `color-mix()` and map them to Tailwind.
 - Disabled state:
   - Prefer opacity + pointer-events (e.g., `disabled:opacity-50 disabled:pointer-events-none`).
 - Never add “one-off” colors in components. If a new semantic is required, add a token.
 
-### 5.3 Implementation contract (copy/paste baseline)
+### 5.4 Implementation contract (copy/paste baseline)
 
 **Contract:** tokens live in CSS variables (single source of truth). Tailwind maps to those variables.
-Components use Tailwind semantic classes (e.g., `bg-background`, `text-foreground`, `bg-primary`).
+Components use semantic utilities (e.g., `bg-background`, `text-foreground`, `bg-primary`).
 
-**`src/app/globals.css`**
+**`src/app/globals.css` (example)**
 
 ```css
 :root {
-  /* colors (HSL components; shadcn-compatible) */
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
-
   --card: 0 0% 100%;
   --card-foreground: 222.2 84% 4.9%;
-
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-
   --primary: 222.2 47.4% 11.2%;
   --primary-foreground: 210 40% 98%;
-
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-
   --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
   --ring: 222.2 84% 4.9%;
 
-  /* elevation */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.06), 0 1px 1px -1px rgb(0 0 0 / 0.06);
   --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.12), 0 4px 6px -4px rgb(0 0 0 / 0.12);
 
-  /* shape */
   --radius: 0.75rem;
 
-  /* motion */
   --motion-fast: 120ms;
   --motion-normal: 180ms;
   --motion-slow: 260ms;
@@ -317,47 +225,24 @@ Components use Tailwind semantic classes (e.g., `bg-background`, `text-foregroun
 .dark {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
-
   --card: 222.2 84% 4.9%;
   --card-foreground: 210 40% 98%;
-
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
-
   --primary: 210 40% 98%;
   --primary-foreground: 222.2 47.4% 11.2%;
-
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-
   --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
   --ring: 212.7 26.8% 83.9%;
-
-  /* elevation (tune as needed for dark mode) */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.35), 0 1px 1px -1px rgb(0 0 0 / 0.35);
-  --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.45), 0 4px 6px -4px rgb(0 0 0 / 0.45);
 }
 ```
 
-**`tailwind.config.ts` (extend mapping)**
+**Tailwind mapping (example)**
 
 ```ts
+// tailwind.config.ts (extend)
 export default {
   theme: {
     extend: {
       colors: {
         border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -365,34 +250,10 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-      },
-      fontFamily: {
-        body: ["var(--font-body)"],
-        display: ["var(--font-display)"],
       },
       boxShadow: {
         sm: "var(--shadow-sm)",
@@ -419,14 +280,14 @@ export default {
 **Component usage (example)**
 
 ```tsx
-<button className="rounded-lg bg-primary text-primary-foreground transition-[transform,opacity] duration-normal ease-ease-out hover:-translate-y-0.5 hover:bg-primary/90 active:bg-primary/85">
+<button className="rounded-lg bg-primary text-primary-foreground shadow-sm transition-[transform,opacity] duration-normal ease-ease-out hover:-translate-y-0.5 hover:bg-primary/90 active:bg-primary/85">
   Continue
 </button>
 ```
 
-### 5.4 Focus-visible pattern (copy/paste)
+### 5.5 Focus-visible pattern (copy/paste)
 
-Make focus styles **consistent and visible** across all interactive primitives (buttons, links, inputs):
+Make focus styles **consistent and visible** across interactive primitives:
 
 ```txt
 focus-visible:outline-none
@@ -435,8 +296,6 @@ focus-visible:ring-offset-2 focus-visible:ring-offset-background
 ```
 
 Use it directly or via shared component variants. Do not ship “invisible focus”.
-
----
 
 ---
 
@@ -449,7 +308,7 @@ Recipes are not templates. They are constraints that help you pick coherent defa
 - Dark neutral base with subtle texture and crisp borders.
 - One cool accent used sparingly.
 - Strong display type; calm, readable body type.
-- One “signature” interaction (e.g., staggered hero reveal).
+- One signature interaction (e.g., staggered hero reveal).
 
 ### 6.2 Clean Studio (light)
 
@@ -483,13 +342,13 @@ Rules:
 
 ### 7.1 Baseline: container widths + spacing scale
 
-**Container baseline (default):**
+**Container baseline (default)**
 
 - Max width: **72rem (1152px)** for marketing pages and general UI.
 - Side padding: `px-4` on mobile; `md:px-6` or `lg:px-8` on larger screens.
 - For long-form text, cap reading width around **65ch**.
 
-**Spacing scale (px → Tailwind):**
+**Spacing scale (px → Tailwind)**
 
 - 4 → `1`
 - 8 → `2`
@@ -499,7 +358,7 @@ Rules:
 - 32 → `8`
 - 48 → `12`
 
-**Recommended defaults:**
+**Recommended defaults**
 
 - Card padding: `p-4` (16px) or `p-6` (24px)
 - Stack gaps: `gap-3` (12px) to `gap-6` (24px)
@@ -588,7 +447,7 @@ Gate “nice-to-have” animation behind `motion-safe:` and provide `motion-redu
 ### Accessibility baseline (practical, numeric)
 
 - Color contrast meets **WCAG AA** for text (or better).
-- Focus ring is visible: **≥ 2px** thickness with an offset (avoid “inset-only” focus).
+- Focus ring is visible: **≥ 2px** thickness with an offset.
 - Minimum interactive hit target: **44×44px** for touch targets.
 - `prefers-reduced-motion`: disable non-essential animations and remove large parallax effects.
 
@@ -600,7 +459,7 @@ Gate “nice-to-have” animation behind `motion-safe:` and provide `motion-redu
 ### Performance
 
 - Avoid heavy, large-area blur/glow layers.
-- No janky animation: avoid animating layout properties (`width`, `height`, `top`, etc.) when possible.
+- Avoid animating layout properties (`width`, `height`, `top`, etc.) when possible.
 
 ---
 
@@ -610,5 +469,5 @@ Use a short, structured request:
 
 1) Propose 2 style directions (name + 5 bullets each).
 2) Pick 1 direction and update `docs/STYLE_GUIDE.md` (typography + palette + tokens).
-3) Implement the UI in small checkpoints (primitives → components → polish).
+3) Implement in small checkpoints (primitives → components → polish).
 4) End with diff + checklist of manual UI verifications.
