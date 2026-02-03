@@ -7,6 +7,8 @@ The goal is to prevent “massive fix-up phases” by keeping quality high at ev
 
 ## A) Minimum DoD for every checkpoint (15–30 minutes)
 
+Read-only checkpoints (docs/audits): still update `plans/NOW.md` and write a checkpoint report; mark quality gates as `N/A` with a reason.
+
 1) The checkpoint objective is achieved (as written in `plans/NOW.md`).
 2) `plans/NOW.md` is updated to reflect reality (checkboxes + next step).
 3) No obvious breakage (when applicable):
@@ -14,7 +16,10 @@ The goal is to prevent “massive fix-up phases” by keeping quality high at ev
    - no obvious runtime errors introduced by the change.
 4) Quality gates (when available in the codebase):
    - `lint` passes (or `N/A` with a reason),
-   - `typecheck` passes (or `N/A` with a reason).
+   - `typecheck` passes (or `N/A` with a reason),
+   - `tests` pass (or `N/A` with a reason).
+
+   Tests guidance: run tests for user-facing or risky changes; otherwise mark `tests` as `N/A` and state why in the checkpoint report.
 5) Changes are reviewable:
    - diff is reasonably small (or `N/A` for read-only checkpoints),
    - changes/findings are explained in a checkpoint report.

@@ -340,6 +340,19 @@ Rules:
 - Padding *inside* cards → one place (don’t “sprinkle padding” on every nested layer).
 - Prefer 2–4 nesting levels; deeply nested wrappers must justify themselves.
 
+**Copy/paste Tailwind class recipes (baseline)**
+
+```txt
+Container: mx-auto w-full max-w-6xl px-4 md:px-6 lg:px-8
+Section: py-12 md:py-16
+Stack: flex flex-col gap-4
+Cluster: flex flex-wrap items-center gap-3
+Grid (2-col): grid grid-cols-1 gap-6 md:grid-cols-2
+Grid (3-col): grid grid-cols-1 gap-6 md:grid-cols-3
+```
+
+Adjust `px-*`, `py-*`, and `gap-*` using the spacing scale in §7.1. Avoid ad-hoc values.
+
 ### 7.1 Baseline: container widths + spacing scale
 
 **Container baseline (default)**
