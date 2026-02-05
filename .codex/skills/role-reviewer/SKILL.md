@@ -4,8 +4,8 @@ description: Review diffs/PRs for correctness, security, performance, UX regress
 metadata:
   short-description: Reviewer (diff/PR)
   recommended-surface: codex app (review pane) or /review
-  recommended-model: codex
-  recommended-reasoning: high
+  recommended-model: GPT-5.3-Codex
+  recommended-reasoning: medium
 ---
 
 # Role: Reviewer

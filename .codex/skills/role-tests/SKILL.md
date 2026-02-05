@@ -3,7 +3,7 @@ name: role-tests
 description: Run quality gates and tests honestly (no manipulation). Triage failures, propose fixes, and keep the project shippable at every checkpoint.
 metadata:
   short-description: Tests / QA
-  recommended-model: codex
+  recommended-model: GPT-5.3-Codex
   recommended-reasoning: medium
 ---
 

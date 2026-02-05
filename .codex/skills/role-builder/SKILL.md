@@ -4,7 +4,7 @@ description: Implement the next planned step safely: small diff, run checks, upd
 metadata:
   short-description: Builder (checkpoint-based implementation)
   recommended-surface: codex app (worktree)
-  recommended-model: codex
+  recommended-model: GPT-5.3-Codex
   recommended-reasoning: medium
 ---
 

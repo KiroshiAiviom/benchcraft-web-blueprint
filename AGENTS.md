@@ -28,6 +28,11 @@ Unless the checkpoint is doc-only:
 - Run `bun run lint` and `bun run typecheck`.
 - Run tests when the change is user-facing, risky, or touches core flows. Otherwise mark tests as `N/A` with a reason.
 
+## Model defaults
+
+- Use **GPT-5.3-Codex** for all work in this repo.
+- Reasoning effort: **medium** by default; use **high** when stuck or when the task is complex; use **xhigh** (“extra high”) only for the hardest tasks.
+
 ## How instructions layer
 
 - `AGENTS.md` applies globally.

@@ -1,8 +1,11 @@
 ---
 name: ui-foundation-pack
 description: Plan, audit, and implement premium UI using the UI Foundation Pack + project Design System.
-recommended-model: codex
-recommended-reasoning: medium
+metadata:
+  short-description: Premium UI/UX guardrails + phased audit/build protocol.
+  recommended-surface: codex-app
+  recommended-model: GPT-5.3-Codex
+  recommended-reasoning: medium
 ---
 
 # UI Foundation Pack Skill

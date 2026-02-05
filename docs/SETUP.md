@@ -81,6 +81,8 @@ Install the Codex App from OpenAI, sign in, then:
 - Configure at least one **Local Environment** that can run `bun`, `node`, and `git`.
 - Ensure **web search** is enabled (cached is fine for most work).
 - Use **worktrees** for parallel lanes (Builder / Reviewer / Tests) and for any non-trivial change.
+- Set the model to **GPT-5.3-Codex** and default reasoning effort to **medium** (use **high** / **xhigh** only when needed).
+- (Optional) Enable steering while Codex works: Settings → General → Follow-up behavior.
 
 > Keep one thread per checkpoint to avoid context drift.
 

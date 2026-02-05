@@ -26,7 +26,8 @@ If this checkpoint touches UI:
 
 - Surface:
 - Worktree (if used):
-- Model + reasoning effort:
+- Model: **GPT-5.3-Codex** (default; pinned in `.codex/config.toml`)
+- Reasoning effort: **medium** by default; use **high** when stuck; use **xhigh** for the hardest tasks
 
 ## Current objective (one sentence)
 

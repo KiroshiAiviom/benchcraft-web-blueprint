@@ -17,9 +17,17 @@ Use the Codex app as the control plane:
 
 If you use the Codex CLI/IDE extension, the same principles apply: **one checkpoint per session** and **small diffs**.
 
+## Model + reasoning effort
+
+- Default model: **GPT-5.3-Codex** (Codex App label; config id: `gpt-5.3-codex`).
+- Default reasoning effort: **medium**. Use **high** when stuck / complex. Use **xhigh** (“extra high”) only for the hardest tasks.
+- This blueprint pins model + default effort in `.codex/config.toml`.
+
 ## Documentation-first (keep it lean)
 
-Before serious coding begins, create/fill the three canonical docs:
+Before serious coding begins, create/fill the three canonical docs.
+
+Planning note: draft these docs during a separate planning session in ChatGPT (recommended: **GPT-5.2 Pro**) before you start Codex execution.
 
 - `docs/PRD.md` — scope, routes/flows, features + acceptance criteria
 - `docs/DESIGN_SYSTEM.md` — typography, palette, tokens, layout primitives, component rules

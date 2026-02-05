@@ -24,7 +24,7 @@ Read-only checkpoints (docs/audits): still update `plans/NOW.md` and write a che
    - diff is reasonably small (or `N/A` for read-only checkpoints),
    - changes/findings are explained in a checkpoint report.
 6) A checkpoint report exists in `reports/` (use `reports/TEMPLATE.md`) and includes:
-   - surface + model (for calibration),
+   - surface + model + reasoning effort (for traceability),
    - commands run (or `N/A` with a reason).
 
 ---
