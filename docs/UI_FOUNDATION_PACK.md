@@ -464,6 +464,14 @@ Gate “nice-to-have” animation behind `motion-safe:` and provide `motion-redu
 - Minimum interactive hit target: **44×44px** for touch targets.
 - `prefers-reduced-motion`: disable non-essential animations and remove large parallax effects.
 
+Focus-visible pattern (Tailwind):
+
+```tsx
+<button className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+  …
+</button>
+```
+
 ### Responsive
 
 - No broken layout on mobile.
@@ -481,6 +489,6 @@ Gate “nice-to-have” animation behind `motion-safe:` and provide `motion-redu
 Use a short, structured request:
 
 1) Propose 2 style directions (name + 5 bullets each).
-2) Pick 1 direction and update `docs/STYLE_GUIDE.md` (typography + palette + tokens).
+2) Pick 1 direction and update `docs/DESIGN_SYSTEM.md` (typography + palette + tokens).
 3) Implement in small checkpoints (primitives → components → polish).
 4) End with diff + checklist of manual UI verifications.

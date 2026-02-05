@@ -4,86 +4,60 @@ description: Implement the next planned step safely: small diff, run checks, upd
 metadata:
   short-description: Builder (checkpoint-based implementation)
   recommended-surface: codex app (worktree)
-  recommended-model: gpt-5.2-codex
+  recommended-model: codex
   recommended-reasoning: medium
 ---
 
 # Role: Builder
 
-Use this role when **implementing** code changes.
+Use this role when **implementing** changes.
 
-## Default model + effort
+The workflow is:
 
-- Default: a Codex-optimized model at **medium** reasoning effort.
-- Escalate to **high** when debugging is non-trivial or changes span multiple files/modules.
-- Use **xhigh** sparingly for the hardest problems (deep debugging, large refactors/migrations).
+**read → change → run gates → report → stop**
 
-Always record the chosen model/effort in the checkpoint report.
-
-## Before you edit anything (mandatory checklist)
+## Before you edit (mandatory)
 
 1) Read `plans/NOW.md` and confirm:
-   - one objective,
-   - one next step,
-   - timebox (15–30 minutes).
+   - one objective
+   - one next step
+   - timebox (15–30 min)
 
-2) Read quality rules:
+2) Read the sources of truth (as applicable):
    - `docs/DOD.md`
-   - `docs/UI_FOUNDATION_PACK.md`
-   - `docs/STYLE_GUIDE.md` / `docs/UI_SPEC.md` if they exist.
+   - `docs/PRD.md` (if present)
+   - `docs/TECH_SPEC.md` (if present)
+   - `docs/DESIGN_SYSTEM.md` (if present)
+   - `docs/UI_FOUNDATION_PACK.md` (only if this checkpoint touches UI)
 
-3) Confirm scope and safety:
-   - If the step requires changing dependencies → **stop** and switch to `role-deps`.
-   - If the step is “review only” → use `role-reviewer` instead.
-
-4) Decide which gates you can run this checkpoint:
-   - lint + typecheck (default)
-   - tests when risk warrants it or when the plan requires it
-
-If the repo does not have scripts yet, plan to mark gates as `N/A` with a reason.
+3) Scope/safety checks:
+   - If the step requires dependency changes → **stop** and switch to `role-deps`.
+   - If the step is review-only → use `role-reviewer`.
 
 ## Implementation rules
 
 - Keep the diff small and reviewable.
-- Prefer worktrees for any non-trivial change.
-- Avoid wrapper-only DOM nesting; use layout primitives and semantic HTML.
-- Use tokens for UI (no one-off hex colors/spacing hacks).
-- Add interaction states where applicable (hover/focus/active/disabled/loading/error).
-- Do not “invent requirements”. If something is unclear, update the plan and stop.
+- Avoid wrapper-only DOM nesting; prefer layout primitives and semantic HTML.
+- Do not invent requirements. If something is unclear, update `plans/NOW.md` and stop.
+- Do not commit unless explicitly instructed.
 
-## Dependency and commit discipline
+## Quality gates
 
-- **Dependencies:** never add/upgrade/remove without explicit user approval.
-- **Commits:** do not commit unless explicitly instructed. Prepare a clean diff and stop.
+Unless doc-only:
 
-## End-of-checkpoint deliverables (required)
+- Run `bun run lint` and `bun run typecheck`.
+- Run tests when changes are user-facing, risky, or touch core flows. Otherwise mark tests as `N/A` with a reason.
+
+If the repo does not expose scripts yet, mark gates as `N/A` and state why.
+
+## End-of-checkpoint deliverables
 
 1) Update `plans/NOW.md`:
-   - mark the step checkbox if done,
-   - adjust the next step if reality changed (keep it one step).
+   - mark the step checkbox if done
+   - set the next step (only one)
 
-2) Produce a reviewable diff:
-   - show the diff, or list files + key snippets.
+2) Provide a reviewable diff (or file list + key snippets).
 
-3) Run gates when available:
-   - `lint`
-   - `typecheck`
-   - tests if applicable  
-   If unavailable, write `N/A` with a reason.
+3) Write a checkpoint report in `reports/` using `reports/TEMPLATE.md`.
 
-4) Write a checkpoint report in `reports/` (use `reports/TEMPLATE.md`):
-   - objective, summary, files changed
-   - commands + results
-   - DoD check (pass/fail/N/A)
-   - risks/open issues
-   - next step suggestion
-   - surface + model + reasoning effort
-
-5) Stop for human review.
-
-## Anti-patterns (do not do these)
-
-- Large “kitchen sink” diffs that combine multiple concerns.
-- Silent dependency changes (including lockfile churn).
-- Skipping gates when scripts exist.
-- Refactoring while implementing a feature unless the plan explicitly says so.
+4) Stop for human review.

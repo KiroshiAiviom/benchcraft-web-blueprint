@@ -1,55 +1,35 @@
-# AGENTS.md — Benchcraft Web
+# Benchcraft Web — Agent Instructions
 
-You are an engineering agent operating inside a **Benchcraft Web** project.
+These are the operating rules for Codex when working in a repository using the Benchcraft Web workflow.
 
-## Goals
+## Read-first order
 
-- Build production-grade **Next.js (App Router)** code in **TypeScript**.
-- Keep changes small, reviewable, and auditable.
-- Maintain a high UI quality bar using the project’s specs and tokens.
+1) `plans/NOW.md` — the current objective and the only next step.
+2) The files listed under **“Read first”** inside `plans/NOW.md`.
+3) `docs/DOD.md` — quality bar for completion.
+4) `plans/WORK_QUEUE.md` — progress bridge and what’s next.
 
-## Operating protocol (mandatory)
+When the current work touches UI, also read:
 
-1) Read (in this order):
-
-- `plans/NOW.md`
-- `docs/DOD.md`
 - `docs/UI_FOUNDATION_PACK.md`
-- If present: `docs/STYLE_GUIDE.md` and `docs/UI_SPEC.md`
+- `docs/DESIGN_SYSTEM.md` (if present)
 
-2) Execute **only the single next step** from `plans/NOW.md` / the active ExecPlan.
+## Core rules
 
-3) Work in **15–30 minute checkpoints**.
+- **One checkpoint per thread.** Do one step, produce a diff and a short report, then stop.
+- **Small diffs.** Prefer multiple small checkpoints over a single large change.
+- **No undocumented decisions.** If something is unclear or missing, update `plans/NOW.md` or the relevant canonical doc, then stop.
+- **No surprise deps.** Any new dependency requires explicit approval (use the Deps skill).
 
-4) End **every** checkpoint (including read-only work like reviews or doc audits) with all of the following:
+## Quality gates
 
-- A concise summary: what changed (or what you found), why, what remains, and risks.
-- A reviewable diff (or a file list + key snippets if a diff is not available).
-- Quality gates (when available):
-  - `lint`
-  - `typecheck`
-  - tests when the change is risky or user-facing  
-  If scripts do not exist (e.g., no `package.json` yet), mark gates as `N/A` and explain why.
-- Update `plans/NOW.md` (checkboxes reflect reality; keep it short).
-- Write a checkpoint report in `reports/` (use `reports/TEMPLATE.md`).
-- **Stop** and wait for user review.
+Unless the checkpoint is doc-only:
 
-## Constraints
+- Run `bun run lint` and `bun run typecheck`.
+- Run tests when the change is user-facing, risky, or touches core flows. Otherwise mark tests as `N/A` with a reason.
 
-- Do not commit, merge, rebase, or force-push unless explicitly instructed.
-- Do not add/upgrade/remove dependencies without explicit approval. Before asking for approval:
-  - explain why the dependency is needed,
-  - list at least one alternative,
-  - verify the API against current documentation when usage is non-trivial.
-- Treat `plans/NOW.md` as a structured session driver:
-  - do not delete or reorder sections,
-  - fill fields, toggle checkboxes, and keep it short.
-- If requirements are unclear, propose a plan update instead of guessing.
-- Avoid wrapper-only DOM nesting. Prefer layout primitives (Container/Section/Stack/Grid) and semantic HTML.
+## How instructions layer
 
-## UI quality bar
-
-- Prefer design tokens (CSS variables) over hardcoded colors/spacing in components.
-- Wire fonts via `next/font` and enforce typography tokens (font variables + a small type scale).
-- Provide complete interaction states where applicable: hover, focus, active, disabled, loading, empty, error.
-- Ensure keyboard navigation works, keep focus-visible styles strong, and respect `prefers-reduced-motion`.
+- `AGENTS.md` applies globally.
+- `AGENTS.md` in a subfolder **adds** constraints for that subtree.
+- `AGENTS.override.md` (if used) is an emergency, temporary override for that folder/worktree.

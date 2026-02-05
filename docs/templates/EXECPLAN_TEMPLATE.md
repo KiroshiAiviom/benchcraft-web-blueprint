@@ -8,6 +8,13 @@ Principles:
 - Output is explicit.
 - Completion is verifiable (checks + reviewable diff).
 
+## References (must be consistent with)
+
+- `docs/PRD.md`
+- `docs/TECH_SPEC.md`
+- `docs/DESIGN_SYSTEM.md`
+- `docs/DOD.md`
+
 ## Context
 
 - What is being built?
@@ -42,6 +49,10 @@ For each step, specify the output, expected files, checks, and the stop conditio
    - Files touched:  
    - Checks:  
    - Stop condition:  
+
+## Dependencies
+
+- Any new dependency? If yes, list it and mark: **requires approval**.
 
 ## Risks / unknowns
 

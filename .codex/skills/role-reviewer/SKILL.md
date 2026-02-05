@@ -4,7 +4,7 @@ description: Review diffs/PRs for correctness, security, performance, UX regress
 metadata:
   short-description: Reviewer (diff/PR)
   recommended-surface: codex app (review pane) or /review
-  recommended-model: gpt-5.2 (high) or gpt-5.2-codex (high)
+  recommended-model: codex
   recommended-reasoning: high
 ---
 
@@ -12,21 +12,13 @@ metadata:
 
 Use this role to review a **diff**, **commit**, or **PR** (including docs-only changes).
 
-## Default model + effort
-
-- Prefer **high** reasoning effort for reviews.
-- Use a Codex model when reviewing code changes inside a repo.
-- Use a general model when the task is primarily writing/communication (e.g., product copy), but keep the review anchored to the diff.
-
-Always record model/effort in the checkpoint report.
-
 ## What “done” looks like
 
 A review checkpoint is complete when:
 
 - You produced a prioritized findings list (P0 → P3),
-- you included concrete fixes,
-- you updated `plans/NOW.md`,
+- you included concrete fixes (or pointed to exact lines/files),
+- you updated `plans/NOW.md` if the plan is now inaccurate,
 - you wrote a checkpoint report (`reports/`),
 - then you stopped for human review.
 
@@ -39,59 +31,32 @@ A review checkpoint is complete when:
 
 ## Review checklist (high signal)
 
-### 1) Safety and correctness
+Correctness:
 
-- New failure modes or edge cases?
-- Error handling and loading states (where applicable)?
-- Data validation and auth boundaries?
-- Secrets/keys accidentally committed?
+- Are there obvious logic errors or missing edge cases?
+- Any broken imports / types / runtime errors?
 
-### 2) Dependency risk
+Architecture:
 
-- Any new deps or lockfile changes?
-- Are they explicitly approved?
-- Any risky transitive deps / bundle bloat?
+- Does the change respect `docs/TECH_SPEC.md` and current structure?
+- Any new abstractions that should be documented?
 
-### 3) Architecture integrity
+UI/UX:
 
-- Does the change respect module boundaries?
-- Is the abstraction level appropriate (no “business logic in UI” leakage)?
-- Is it easy to test and extend?
+- Does it match `docs/DESIGN_SYSTEM.md` (tokens, spacing, typography)?
+- Any responsiveness or a11y regressions?
 
-### 4) UI / UX (if applicable)
+Security:
 
-- States: hover/focus/active/disabled/loading/empty/error
-- Token compliance: no one-off hex colors/spacing hacks
-- Focus-visible styles present and visible
-- Touch targets reasonable (~44×44px)
-- Reduced motion respected (`prefers-reduced-motion`)
-- Minimal DOM nesting (no wrapper-only stacks)
+- Any secrets in code/logs?
+- Input validation and auth checks where required?
 
-### 5) Performance
+Performance:
 
-- Avoid heavy re-renders, expensive effects, unnecessary client components
-- Avoid animating layout properties when possible
-- Images/fonts optimized appropriately (when relevant)
+- Any unnecessary re-renders, heavy client bundles, or avoidable network requests?
 
-## Output format (required)
+## Output format
 
-Write findings in this format:
-
-- **[P1] Finding title**
-  - Evidence: file(s) + what changed
-  - Impact: what can break / user impact
-  - Fix: concrete suggestion (minimal patch guidance)
-
-Then include:
-
-1) Summary (1–3 lines)
-2) Findings grouped by priority (P0 → P3)
-3) Suggested fixes (actionable, minimal)
-4) Risks / follow-ups (if any)
-
-## Plan + report hygiene (mandatory)
-
-- Update `plans/NOW.md` checkboxes to reflect that the review was completed.
-- Write a checkpoint report in `reports/` (use `reports/TEMPLATE.md`).
-- If you cannot run gates (no scripts), mark `N/A` and explain why.
-- Stop for human review.
+- Findings list with P0–P3
+- For each finding: what’s wrong → why it matters → proposed fix
+- “Approve / Request changes” recommendation

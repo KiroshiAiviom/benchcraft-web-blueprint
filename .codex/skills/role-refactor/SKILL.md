@@ -3,7 +3,7 @@ name: role-refactor
 description: Refactor code safely (preferably behavior-preserving). Requires an explicit plan and frequent safety checks.
 metadata:
   short-description: Refactor (disciplined, checkpointed)
-  recommended-model: gpt-5.2-codex
+  recommended-model: codex
   recommended-reasoning: high
 ---
 

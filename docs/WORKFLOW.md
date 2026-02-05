@@ -1,7 +1,10 @@
 # Workflow (Benchcraft Web)
 
-This workflow is designed to keep **quality high** while increasing throughput:
-small checkpoints, parallel lanes, and disciplined context management.
+This workflow keeps **quality high** while increasing throughput via:
+
+- small, checkpointed diffs
+- parallel work lanes with worktrees
+- disciplined context management
 
 ## Primary surface: Codex App
 
@@ -9,11 +12,22 @@ Use the Codex app as the control plane:
 
 - One project = one sidebar entry.
 - One checkpoint = one thread (keeps context clean).
-- Prefer **worktree threads** for any non-trivial change.
-- Use the **Review** pane for diffs, staging/reverting, and inline feedback.
-- Use `/review` for an independent review agent.
-- Use `/status` to monitor context usage and stop early if context is getting large.
-- Use `/plan-mode` only when you need multi-step planning; execution is still checkpoint-based.
+- Prefer worktrees for any non-trivial change or parallelism.
+- Use the built-in diff/review UI to stage/revert and give precise feedback.
+
+If you use the Codex CLI/IDE extension, the same principles apply: **one checkpoint per session** and **small diffs**.
+
+## Documentation-first (keep it lean)
+
+Before serious coding begins, create/fill the three canonical docs:
+
+- `docs/PRD.md` — scope, routes/flows, features + acceptance criteria
+- `docs/DESIGN_SYSTEM.md` — typography, palette, tokens, layout primitives, component rules
+- `docs/TECH_SPEC.md` — pinned stack, architecture, backend/data contracts, deployment notes
+
+Templates live in `docs/templates/`.
+
+If any of these are missing and the task is non-trivial, the agent should propose creating them **before** implementing.
 
 ## Core loop (one checkpoint)
 
@@ -30,15 +44,14 @@ Every iteration is:
    - quality gates (lint/typecheck; tests when appropriate; otherwise `N/A` with a reason),
    - then **stop** for human review.
 
-> This applies to “read-only” work too (reviews, design suggestions, doc audits).  
-> Mark non-applicable gates as `N/A`, but still update `plans/NOW.md` and write a report.
+> This applies to read-only work too (reviews, design suggestions, doc audits).
 
-## Parallel lanes (v1.1)
+## Parallel lanes
 
 Use three lanes to move faster without losing control:
 
 - **Lane A — Builder:** implement the next step (typically in a worktree).
-- **Lane B — Reviewer:** independent review of diffs/PRs (`/review` and/or GitHub review).
+- **Lane B — Reviewer:** independent review of diffs/PRs.
 - **Lane C — Tests/QA:** run quality gates and add/update tests when the plan requires it.
 
 Keep lanes isolated by file ownership. Avoid multiple lanes changing dependencies or lockfiles.
@@ -48,19 +61,8 @@ Keep lanes isolated by file ownership. Avoid multiple lanes changing dependencie
 Worktrees are the default mechanism for parallel work:
 
 - Each lane runs in its own worktree with a clear scope.
-- Integrate changes via **Sync with local** (or apply patch).
+- Integrate changes via the app’s sync/apply workflow, or by cherry-picking.
 - Only commit when the human says so.
-
-## Model + reasoning effort (recommended defaults)
-
-Codex supports model variants and reasoning effort levels. Use these defaults unless you have a clear reason to deviate:
-
-- Start with **Codex model + medium reasoning** for day-to-day coding and iterative UI work.
-- Switch to **high** when tasks become multi-step, ambiguous, or require careful debugging/refactoring.
-- Use **xhigh / “Extra High”** sparingly for the hardest tasks (deep debugging, large migrations, complex refactors).
-- Use a **mini / lightweight Codex model** for simple edits (docs tweaks, small refactors, quick Q&A) to extend rate limits.
-
-Record the chosen **model + reasoning effort** in each checkpoint report. This makes it easy to calibrate your presets over time.
 
 ## Dependency policy
 
@@ -68,18 +70,10 @@ Record the chosen **model + reasoning effort** in each checkpoint report. This m
 - Serialize dependency work: one active dependency-changing effort at a time.
 - Always record dependency rationale in the checkpoint report.
 
-## Branching and PRs
-
-- Work on a feature branch.
-- Push when a checkpoint is reviewable.
-- Use the PR template (`.github/PULL_REQUEST_TEMPLATE.md`).
-- Commit, merge, and rebases are user-controlled unless explicitly delegated.
-- Merge only when quality gates pass and review is clean.
-
 ## Context hygiene
 
 - Treat the repository as memory. Do not rely on chat history.
-- Keep `plans/NOW.md` short. Link to ExecPlans and docs instead of pasting large context.
+- Keep `plans/NOW.md` short. Link to docs/ExecPlans instead of pasting large context.
 - Prefer one thread per checkpoint; archive threads when done.
 
 ## Doc improvement loop (optional, recommended)
@@ -88,6 +82,6 @@ After you polish a doc, run a **doc audit checkpoint**:
 
 - Ask Codex to propose **3 targeted improvements** (no full rewrite).
 - Capture suggestions in a checkpoint report.
-- Convert accepted suggestions into small, checkpointable tasks in `plans/WORK_QUEUE.md`.
+- Convert accepted suggestions into small tasks in `plans/WORK_QUEUE.md`.
 
-This keeps documents continuously improving without bloating context or causing churn.
+This keeps documents improving without bloating context or causing churn.

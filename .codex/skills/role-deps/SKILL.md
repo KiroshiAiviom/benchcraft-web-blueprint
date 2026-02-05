@@ -3,7 +3,7 @@ name: role-deps
 description: Manage dependencies safely. Requires explicit user approval for any new dependency or lockfile change.
 metadata:
   short-description: Dependency steward (approval-gated)
-  recommended-model: gpt-5.2-codex
+  recommended-model: codex
   recommended-reasoning: medium
 ---
 

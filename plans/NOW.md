@@ -10,30 +10,35 @@ Rules:
 
 ## Read first (context files)
 
-- `docs/BRIEF.md` (or `docs/templates/BRIEF_TEMPLATE.md`)
-- `docs/UI_SPEC.md` (or `docs/templates/UI_SPEC_TEMPLATE.md`)
-- `docs/STYLE_GUIDE.md` (or `docs/templates/STYLE_GUIDE_TEMPLATE.md`)
+Always:
+
+- `docs/PRD.md` (or `docs/templates/PRD_TEMPLATE.md`)
+- `docs/DESIGN_SYSTEM.md` (or `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`)
+- `docs/TECH_SPEC.md` (or `docs/templates/TECH_SPEC_TEMPLATE.md`)
 - `docs/DOD.md`
-- `docs/UI_FOUNDATION_PACK.md`
 - `plans/WORK_QUEUE.md`
+
+If this checkpoint touches UI:
+
+- `docs/UI_FOUNDATION_PACK.md`
 
 ## Session settings (optional)
 
-- Surface:  
-- Worktree (if used):  
-- Model + reasoning effort:  
+- Surface:
+- Worktree (if used):
+- Model + reasoning effort:
 
 ## Current objective (one sentence)
 
--  
+-
 
 ## Active ExecPlan
 
-- (link to `docs/EXECPLAN-*.md` or similar)
+- (link to `plans/EXECPLAN-*.md` or `docs/EXECPLAN-*.md`)
 
 ## Next step (only one)
 
-- [ ]  
+- [ ]
 
 ### Timebox
 
@@ -41,10 +46,10 @@ Rules:
 
 ### Expected deliverables at checkpoint end (checklist)
 
-- [ ] Reviewable diff (or a file list + key snippets)  
+- [ ] Reviewable diff (or a file list + key snippets)
       If this is a read-only checkpoint, write `N/A` and summarize the inspected scope.
 - [ ] Checkpoint report in `reports/`
-- [ ] Quality gates run **when available** (`lint`, `typecheck`, tests if applicable)  
+- [ ] Quality gates run **when available** (`lint`, `typecheck`, tests if applicable)
       If no scripts exist (e.g., no `package.json`), mark `N/A` and state why.
 - [ ] Plan updated to reflect reality (checkboxes / next step)
 - [ ] Stop for human review
