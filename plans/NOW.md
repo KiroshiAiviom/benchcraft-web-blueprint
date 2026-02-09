@@ -31,7 +31,7 @@ If this checkpoint touches UI:
 
 ## Current objective (one sentence)
 
--
+- Codex doc-audit run: propose 3 improvements per bundle (no rewrites).
 
 ## Active ExecPlan
 
@@ -39,7 +39,7 @@ If this checkpoint touches UI:
 
 ## Next step (only one)
 
-- [ ]
+- [x] DOC-AUDIT 04 — Skills
 
 ### Timebox
 
