@@ -47,7 +47,7 @@ If this checkpoint has special constraints (e.g., “exactly 3 improvements”, 
 
 ## Next step (only one)
 
-- [ ] DOC-AUDIT 01 — Core docs
+- [x] DOC-AUDIT 04 — Skills
 
 ### Timebox
 
