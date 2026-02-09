@@ -15,7 +15,7 @@ Use the Codex app as the control plane:
 - Prefer worktrees for any non-trivial change or parallelism.
 - Use the built-in diff/review UI to stage/revert and give precise feedback.
 
-If you use the Codex CLI/IDE extension, the same principles apply: **one checkpoint per session** and **small diffs**.
+If you use the Codex CLI/IDE extension, the same principles apply: **one checkpoint per thread** and **small diffs**.
 
 ## Model + reasoning effort
 

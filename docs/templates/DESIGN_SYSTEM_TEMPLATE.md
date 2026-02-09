@@ -95,13 +95,17 @@ Define how hover/active/disabled are derived:
 
 > This contract makes tokens real: CSS variables → Tailwind mapping → component usage.
 
+> **Important:** do not blindly copy/paste typography choices from a template.
+> First, decide fonts in **§2 Typography**, then wire them here.
+
 `src/app/globals.css` (example skeleton):
 
 ```css
 :root {
   /* Typography */
-  --font-body: ui-sans-serif;
-  --font-display: ui-sans-serif;
+  /* Provided by next/font via CSS variables on <html>. */
+  /* --font-body: <set via next/font> */
+  /* --font-display: <set via next/font> */
 
   /* Type scale (examples) */
   --text-h1: 2.25rem;
@@ -178,10 +182,11 @@ export default config;
 `src/app/layout.tsx` (Next.js font wiring pattern):
 
 ```tsx
-import { Inter, Geist } from "next/font/google";
+// Choose your fonts in §2 Typography. Replace the placeholders below.
+import { <BodyFont>, <DisplayFont> } from "next/font/google";
 
-const body = Inter({ subsets: ["latin"], variable: "--font-body" });
-const display = Geist({ subsets: ["latin"], variable: "--font-display" });
+const body = <BodyFont>({ subsets: ["latin"], variable: "--font-body" });
+const display = <DisplayFont>({ subsets: ["latin"], variable: "--font-display" });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

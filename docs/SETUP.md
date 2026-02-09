@@ -151,7 +151,9 @@ bun run dev
 
 ## 5) Apply this blueprint overlay
 
-Copy the blueprint files/folders into your new repo root:
+Copy/merge the blueprint files/folders into your new repo root.
+
+Avoid blindly overwriting existing files; prefer selective merges and review diffs.
 
 - `AGENTS.md`
 - `.codex/`

@@ -21,6 +21,7 @@ A review checkpoint is complete when:
 - each finding includes a navigable reference: `path:line` or `path#Lline`; if line numbers are unavailable, use file + unique identifier (function/component name).
 - you updated `plans/NOW.md` if the plan is now inaccurate,
 - you wrote a checkpoint report (`reports/`),
+- the report includes **commands run** (or `N/A` + reason) and **quality gates status** (pass/fail/`N/A` + reason),
 - then you stopped for human review.
 
 ## Priorities

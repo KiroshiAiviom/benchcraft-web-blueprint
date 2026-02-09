@@ -24,11 +24,8 @@ The workflow is:
    - timebox (15–30 min)
 
 2) Read the sources of truth (as applicable):
-   - `docs/DOD.md`
-   - `docs/PRD.md` (if present)
-   - `docs/TECH_SPEC.md` (if present)
-   - `docs/DESIGN_SYSTEM.md` (if present)
-   - `docs/UI_FOUNDATION_PACK.md` (only if this checkpoint touches UI)
+   - Treat `plans/NOW.md` → **Read first** as the canonical list.
+   - Do not maintain a separate read-first list here (prevents drift).
 
 3) Scope/safety checks:
    - If the step requires dependency changes → **stop** and switch to `role-deps`.

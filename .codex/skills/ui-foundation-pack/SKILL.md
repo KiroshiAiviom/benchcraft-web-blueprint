@@ -19,13 +19,10 @@ It is designed to prevent:
 - wrapper-heavy DOM structure
 - inaccessible focus/motion behavior
 
-## Read-first order
+## Read-first (canonical)
 
-1) `plans/NOW.md`
-2) `docs/PRD.md` (if present)
-3) `docs/DESIGN_SYSTEM.md` (if present)
-4) `docs/UI_FOUNDATION_PACK.md`
-5) `docs/DOD.md`
+- `plans/NOW.md` is the canonical checklist. Read the files listed under **Read first**.
+- For UI checkpoints, `docs/UI_FOUNDATION_PACK.md` is mandatory (it should be included under NOW’s UI section).
 
 If `docs/DESIGN_SYSTEM.md` is missing and the UI scope is non-trivial, propose creating it from `docs/templates/DESIGN_SYSTEM_TEMPLATE.md` **before** major UI work.
 

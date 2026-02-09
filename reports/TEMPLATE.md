@@ -33,6 +33,10 @@ Use for reviews/audits. For non-review checkpoints, write `N/A`.
 
 - (Approve / Request changes / N/A)
 
+## Files reviewed / inspected
+
+-  
+
 ## Files changed
 
 -  

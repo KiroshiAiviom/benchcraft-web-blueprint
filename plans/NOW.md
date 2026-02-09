@@ -1,6 +1,6 @@
-# NOW.md (session driver)
+# NOW.md (checkpoint driver)
 
-This file is the single source of truth for the **current Codex session**.
+This file is the single source of truth for the **current checkpoint thread**.
 
 Rules:
 
@@ -31,11 +31,11 @@ If this checkpoint touches UI:
 
 ## Current objective (one sentence)
 
-- Codex doc-audit run: propose 3 improvements per bundle (no rewrites).
+- 
 
 ## Active ExecPlan
 
-- (link to `plans/EXECPLAN-*.md` or `docs/EXECPLAN-*.md`)
+- (link to `plans/EXECPLAN-*.md` or `docs/EXECPLAN-*.md`, or `N/A`)
 
 ## Constraints (checkpoint-specific, optional)
 
@@ -47,7 +47,7 @@ If this checkpoint has special constraints (e.g., “exactly 3 improvements”, 
 
 ## Next step (only one)
 
-- [x] DOC-AUDIT 04 — Skills
+- [ ] …
 
 ### Timebox
 

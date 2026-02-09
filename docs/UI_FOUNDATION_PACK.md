@@ -193,6 +193,30 @@ Also define:
   - Prefer opacity + pointer-events (e.g., `disabled:opacity-50 disabled:pointer-events-none`).
 - Never add “one-off” colors in components. If a new semantic is required, add a token.
 
+**Derived token example (copy/paste)**
+
+Use this when opacity variants are not enough (e.g., complex surfaces, gradients, or strict theming).
+
+```css
+/* globals.css */
+:root {
+  /* base */
+  --primary: 222.2 47.4% 11.2%;
+
+  /* derived interaction tokens */
+  --primary-hover: color-mix(in oklab, hsl(var(--primary)) 92%, white);
+  --primary-active: color-mix(in oklab, hsl(var(--primary)) 86%, black);
+}
+```
+
+```tsx
+<button
+  className="bg-primary text-primary-foreground hover:bg-[color:var(--primary-hover)] active:bg-[color:var(--primary-active)]"
+/>
+```
+
+If you must support older browsers that don’t handle `color-mix()`, fall back to opacity variants.
+
 ### 5.4 Implementation contract (copy/paste baseline)
 
 **Contract:** tokens live in CSS variables (single source of truth). Tailwind maps to those variables.
@@ -463,6 +487,12 @@ Gate “nice-to-have” animation behind `motion-safe:` and provide `motion-redu
 
 ## 10) UI QA checklist
 
+**QA matrix (baseline)**
+
+- Viewports: 375×812, 768×1024, 1024×768, 1440×900
+- Keyboard: tab through all interactive controls; ensure the `focus-visible` ring is always visible
+- Motion: verify with `prefers-reduced-motion` enabled (no parallax/entry animations; transitions shortened/removed)
+
 ### Visual clarity
 
 - Hierarchy is obvious (headings, subheadings, body).
@@ -484,6 +514,11 @@ Gate “nice-to-have” animation behind `motion-safe:` and provide `motion-redu
 - Focus ring is visible: **≥ 2px** thickness with an offset.
 - Minimum interactive hit target: **44×44px** for touch targets.
 - `prefers-reduced-motion`: disable non-essential animations and remove large parallax effects.
+
+**Hit target baseline (Tailwind)**
+
+- Icon buttons: `min-h-11 min-w-11 p-2` (visual stays compact; target stays 44px)
+- Dense rows/toolbars: keep `min-h-11`; reduce internal padding or spacing around controls, not the target
 
 Focus-visible pattern (Tailwind):
 

@@ -14,8 +14,7 @@ This document defines the default baseline used for most production web projects
 
 ## Quality gates (default expectations)
 
-- Lint and typecheck run frequently (at least per checkpoint).
-- Tests are added when a change is risky, user-facing, or hard to reason about.
+See `docs/DOD.md` for checkpoint-level quality gates and when to run tests.
 
 ## Not fixed by this baseline (project-specific)
 

@@ -34,6 +34,16 @@ If the plan is missing or vague, update the plan before editing code.
 - Do not mix refactors with feature work unless the plan explicitly allows it.
 - Run quality gates frequently (lint/typecheck; tests when applicable).
 
+## Pre-flight (before the first edit)
+
+1) Capture **3–5 invariants** that must remain true (APIs, UX behavior, performance constraints).
+2) Run the smallest available baseline gate (or mark `N/A` with a reason):
+   - `bun run lint`
+   - `bun run typecheck`
+   - relevant tests when the risk warrants it
+
+Record invariants + baseline status in the checkpoint report so regressions are easier to diagnose.
+
 ## Refactor method (recommended)
 
 1) Define invariants:
