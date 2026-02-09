@@ -254,6 +254,27 @@ export default {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        input: "hsl(var(--input))",
       },
       boxShadow: {
         sm: "var(--shadow-sm)",
@@ -265,7 +286,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       transitionTimingFunction: {
-        "ease-out": "var(--ease-out)",
+        out: "var(--ease-out)",
       },
       transitionDuration: {
         fast: "var(--motion-fast)",
@@ -280,7 +301,7 @@ export default {
 **Component usage (example)**
 
 ```tsx
-<button className="rounded-lg bg-primary text-primary-foreground shadow-sm transition-[transform,opacity] duration-normal ease-ease-out hover:-translate-y-0.5 hover:bg-primary/90 active:bg-primary/85">
+<button className="rounded-lg bg-primary text-primary-foreground shadow-sm transition-[transform,opacity] duration-normal ease-out hover:-translate-y-0.5 hover:bg-primary/90 active:bg-primary/85">
   Continue
 </button>
 ```
@@ -425,7 +446,7 @@ Gate “nice-to-have” animation behind `motion-safe:` and provide `motion-redu
 ```tsx
 <button
   className="
-    transition duration-normal ease-ease-out
+    transition duration-normal ease-out
     motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-md
     motion-reduce:transform-none motion-reduce:shadow-none
     motion-reduce:transition-none
@@ -467,7 +488,7 @@ Gate “nice-to-have” animation behind `motion-safe:` and provide `motion-redu
 Focus-visible pattern (Tailwind):
 
 ```tsx
-<button className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+<button className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
   …
 </button>
 ```

@@ -19,7 +19,7 @@ When the current work touches UI, also read:
 - **One checkpoint per thread.** Do one step, produce a diff and a short report, then stop.
 - **Small diffs.** Prefer multiple small checkpoints over a single large change.
 - **No undocumented decisions.** If something is unclear or missing, update `plans/NOW.md` or the relevant canonical doc, then stop.
-- **No surprise deps.** Any new dependency requires explicit approval (use the Deps skill).
+- **No surprise deps.** Any new dependency requires explicit approval (use the `role-deps` skill).
 
 ## Quality gates
 

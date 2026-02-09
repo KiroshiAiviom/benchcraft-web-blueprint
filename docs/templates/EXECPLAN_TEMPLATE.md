@@ -10,9 +10,9 @@ Principles:
 
 ## References (must be consistent with)
 
-- `docs/PRD.md`
-- `docs/TECH_SPEC.md`
-- `docs/DESIGN_SYSTEM.md`
+- `docs/PRD.md` (or `docs/templates/PRD_TEMPLATE.md`)
+- `docs/TECH_SPEC.md` (or `docs/templates/TECH_SPEC_TEMPLATE.md`)
+- `docs/DESIGN_SYSTEM.md` (or `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`)
 - `docs/DOD.md`
 
 ## Context

@@ -20,6 +20,19 @@ If a section does not apply, write `N/A`.
 
 -  
 
+## Findings (P0–P3) (optional)
+
+Use for reviews/audits. For non-review checkpoints, write `N/A`.
+
+- P0:
+- P1:
+- P2:
+- P3:
+
+## Recommendation (optional)
+
+- (Approve / Request changes / N/A)
+
 ## Files changed
 
 -  

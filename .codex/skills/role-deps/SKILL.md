@@ -47,6 +47,7 @@ You must produce a short proposal that includes:
 
 5) **Doc grounding**:
    - confirm the install + API usage against current docs (web search and/or Context7)
+   - If current docs cannot be accessed (no browsing / Context7 unavailable), say so, ask for permission to browse or user-provided authoritative links, and **stop**. Do not proceed on assumptions.
 
 Then explicitly ask: **“Approve this dependency change? (yes/no)”**
 

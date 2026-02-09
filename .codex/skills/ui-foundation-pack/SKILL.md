@@ -42,6 +42,10 @@ Deliver:
   - **Phase 2 — Refinement** (spacing, typography, color discipline)
   - **Phase 3 — Polish** (micro-interactions, motion, empty/loading/error states)
 - A short list of **Design System updates required** (tokens/components) before implementation.
+- A minimal **QA matrix** for the recommendations:
+  - viewports to sanity check (e.g., 375 / 768 / 1024 / 1440)
+  - focus-visible baseline
+  - `prefers-reduced-motion` baseline
 - Stop and wait for approval.
 
 ### B) Build (implement approved scope)

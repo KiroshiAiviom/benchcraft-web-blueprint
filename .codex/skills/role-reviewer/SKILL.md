@@ -17,7 +17,8 @@ Use this role to review a **diff**, **commit**, or **PR** (including docs-only c
 A review checkpoint is complete when:
 
 - You produced a prioritized findings list (P0 → P3),
-- you included concrete fixes (or pointed to exact lines/files),
+- you included concrete fixes (or pointed to exact locations),
+- each finding includes a navigable reference: `path:line` or `path#Lline`; if line numbers are unavailable, use file + unique identifier (function/component name).
 - you updated `plans/NOW.md` if the plan is now inaccurate,
 - you wrote a checkpoint report (`reports/`),
 - then you stopped for human review.

@@ -2,11 +2,8 @@
 
 This document describes the **minimum, repeatable** setup to use the Benchcraft Web workflow on macOS.
 
-The goal is a stable baseline for:
+The goal is a stable baseline; see `docs/STACK_BASELINE.md` for the canonical stack/workflow baseline.
 
-- Next.js (App Router) + TypeScript development
-- Bun-based installs and scripts
-- Codex-first, checkpoint-based iteration with reviewable diffs
 
 ---
 
