@@ -1,11 +1,6 @@
 ---
 name: role-planner
 description: Maintain ExecPlans and step sheets: create plans, select the next step, keep NOW.md in sync, and archive completed plans.
-metadata:
-  short-description: Planner (ExecPlans + NOW.md bookkeeping)
-  recommended-surface: codex app
-  recommended-model: GPT-5.3-Codex
-  recommended-reasoning: medium
 ---
 
 # Role: Planner (ExecPlans)
@@ -22,6 +17,7 @@ Use this role to **reduce monotony** and keep execution unblocked:
 - `docs/PLANS.md` (plan rules + structure)
 - `docs/exec-plans/active/NOW.md` (current objective + next step)
 - `docs/QUALITY_SCORE.md` (quality bar)
+- `docs/templates/NOW_TEMPLATE.md` (template reference; `active/NOW.md` must remain runnable)
 
 If requirements are unclear:
 - create/point to a product spec first: `docs/product-specs/_TEMPLATE.md`
@@ -76,6 +72,12 @@ Update `docs/exec-plans/active/NOW.md` to include:
 - link to the active ExecPlan folder
 - a single next-step checkbox that references the step sheet
 - a lean “Read first” list (prefer links to spec sections)
+
+If `active/NOW.md` is missing or looks like a blank template stub, rewrite it using:
+
+- `docs/templates/NOW_TEMPLATE.md`
+
+Then fill it so it is **runnable** (one objective + one next-step checkbox).
 
 ### 5) After a step completes (bookkeeping)
 

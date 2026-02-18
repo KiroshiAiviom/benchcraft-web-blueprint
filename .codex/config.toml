@@ -1,14 +1,14 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
 # Project-scoped Codex defaults (loaded when the project is trusted).
-# Codex App shows this model as "GPT-5.3-Codex".
 model = "gpt-5.3-codex"
-model_reasoning_effort = "medium" # minimal | low | medium | high | xhigh
+model_reasoning_effort = "high"
 
-# Web search
-# - "cached" (default) serves results from the web search cache.
-# - "live" fetches the most recent pages (higher prompt-injection risk).
-web_search = "cached" # cached | live | disabled
+tool_output_token_limit = 20000
+model_auto_compact_token_limit = 230000
 
-# Optional: pin /review to the same model (usually unnecessary; it uses the session model).
-# review_model = "gpt-5.3-codex"
+web_search = "cached"
+
+unified_exec = true
+shell_snapshot = true
+apply_patch_freeform = true

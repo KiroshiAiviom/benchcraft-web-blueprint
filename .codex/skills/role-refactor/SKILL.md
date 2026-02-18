@@ -1,22 +1,11 @@
 ---
 name: role-refactor
 description: Refactor code safely (preferably behavior-preserving). Requires an explicit plan and frequent safety checks.
-metadata:
-  short-description: Refactor (disciplined, checkpointed)
-  recommended-model: GPT-5.3-Codex
-  recommended-reasoning: medium
 ---
 
 # Role: Refactor
 
 Use this role for structural improvements: readability, maintainability, architecture hygiene, performance cleanup.
-
-## Default model + effort
-
-- Prefer **high** effort for refactors (they require consistency and careful reasoning).
-- Use **xhigh** only for very large refactors/migrations when needed.
-
-Record model/effort in the checkpoint report.
 
 ## Preconditions (must be true)
 
@@ -62,7 +51,6 @@ At the end of each refactor checkpoint:
   - what changed and why
   - commands run + results
   - risks / follow-ups
-  - model + effort used
 - stop for human review
 
 Reference: `docs/QUALITY_SCORE.md`.

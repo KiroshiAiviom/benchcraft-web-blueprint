@@ -57,10 +57,6 @@ Pick the smallest role that matches the work:
 
 - Source of truth: `docs/QUALITY_SCORE.md`.
 
-## Model defaults
-
-- Pinned in `.codex/config.toml`.
-
 ## How instructions layer
 
 - Root `AGENTS.md` applies repo-wide.

@@ -4,33 +4,27 @@
 
 - `docs/QUALITY_SCORE.md`
 - `docs/PLANS.md`
-- `docs/exec-plans/active/2026-02-18--bootstrap-first-project-docs/EXECPLAN.md`
-- `docs/exec-plans/active/2026-02-18--bootstrap-first-project-docs/steps/S01-bootstrap-project-docs.md`
-
-## Session settings (optional)
-
-- Surface: Codex app
-- Worktree (if used): N/A
-- Model: **GPT-5.3-Codex**
-- Reasoning effort: **medium**
+- `docs/references/planning-prompts.md`
+- `docs/exec-plans/active/bootstrap--project-planning/EXECPLAN.md`
+- `docs/exec-plans/active/bootstrap--project-planning/steps/S01-interrogation.md`
 
 ## Current objective (one sentence)
 
-- Bootstrap the project by creating minimal source-of-truth docs (Product Spec + TECH_SPEC + DESIGN_SYSTEM).
+- Bootstrap project planning: create Product Specs, Design System, Tech Spec, then a build ExecPlan.
 
 ## Active ExecPlan
 
-- `docs/exec-plans/active/2026-02-18--bootstrap-first-project-docs/`
+- `docs/exec-plans/active/bootstrap--project-planning/`
 
 ## Constraints (checkpoint-specific, optional)
 
-- Expected outputs: docs-only diff
-- Allowed edits: `docs/**`, `reports/**`
-- Prohibited: `package.json`, lockfiles, dependency changes
+- Expected outputs: S01 = questions only (no repo edits)
+- Allowed edits: S01 = none; later steps = docs/** + reports/**
+- Prohibited: dependency changes
 
 ## Next step (only one)
 
-- [ ] Execute `S01` from `docs/exec-plans/active/2026-02-18--bootstrap-first-project-docs/steps/S01-bootstrap-project-docs.md`
+- [ ] Execute `S01` from `docs/exec-plans/active/bootstrap--project-planning/steps/S01-interrogation.md`
 
 ### Timebox
 
@@ -38,12 +32,9 @@
 
 ### Expected deliverables at checkpoint end (checklist)
 
-- [ ] Reviewable diff (or a file list + key snippets)
-- [ ] Checkpoint report in `reports/`
-- [ ] Quality gates run when available (`lint`, `typecheck`, tests if applicable) or `N/A`
-- [ ] Plan updated to reflect reality (checkboxes / next step / step sheet)
-- [ ] Stop for human review
+- [ ] Question list + Answer Sheet (copy/paste)
+- [ ] Stop for human answers
 
 ## Parking lot (optional)
 
-- 
+-

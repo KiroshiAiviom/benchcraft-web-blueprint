@@ -41,7 +41,7 @@ Read-only checkpoints (docs reviews, design audits): still update `docs/exec-pla
    - diff is reasonably small (or `N/A` for read-only checkpoints),
    - changes/findings are explained in a checkpoint report.
 6) A checkpoint report exists in `reports/` and includes:
-   - surface + model + reasoning effort (traceability),
+   - execution context (traceability),
    - commands run (or `N/A` with a reason).
 
 ---

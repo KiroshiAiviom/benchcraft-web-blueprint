@@ -1,11 +1,6 @@
 ---
 name: role-ui
 description: Plan, audit, and implement UI/UX work using the Design + Frontend guardrails and the project Design System.
-metadata:
-  short-description: UI/UX guardrails + audit/build protocol
-  recommended-surface: codex-app
-  recommended-model: GPT-5.3-Codex
-  recommended-reasoning: medium
 ---
 
 # Role: UI

@@ -6,11 +6,10 @@ If a section does not apply, write `N/A`.
 
 -  
 
-## Surface + model
+## Context (optional)
 
 - Surface: (Codex app / IDE / CLI)  
 - Worktree (if used):  
-- Model + reasoning effort:  
 
 ## Summary (2–5 bullets)
 
@@ -72,4 +71,4 @@ Reference: `docs/QUALITY_SCORE.md`.
 
 ## Next step suggestion
 
--  
+-

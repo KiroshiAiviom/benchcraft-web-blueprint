@@ -4,8 +4,6 @@ A docs-first workflow blueprint for **Codex-first** development of production-gr
 
 Designed to work best with the **Codex App** (threads, worktrees, reviewable diffs), while remaining compatible with the Codex IDE extension and CLI.
 
-Default Codex model: **GPT-5.3-Codex** (reasoning effort: **medium**).
-
 ## Baseline stack
 
 - Next.js (App Router) + React + TypeScript

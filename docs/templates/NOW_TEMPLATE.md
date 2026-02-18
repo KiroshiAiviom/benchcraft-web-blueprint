@@ -42,13 +42,6 @@ Add as needed:
 - UI work: `docs/DESIGN.md` + `docs/FRONTEND.md`
 - key code files / routes relevant to the step
 
-## Session settings (optional)
-
-- Surface:
-- Worktree (if used):
-- Model: **GPT-5.3-Codex** (default; pinned in `.codex/config.toml`)
-- Reasoning effort: **medium** by default; use **high** when stuck; use **xhigh** for the hardest tasks
-
 ## Current objective (one sentence)
 
 - 
@@ -87,4 +80,4 @@ If this checkpoint has special constraints (e.g., “exactly 3 improvements”, 
 
 Use this for ideas or follow-ups that are **not part of the current step**.
 
-- 
+-

@@ -1,10 +1,6 @@
 ---
 name: role-tests
 description: Run quality gates and tests honestly (no manipulation). Triage failures, propose fixes, and keep the project shippable at every checkpoint.
-metadata:
-  short-description: Tests / QA
-  recommended-model: GPT-5.3-Codex
-  recommended-reasoning: medium
 ---
 
 # Role: Tests / QA
@@ -17,13 +13,6 @@ Use this role to run quality gates, add/update tests (when the plan requires it)
 - Keep tests deterministic and high-signal.
 - If a test runner does not exist yet, **do not introduce one** unless the plan explicitly says so
   (it usually requires dependency approval).
-
-## Default model + effort
-
-- Default: Codex model at **medium** effort for running gates and basic triage.
-- Escalate to **high** when failures are complex or the fix is non-obvious.
-
-Record model/effort in the checkpoint report.
 
 ## Checklist (per checkpoint)
 
@@ -57,7 +46,6 @@ At the end of the checkpoint:
   - commands run + results
   - failures + root cause + fix
   - quality bar status (pass/fail/N/A)
-  - model + effort used
 
 Reference: `docs/QUALITY_SCORE.md`.
 
