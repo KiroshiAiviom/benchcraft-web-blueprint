@@ -1,40 +1,55 @@
-# Benchcraft Web — Agent Instructions
+# Benchcraft Web — Agent Guide
 
-These are the operating rules for Codex when working in a repository using the Benchcraft Web workflow.
+This file is intentionally short.
+Treat it as a **map**, not the encyclopedia.
 
-## Read-first order
+## Start here (every thread)
 
-1) `plans/NOW.md` — the current objective and the only next step.
-2) The files listed under **“Read first”** inside `plans/NOW.md`.
-3) `docs/DOD.md` — quality bar for completion.
-4) `plans/WORK_QUEUE.md` — progress bridge and what’s next.
+1) Read `docs/exec-plans/active/NOW.md`.
+2) Read **only** the files listed in `NOW.md → Read first` (keep that list small).
+3) Execute exactly the **single** checkbox under `NOW.md → Next step` (timebox: 15–30 min).
 
-When the current work touches UI, also read:
+(Plan index: `docs/PLANS.md`.)
 
-- `docs/UI_FOUNDATION_PACK.md`
-- `docs/DESIGN_SYSTEM.md` (if present)
+## Non-negotiables
 
-## Core rules
+- **One checkpoint per thread.** Small diff, then stop for human review.
+- **Don’t invent requirements.** If something is unclear, write the question + assumption(s) into `docs/exec-plans/active/NOW.md`, then stop.
+- **Report honestly.** Include commands run + results (or `N/A` + a reason).
+- **No surprise dependencies.** Do not edit `package.json` or lockfiles unless the human explicitly approves.
 
-- **One checkpoint per thread.** Do one step, produce a diff and a short report, then stop.
-- **Small diffs.** Prefer multiple small checkpoints over a single large change.
-- **No undocumented decisions.** If something is unclear or missing, update `plans/NOW.md` or the relevant canonical doc, then stop.
-- **No surprise deps.** Any new dependency requires explicit approval (use the `role-deps` skill).
+## Dependencies (human-operated)
 
-## Quality gates
+If you need a new package, version bump, or lockfile change:
 
-Unless the checkpoint is doc-only:
+1) Stop and write a short proposal:
+   - what you want to change
+   - why
+   - at least one alternative
+   - risks (maintenance/bundle/breaking changes)
+2) Provide the exact command(s) the human should run.
+3) Wait for confirmation before continuing.
 
-- Run `bun run lint` and `bun run typecheck`.
-- Run tests when the change is user-facing, risky, or touches core flows. Otherwise mark tests as `N/A` with a reason.
+## Skills / roles
+
+Pick the smallest role that matches the work:
+
+- `.codex/skills/role-planner` — create/maintain ExecPlans + step sheets; keep `NOW.md` in sync; archive completed plans
+- `.codex/skills/role-builder` — implement the next planned step
+- `.codex/skills/role-tests` — run quality gates / triage failures
+- `.codex/skills/role-refactor` — refactors (invariants + baseline first)
+- `.codex/skills/role-ui` — UI/UX work (audit/build protocol)
+
+## Quality bar
+
+- Source of truth: `docs/QUALITY_SCORE.md`.
 
 ## Model defaults
 
-- Use **GPT-5.3-Codex** for all work in this repo.
-- Reasoning effort: **medium** by default; use **high** when stuck or when the task is complex; use **xhigh** (“extra high”) only for the hardest tasks.
+- Pinned in `.codex/config.toml`.
 
 ## How instructions layer
 
-- `AGENTS.md` applies globally.
+- Root `AGENTS.md` applies repo-wide.
 - `AGENTS.md` in a subfolder **adds** constraints for that subtree.
-- `AGENTS.override.md` (if used) is an emergency, temporary override for that folder/worktree.
+- `AGENTS.override.md` is an emergency, temporary override for that folder/worktree.

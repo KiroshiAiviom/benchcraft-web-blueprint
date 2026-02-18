@@ -5,6 +5,7 @@ This workflow keeps **quality high** while increasing throughput via:
 - small, checkpointed diffs
 - parallel work lanes with worktrees
 - disciplined context management
+- agent-managed planning artifacts (ExecPlans)
 
 ## Primary surface: Codex App
 
@@ -25,17 +26,28 @@ If you use the Codex CLI/IDE extension, the same principles apply: **one checkpo
 
 ## Documentation-first (keep it lean)
 
-Before serious coding begins, create/fill the three canonical docs.
+Before serious coding begins, create/fill the minimal set of project “source of truth” docs.
 
-Planning note: draft these docs during a separate planning session in ChatGPT (recommended: **GPT-5.2 Pro**) before you start Codex execution.
+Planning note: drafting these docs in a separate planning session (often easier in ChatGPT) is usually faster than doing it mid-implementation.
 
-- `docs/PRD.md` — scope, routes/flows, features + acceptance criteria
-- `docs/DESIGN_SYSTEM.md` — typography, palette, tokens, layout primitives, component rules
-- `docs/TECH_SPEC.md` — pinned stack, architecture, backend/data contracts, deployment notes
+**Recommended minimum:**
 
-Templates live in `docs/templates/`.
+1) Product specs (what + acceptance criteria)
+   - `docs/product-specs/index.md`
+   - `docs/product-specs/<feature>.md` (copy `docs/product-specs/_TEMPLATE.md`)
 
-If any of these are missing and the task is non-trivial, the agent should propose creating them **before** implementing.
+2) Design System (tokens + primitives)
+   - `docs/DESIGN_SYSTEM.md` (from `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`)
+
+3) Technical Spec (pinned decisions)
+   - `docs/TECH_SPEC.md` (from `docs/templates/TECH_SPEC_TEMPLATE.md`)
+
+Optional (but useful for enterprise work):
+
+- Design decision records: `docs/design-docs/` (start with `core-beliefs.md`)
+- Architecture map: `ARCHITECTURE.md` (keep it short; link out)
+
+If key docs are missing and the task is non-trivial, the agent should propose creating them **before** implementing.
 
 ## Core loop (one checkpoint)
 
@@ -43,23 +55,36 @@ Every iteration is:
 
 **1 task → 1 checkpoint → report → stop**
 
-1) Read `plans/NOW.md` and execute **only the single next step**.
+1) Drive the checkpoint from `docs/exec-plans/active/NOW.md` and execute **only the single next step**.
 2) Timebox to **15–30 minutes**.
 3) End the checkpoint with:
    - a reviewable diff,
-   - an updated `plans/NOW.md` (checkboxes reflect reality),
+   - updated plan bookkeeping (step sheet + checkboxes + next step),
    - a checkpoint report in `reports/` (use `reports/TEMPLATE.md`),
    - quality gates (lint/typecheck; tests when appropriate; otherwise `N/A` with a reason),
    - then **stop** for human review.
 
 > This applies to read-only work too (reviews, design suggestions, doc audits).
 
+## ExecPlans (agent-managed by default)
+
+ExecPlans are stored under `docs/exec-plans/active/` and archived to `completed/`.
+
+To reduce repetitive work, the agent may:
+
+- create an ExecPlan when missing
+- pick the next step (first unchecked)
+- create/update a short step sheet for the checkpoint
+- archive finished plans
+
+Skill: `.codex/skills/role-planner`.
+
 ## Parallel lanes
 
-Use three lanes to move faster without losing control:
+Use lanes to move faster without losing control:
 
 - **Lane A — Builder:** implement the next step (typically in a worktree).
-- **Lane B — Reviewer:** independent review of diffs/PRs.
+- **Lane B — Review:** review diffs/PRs (human + built-in review UI).
 - **Lane C — Tests/QA:** run quality gates and add/update tests when the plan requires it.
 
 Keep lanes isolated by file ownership. Avoid multiple lanes changing dependencies or lockfiles.
@@ -75,13 +100,14 @@ Worktrees are the default mechanism for parallel work:
 ## Dependency policy
 
 - Dependency changes are approval-gated.
+- When a new dependency is required, the agent should propose it and ask the human to apply it.
 - Serialize dependency work: one active dependency-changing effort at a time.
 - Always record dependency rationale in the checkpoint report.
 
 ## Context hygiene
 
 - Treat the repository as memory. Do not rely on chat history.
-- Keep `plans/NOW.md` short. Link to docs/ExecPlans instead of pasting large context.
+- Keep `docs/exec-plans/active/NOW.md` short. Link to long docs; don’t paste them.
 - Prefer one thread per checkpoint; archive threads when done.
 
 ## Doc improvement loop (optional, recommended)
@@ -90,6 +116,6 @@ After you polish a doc, run a **doc audit checkpoint**:
 
 - Ask Codex to propose **3 targeted improvements** (no full rewrite).
 - Capture suggestions in a checkpoint report.
-- Convert accepted suggestions into small tasks in `plans/WORK_QUEUE.md`.
+- Convert accepted suggestions into small tasks in your issue tracker (or `docs/exec-plans/active/NOW.md → Parking lot`).
 
 This keeps documents improving without bloating context or causing churn.

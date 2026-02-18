@@ -21,8 +21,8 @@ Record model/effort in the checkpoint report.
 ## Preconditions (must be true)
 
 - There is an explicit refactor plan:
-  - a dedicated refactor doc, or
-  - an ExecPlan step that clearly describes refactor scope and stop conditions.
+  - an ExecPlan step that clearly describes refactor scope and stop conditions, or
+  - a dedicated refactor doc.
 
 If the plan is missing or vague, update the plan before editing code.
 
@@ -46,12 +46,9 @@ Record invariants + baseline status in the checkpoint report so regressions are 
 
 ## Refactor method (recommended)
 
-1) Define invariants:
-   - what must remain true (public APIs, UI behavior, performance constraints).
-2) Identify the smallest safe slice:
-   - one module, one boundary, one pattern at a time.
-3) Make mechanical, reversible changes first:
-   - rename, extract, move, simplify nesting.
+1) Define invariants (what must remain true).
+2) Identify the smallest safe slice (one module/boundary/pattern at a time).
+3) Make mechanical, reversible changes first (rename, extract, move, simplify nesting).
 4) Re-run gates and/or tests to validate invariants.
 5) Stop with a clean diff and a report.
 
@@ -59,7 +56,7 @@ Record invariants + baseline status in the checkpoint report so regressions are 
 
 At the end of each refactor checkpoint:
 
-- `plans/NOW.md` updated (checkboxes reflect reality)
+- Plan bookkeeping updated (step sheet + `EXECPLAN.md` checkboxes + `NOW.md`)
 - checkpoint report in `reports/` including:
   - refactor intent
   - what changed and why
@@ -67,3 +64,5 @@ At the end of each refactor checkpoint:
   - risks / follow-ups
   - model + effort used
 - stop for human review
+
+Reference: `docs/QUALITY_SCORE.md`.

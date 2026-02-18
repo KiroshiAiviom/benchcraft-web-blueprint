@@ -1,0 +1,20 @@
+NEXT.JS APP ROUTER (LLM REFERENCE)
+
+Defaults:
+- Server Components by default; add "use client" only when necessary.
+- Keep server-only code out of client bundles (server modules, env vars, secrets).
+- Prefer simple route ownership: app/* owns routes, components/* for shared UI, lib/* for utilities.
+
+Common patterns:
+- loading.tsx for route-level loading
+- error.tsx for route-level error boundaries
+- route handlers under app/api/* for server endpoints
+
+Rules of thumb:
+- Data validation + auth/authz happen server-side.
+- Don’t over-abstract early. Start with clear modules, then refactor.
+- For cross-cutting decisions, write a short design doc (docs/design-docs/).
+
+When unsure:
+- Check ARCHITECTURE.md and docs/FRONTEND.md
+- If still ambiguous, record question + assumption in NOW.md and stop.

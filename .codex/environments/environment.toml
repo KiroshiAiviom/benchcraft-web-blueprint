@@ -4,8 +4,12 @@ name = "benchcraft-web-blueprint"
 
 [setup]
 script = '''
-bun install
-bun run build
+if [ -f package.json ]; then
+  bun install
+  bun run build
+else
+  echo "No package.json found; skipping bun install/build."
+fi
 '''
 
 [[actions]]

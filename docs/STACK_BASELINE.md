@@ -14,7 +14,7 @@ This document defines the default baseline used for most production web projects
 
 ## Quality gates (default expectations)
 
-See `docs/DOD.md` for checkpoint-level quality gates and when to run tests.
+See `docs/QUALITY_SCORE.md` for checkpoint-level quality gates and when to run tests.
 
 ## Not fixed by this baseline (project-specific)
 

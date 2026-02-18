@@ -77,7 +77,7 @@ Install the Codex App from OpenAI, sign in, then:
 
 - Configure at least one **Local Environment** that can run `bun`, `node`, and `git`.
 - Ensure **web search** is enabled (cached is fine for most work).
-- Use **worktrees** for parallel lanes (Builder / Reviewer / Tests) and for any non-trivial change.
+- Use **worktrees** for parallel lanes (Builder / Review / Tests) and for any non-trivial change.
 - Set the model to **GPT-5.3-Codex** and default reasoning effort to **medium** (use **high** / **xhigh** only when needed).
 - (Optional) Enable steering while Codex works: Settings → General → Follow-up behavior.
 
@@ -132,15 +132,7 @@ docker compose version
 Create a clean Next.js project using Bun:
 
 ```bash
-bun create next-app@latest my-app \
-  --typescript \
-  --tailwind \
-  --biome \
-  --app \
-  --src-dir \
-  --import-alias "@/*" \
-  --use-bun \
-  --empty
+bun create next-app@latest my-app   --typescript   --tailwind   --biome   --app   --src-dir   --import-alias "@/*"   --use-bun   --empty
 
 cd my-app
 bun install
@@ -156,22 +148,33 @@ Copy/merge the blueprint files/folders into your new repo root.
 Avoid blindly overwriting existing files; prefer selective merges and review diffs.
 
 - `AGENTS.md`
+- `ARCHITECTURE.md`
 - `.codex/`
 - `docs/`
-- `plans/`
 - `reports/`
 - `.github/`
 
-Then create the **canonical project docs** from templates:
+Then create the **canonical project docs**:
 
-- `docs/PRD.md` (from `docs/templates/PRD_TEMPLATE.md`)
-- `docs/DESIGN_SYSTEM.md` (from `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`)
-- `docs/TECH_SPEC.md` (from `docs/templates/TECH_SPEC_TEMPLATE.md`)
+1) Product specs (what + acceptance criteria)
+   - Start with: `docs/product-specs/index.md`
+   - Create at least one feature spec from: `docs/product-specs/_TEMPLATE.md`
+
+2) Design System (tokens + primitives)
+   - Create: `docs/DESIGN_SYSTEM.md` from `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`
+
+3) Technical Spec (pinned decisions)
+   - Create: `docs/TECH_SPEC.md` from `docs/templates/TECH_SPEC_TEMPLATE.md`
+
+Optional:
+
+- Create a design decision record in `docs/design-docs/` for high-impact decisions.
+- Keep `ARCHITECTURE.md` as a short map with links to these docs.
 
 Finally:
 
-1) Fill `plans/WORK_QUEUE.md` with initial tasks.
-2) Set `plans/NOW.md` to exactly **one** next step.
+1) Set `docs/exec-plans/active/NOW.md` to exactly **one** next step.
+2) Keep longer lists in your issue tracker (or use `NOW.md → Parking lot`).
 3) Run the first checkpoint in a fresh Codex thread.
 
 ---

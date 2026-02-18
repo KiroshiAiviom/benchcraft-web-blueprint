@@ -37,7 +37,7 @@
 - Measurable outcomes:
   - <Metric / KPI>
 - Quality bar:
-  - Must meet `docs/DOD.md` for every checkpoint.
+  - Must meet `docs/QUALITY_SCORE.md` for every checkpoint.
 
 ## 4) In scope / out of scope
 

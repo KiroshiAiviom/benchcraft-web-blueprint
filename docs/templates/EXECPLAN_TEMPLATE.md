@@ -7,13 +7,15 @@ Principles:
 - Steps are **small** (checkpointable in ~15–30 minutes).
 - Output is explicit.
 - Completion is verifiable (checks + reviewable diff).
+- Requirements come from product specs; do not invent.
 
 ## References (must be consistent with)
 
-- `docs/PRD.md` (or `docs/templates/PRD_TEMPLATE.md`)
-- `docs/TECH_SPEC.md` (or `docs/templates/TECH_SPEC_TEMPLATE.md`)
-- `docs/DESIGN_SYSTEM.md` (or `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`)
-- `docs/DOD.md`
+- Product spec(s): `docs/product-specs/<spec>.md`
+- Design system: `docs/DESIGN_SYSTEM.md` (or `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`)
+- Technical decisions: `docs/TECH_SPEC.md` (or `docs/templates/TECH_SPEC_TEMPLATE.md`)
+- Guardrails: `docs/QUALITY_SCORE.md`, `docs/SECURITY.md`, `docs/RELIABILITY.md`
+- Optional decisions: `docs/design-docs/`
 
 ## Context
 
@@ -21,36 +23,33 @@ Principles:
 - Why now?
 - Constraints / assumptions:
 
-## Definition of Done (specific)
+## Plan steps (checkpointable)
 
--  
+Use stable step IDs (`S01`, `S02`, ...).
+Each step should have a step sheet in `steps/`.
 
-## Plan (checkpointable steps)
+- [ ] S01 — <step title>
+  - Step sheet: `steps/S01-<slug>.md`
+  - Goal (one sentence):
+  - Output (what exists after this step):
+  - Checks (commands) or `N/A`:
+  - Stop condition (what to show before continuing):
 
-For each step, specify the output, expected files, checks, and the stop condition.
+- [ ] S02 — <step title>
+  - Step sheet: `steps/S02-<slug>.md`
+  - Goal:
+  - Output:
+  - Checks:
+  - Stop condition:
 
-1) Step title  
-   - Goal (one sentence):  
-   - Output (what changes exist after this step):  
-   - Files touched (expected):  
-   - Checks (commands to run):  
-   - Stop condition (what to show before continuing):  
+- [ ] S03 — <step title>
+  - Step sheet: `steps/S03-<slug>.md`
+  - Goal:
+  - Output:
+  - Checks:
+  - Stop condition:
 
-2) Step title  
-   - Goal:  
-   - Output:  
-   - Files touched:  
-   - Checks:  
-   - Stop condition:  
-
-3) Step title  
-   - Goal:  
-   - Output:  
-   - Files touched:  
-   - Checks:  
-   - Stop condition:  
-
-## Dependencies
+## Dependencies (approval-gated)
 
 - Any new dependency? If yes, list it and mark: **requires approval**.
 

@@ -1,0 +1,16 @@
+BUN (LLM REFERENCE)
+
+Common commands:
+- bun install
+- bun run dev
+- bun run build
+- bun run lint
+- bun run typecheck
+- bun run test
+
+Dependency policy (important):
+- Do NOT edit package.json/lockfiles unless the human approves.
+- If a dependency is needed:
+  1) write a short proposal (what/why/alternatives/risks)
+  2) provide exact commands for the human
+  3) wait for confirmation

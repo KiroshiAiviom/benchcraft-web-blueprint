@@ -1,0 +1,16 @@
+TAILWIND (LLM REFERENCE)
+
+Do:
+- Use design tokens (via CSS vars/Tailwind config) rather than arbitrary values.
+- Use utility classes for layout and spacing; keep custom CSS minimal.
+- Prefer consistent patterns (containers, grids, spacing scale).
+
+Avoid:
+- Arbitrary values like px-[13px] unless explicitly approved.
+- Mixing many ad-hoc responsive breakpoints without a plan.
+- Large, unreviewable class strings: extract components/primitives when needed.
+
+UI consistency checks:
+- Typography hierarchy is clear (H1/H2/H3/body)
+- Spacing rhythm is consistent (no random gaps)
+- States (hover/focus/disabled) are consistent across components

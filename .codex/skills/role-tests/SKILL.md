@@ -27,7 +27,7 @@ Record model/effort in the checkpoint report.
 
 ## Checklist (per checkpoint)
 
-1) Confirm the exact scope from `plans/NOW.md`.
+1) Confirm the exact scope from `docs/exec-plans/active/NOW.md` (and the linked step sheet).
 2) Discover available scripts and tools:
    - `package.json` scripts (`lint`, `typecheck`, `test`, `e2e`, `build`)
    - CI config if present
@@ -52,10 +52,13 @@ When a check fails:
 
 At the end of the checkpoint:
 
-- `plans/NOW.md` updated (checkboxes reflect reality)
+- Plan bookkeeping updated (step sheet + `EXECPLAN.md` checkboxes + `NOW.md`)
 - A checkpoint report (`reports/`) including:
   - commands run + results
   - failures + root cause + fix
-  - DoD check status (pass/fail/N/A)
+  - quality bar status (pass/fail/N/A)
   - model + effort used
-- Stop for human review
+
+Reference: `docs/QUALITY_SCORE.md`.
+
+- Stop for human review.

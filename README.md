@@ -15,32 +15,46 @@ Default Codex model: **GPT-5.3-Codex** (reasoning effort: **medium**).
 
 ## What’s included
 
-- `AGENTS.md` — concise operating rules for Codex.
-- `.codex/` — Codex configuration + skills (Builder, Reviewer, Refactor, Tests, Deps, UI Foundation Pack).
-- `docs/` — workflow + setup docs, UI Foundation Pack, and project templates.
-- `plans/` — `WORK_QUEUE.md` (progress bridge) and `NOW.md` (drives each checkpoint).
+- `AGENTS.md` — concise operating rules (kept intentionally short).
+- `ARCHITECTURE.md` — architecture map (keep it short; link out).
+- `.codex/` — Codex configuration + skills (Planner, Builder, Refactor, Tests, UI).
+- `docs/` — workflow/setup docs, guardrails, templates, and planning artifacts.
+  - `docs/PLANS.md` — plan rules + structure
+  - `docs/exec-plans/` — active/completed plans + tech debt tracker
+  - `docs/product-specs/` — product specs (what + acceptance criteria)
+  - `docs/design-docs/` — decision records + core beliefs
+  - `docs/references/` — LLM-friendly tool references
+  - `docs/QUALITY_SCORE.md` — quality rubric
+  - `docs/DESIGN.md` + `docs/FRONTEND.md` — UI/UX + frontend defaults
+  - `docs/SECURITY.md`, `docs/RELIABILITY.md`, `docs/PRODUCT_SENSE.md`
 - `reports/` — checkpoint report template.
 - `.github/` — PR template focused on quality gates and UI review.
 
 ## Canonical project docs (keep it lean)
 
-For most web apps, you only need three “source of truth” docs:
+For most projects, start with:
 
-1) `docs/PRD.md` — scope, routes/flows, features + acceptance criteria.
-2) `docs/DESIGN_SYSTEM.md` — typography, palette, tokens, layout primitives, component rules.
-3) `docs/TECH_SPEC.md` — pinned stack, architecture, backend/data contracts, deployment notes.
+1) Product specs
+   - `docs/product-specs/index.md`
+   - at least one feature spec from `docs/product-specs/_TEMPLATE.md`
 
-Templates live in `docs/templates/`.
+2) Design System
+   - `docs/DESIGN_SYSTEM.md` from `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`
+
+3) Technical Spec
+   - `docs/TECH_SPEC.md` from `docs/templates/TECH_SPEC_TEMPLATE.md`
+
+Optional (high-value for enterprise):
+
+- `docs/design-docs/` (decision records)
+- `ARCHITECTURE.md` (short map; links to specs)
 
 ## How to use this blueprint
 
 1) Bootstrap a new Next.js + Bun project (see `docs/SETUP.md`).
 2) Overlay this blueprint into the project root.
-3) Create and fill:
-   - `docs/PRD.md`
-   - `docs/DESIGN_SYSTEM.md`
-   - `docs/TECH_SPEC.md`
-4) Drive each checkpoint from `plans/NOW.md` (one checkpoint per Codex thread).
+3) Create and fill the canonical docs (above).
+4) Drive each checkpoint from `docs/exec-plans/active/NOW.md` (one checkpoint per Codex thread).
 
 ## Key idea
 

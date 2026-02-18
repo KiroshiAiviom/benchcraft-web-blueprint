@@ -1,0 +1,24 @@
+DESIGN SYSTEM (LLM REFERENCE)
+
+Goal: keep UI consistent, accessible, and easy to change.
+
+Golden rules:
+- Never invent new design tokens if a Design System exists.
+- Never introduce one-off hex colors / arbitrary spacing unless explicitly approved.
+- Prefer semantic tokens (bg/surface/foreground/primary/etc.) over raw values.
+
+Minimum UI invariants (always check):
+- Focus-visible baseline for interactive elements
+- Keyboard navigation works for primary flows
+- Touch targets are reasonable on mobile (aim ~44x44 where applicable)
+- Reduced motion respected (prefers-reduced-motion)
+
+Where to look in this repo:
+- Guardrails: docs/DESIGN.md, docs/FRONTEND.md
+- Project tokens: docs/DESIGN_SYSTEM.md (or create from template)
+- Step driver: docs/exec-plans/active/NOW.md
+
+If a token/component is missing:
+1) Propose a minimal update to docs/DESIGN_SYSTEM.md
+2) Implement using only documented tokens
+3) Stop for review

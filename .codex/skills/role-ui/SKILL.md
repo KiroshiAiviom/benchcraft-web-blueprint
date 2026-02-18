@@ -1,28 +1,29 @@
 ---
-name: ui-foundation-pack
-description: Plan, audit, and implement premium UI using the UI Foundation Pack + project Design System.
+name: role-ui
+description: Plan, audit, and implement UI/UX work using the Design + Frontend guardrails and the project Design System.
 metadata:
-  short-description: Premium UI/UX guardrails + phased audit/build protocol.
+  short-description: UI/UX guardrails + audit/build protocol
   recommended-surface: codex-app
   recommended-model: GPT-5.3-Codex
   recommended-reasoning: medium
 ---
 
-# UI Foundation Pack Skill
+# Role: UI
 
-Use this skill when you are working on **UI/UX, layout, styling, components, motion, or visual polish**.
+Use this role for **UI/UX, layout, styling, components, motion, or visual polish**.
 
 It is designed to prevent:
 
 - “AI-template” aesthetics
-- inconsistent spacing/tokens
+- inconsistent tokens/spacing
 - wrapper-heavy DOM structure
 - inaccessible focus/motion behavior
 
 ## Read-first (canonical)
 
-- `plans/NOW.md` is the canonical checklist. Read the files listed under **Read first**.
-- For UI checkpoints, `docs/UI_FOUNDATION_PACK.md` is mandatory (it should be included under NOW’s UI section).
+- `docs/exec-plans/active/NOW.md` is the checkpoint driver. Read the files listed under **Read first**.
+- Design guardrails: `docs/DESIGN.md`
+- Frontend conventions: `docs/FRONTEND.md`
 
 If `docs/DESIGN_SYSTEM.md` is missing and the UI scope is non-trivial, propose creating it from `docs/templates/DESIGN_SYSTEM_TEMPLATE.md` **before** major UI work.
 
@@ -36,14 +37,15 @@ Deliver:
 
 - A phased plan:
   - **Phase 1 — Critical** (hierarchy, responsiveness, consistency, usability)
-  - **Phase 2 — Refinement** (spacing, typography, color discipline)
+  - **Phase 2 — Refinement** (spacing, typography, token discipline)
   - **Phase 3 — Polish** (micro-interactions, motion, empty/loading/error states)
 - A short list of **Design System updates required** (tokens/components) before implementation.
-- A minimal **QA matrix** for the recommendations:
-  - viewports to sanity check (e.g., 375 / 768 / 1024 / 1440)
+- A minimal **QA matrix**:
+  - viewports to sanity check
   - focus-visible baseline
-  - `prefers-reduced-motion` baseline
-- Stop and wait for approval.
+  - `prefers-reduced-motion`
+
+Then stop and wait for approval.
 
 ### B) Build (implement approved scope)
 
@@ -53,22 +55,18 @@ Rules:
 
 - Implement in **small checkpoints** (primitives → components → composition → polish).
 - Do not invent new tokens. If needed, propose an update to `docs/DESIGN_SYSTEM.md` first.
-- Prefer layout primitives (Container/Section/Stack/Grid) and **avoid wrapper-only nesting**.
-- Motion must respect `prefers-reduced-motion` and be gated with `motion-safe:`.
+- Prefer layout primitives and semantic HTML; avoid wrapper-only nesting.
+- Motion must respect `prefers-reduced-motion`.
 
-## Minimum UI quality bar
+## Dependency policy
 
-- Typography-first: consistent scale and readable body text.
-- Palette discipline: semantic tokens only; no ad-hoc hex colors for repeated values.
-- Accessibility baseline:
-  - WCAG AA contrast for text
-  - visible focus ring (≥ 2px + offset)
-  - hit targets ≥ 44×44px
-  - `prefers-reduced-motion` respected
+- Do not introduce new UI libraries or styling deps without explicit human approval.
+- If a new dependency is needed, write a short proposal + exact commands and stop.
 
 ## Output format (end of checkpoint)
 
 - Summary of what changed
 - Files touched
 - Manual UI QA checklist (what to verify in browser)
+- Plan bookkeeping updated (step sheet + `EXECPLAN.md` checkboxes + `NOW.md`)
 - Any approvals needed (tokens, dependencies, scope changes)

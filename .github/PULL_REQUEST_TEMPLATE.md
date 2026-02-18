@@ -10,6 +10,11 @@
 
 -  
 
+## Plan links (recommended)
+
+- ExecPlan:
+- Product spec(s):
+
 ## Checks
 
 - [ ] lint
