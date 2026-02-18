@@ -24,7 +24,7 @@ If you don’t want a number, you can still use the checklist below as pass/fail
 
 ## A) Minimum bar for every checkpoint
 
-Read-only checkpoints (docs/audits): still update `docs/exec-plans/active/NOW.md` and write a checkpoint report; mark gates as `N/A` with a reason.
+Read-only checkpoints (docs reviews, design audits): still update `docs/exec-plans/active/NOW.md` and write a checkpoint report; mark gates as `N/A` with a reason.
 
 1) The checkpoint objective is achieved (as written in `docs/exec-plans/active/NOW.md`).
 2) `docs/exec-plans/active/NOW.md` is updated to reflect reality (checkboxes + next step).
@@ -62,7 +62,7 @@ References: `docs/DESIGN.md`, `docs/FRONTEND.md`.
 
 ## C) Additional bar for dependency changes
 
-1) Explicit human approval obtained before changing dependencies/lockfiles.
+1) Follow the dependency policy in `AGENTS.md` (explicit human approval required before changing dependencies/lockfiles).
 2) Rationale recorded in the checkpoint report:
    - why this dependency is needed,
    - alternatives considered,

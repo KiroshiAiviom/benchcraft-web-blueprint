@@ -18,8 +18,8 @@ Default Codex model: **GPT-5.3-Codex** (reasoning effort: **medium**).
 - `AGENTS.md` — concise operating rules (kept intentionally short).
 - `ARCHITECTURE.md` — architecture map (keep it short; link out).
 - `.codex/` — Codex configuration + skills (Planner, Builder, Refactor, Tests, UI).
-- `docs/` — workflow/setup docs, guardrails, templates, and planning artifacts.
-  - `docs/PLANS.md` — plan rules + structure
+- `docs/` — guardrails, templates, and planning artifacts.
+  - `docs/PLANS.md` — plan structure + lifecycle
   - `docs/exec-plans/` — active/completed plans + tech debt tracker
   - `docs/product-specs/` — product specs (what + acceptance criteria)
   - `docs/design-docs/` — decision records + core beliefs
@@ -51,10 +51,11 @@ Optional (high-value for enterprise):
 
 ## How to use this blueprint
 
-1) Bootstrap a new Next.js + Bun project (see `docs/SETUP.md`).
-2) Overlay this blueprint into the project root.
-3) Create and fill the canonical docs (above).
-4) Drive each checkpoint from `docs/exec-plans/active/NOW.md` (one checkpoint per Codex thread).
+1) Start from an existing Next.js repo or create a new one (your preferred bootstrap).
+2) Overlay this blueprint into the project root (docs + .codex + guardrails).
+3) Run the first checkpoint:
+   - open `docs/exec-plans/active/NOW.md`
+   - execute the single checkbox (or use `.codex/skills/role-planner` to create a new plan)
 
 ## Key idea
 

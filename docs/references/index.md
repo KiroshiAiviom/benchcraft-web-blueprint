@@ -18,3 +18,4 @@ Rules:
 - `bun-llms.txt` — Bun commands + dependency policy reminders
 - `biome-llms.txt` — Biome usage + common fixes
 - `git-worktrees-llms.txt` — worktree workflow cheatsheet
+- `doc-consistency-llms.txt` — quick checks for broken refs + naming drift

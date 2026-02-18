@@ -1,0 +1,26 @@
+Doc consistency checks (optional)
+
+Use these when something feels “off” (broken links, naming drift, placeholder leakage).
+
+1) Broken doc references (paths)
+
+Requires ripgrep (rg):
+
+  rg -o --no-filename "docs/[A-Za-z0-9_./-]+" docs AGENTS.md reports .codex \
+    | sort -u \
+    | while read -r p; do [ -e "$p" ] || echo "MISSING: $p"; done
+
+Note (template repos): it’s normal for `docs/TECH_SPEC.md` and `docs/DESIGN_SYSTEM.md` to be missing
+until bootstrap. See `AGENTS.md → Bootstrap mode`.
+
+2) Mixed terminology (PRD vs Product Spec)
+
+  rg -n "\bPRD\b|Product Spec|product spec|product-spec" docs AGENTS.md .codex
+
+3) Placeholder leakage (templates accidentally used as runtime docs)
+
+  rg -n "<spec>|<title>|YYYY-MM-DD|\[ \] …" docs/exec-plans/active/NOW.md docs/templates
+
+If you don’t have ripgrep, use grep (less precise):
+
+  grep -RIn "docs/" docs AGENTS.md reports .codex | head

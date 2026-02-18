@@ -11,6 +11,19 @@ Treat it as a **map**, not the encyclopedia.
 
 (Plan index: `docs/PLANS.md`.)
 
+## Bootstrap mode (fresh template repos)
+
+Use this mode only when starting a new project and the canonical project docs don’t exist yet.
+
+Rules:
+
+- If `docs/TECH_SPEC.md` or `docs/DESIGN_SYSTEM.md` is missing, start from their templates.
+- The first checkpoint should create minimal project docs:
+  - at least one **Product Spec**: `docs/product-specs/<spec>.md`
+  - `docs/TECH_SPEC.md`
+  - `docs/DESIGN_SYSTEM.md`
+- After those exist, run the normal checkpoint loop.
+
 ## Non-negotiables
 
 - **One checkpoint per thread.** Small diff, then stop for human review.

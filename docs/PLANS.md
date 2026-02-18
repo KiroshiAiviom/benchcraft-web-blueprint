@@ -3,6 +3,14 @@
 This repo is **checkpoint-driven**.
 Plans live in the repo so the agent can work without relying on chat history.
 
+## Governance source
+
+Hard execution constraints (what is allowed/prohibited, dependency policy, when to stop) are defined in:
+
+- `AGENTS.md`
+
+This file explains **plan mechanics** only.
+
 ## Where plans live
 
 - Active plans: `docs/exec-plans/active/`
@@ -13,6 +21,7 @@ Plans live in the repo so the agent can work without relying on chat history.
 
 - `docs/exec-plans/active/NOW.md` is the single source of truth for the **current checkpoint thread**.
 - It must contain **one objective** and **one next step**.
+- `docs/templates/NOW_TEMPLATE.md` is a template only — `active/NOW.md` must stay runnable.
 
 ## ExecPlans (structure)
 
@@ -56,9 +65,18 @@ Use `.codex/skills/role-planner` when starting a new objective or when plans dri
    - move the entire plan folder into `completed/`
    - set `NOW.md → Active ExecPlan` to `N/A`
 
+## Bootstrap mode (template initialization)
+
+Use this only until the first project docs exist.
+
+- If `docs/TECH_SPEC.md` or `docs/DESIGN_SYSTEM.md` is missing, start from their templates.
+- The first ExecPlan in a new project should create minimal project docs:
+  - at least one Product Spec under `docs/product-specs/`
+  - `docs/TECH_SPEC.md`
+  - `docs/DESIGN_SYSTEM.md`
+
 ## Keep plans lean
 
 - Prefer links to specific sections (e.g., `docs/product-specs/<spec>.md#AC3`).
 - Don’t paste long docs into plans.
-- Unknowns become questions + assumptions in `NOW.md`, then stop for approval.
-- Dependency changes must be marked **requires approval**.
+- Keep step sheets short and concrete (goal → inputs → tasks → deliverables → stop).

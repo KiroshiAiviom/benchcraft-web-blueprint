@@ -1,3 +1,13 @@
+# NOW.md (template)
+
+Copy this file to:
+
+- `docs/exec-plans/active/NOW.md`
+
+`active/NOW.md` must be a **runtime checkpoint driver**: always runnable with **one objective** and **one next-step checkbox**.
+
+---
+
 # NOW.md (checkpoint driver)
 
 This file is the single source of truth for the **current checkpoint thread**.
@@ -10,17 +20,27 @@ Rules:
 
 ## Read first (context files)
 
-Always:
+List **only what is needed** for this checkpoint.
 
-- `docs/PRD.md` (or `docs/templates/PRD_TEMPLATE.md`)
-- `docs/DESIGN_SYSTEM.md` (or `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`)
-- `docs/TECH_SPEC.md` (or `docs/templates/TECH_SPEC_TEMPLATE.md`)
-- `docs/DOD.md`
-- `plans/WORK_QUEUE.md`
+Guidelines:
 
-If this checkpoint touches UI:
+- Aim for **3–7 files** max.
+- Prefer a pointer to a specific section (e.g., `docs/product-specs/foo.md#AC3`) over loading an entire long doc.
+- If a file does not exist yet, link its template (don’t paste the template content into this file).
 
-- `docs/UI_FOUNDATION_PACK.md`
+Baseline:
+
+- `docs/QUALITY_SCORE.md`
+
+Add as needed:
+
+- Product spec(s): `docs/product-specs/index.md` + `docs/product-specs/<spec>.md`
+  - (or start from `docs/product-specs/_TEMPLATE.md`)
+- Technical decisions: `docs/TECH_SPEC.md` (or `docs/templates/TECH_SPEC_TEMPLATE.md`)
+- Design system: `docs/DESIGN_SYSTEM.md` (or `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`)
+- Design beliefs/decisions: `docs/design-docs/core-beliefs.md` (and relevant design doc links)
+- UI work: `docs/DESIGN.md` + `docs/FRONTEND.md`
+- key code files / routes relevant to the step
 
 ## Session settings (optional)
 
@@ -35,7 +55,7 @@ If this checkpoint touches UI:
 
 ## Active ExecPlan
 
-- (link to `plans/EXECPLAN-*.md` or `docs/EXECPLAN-*.md`, or `N/A`)
+- (link to a plan folder under `docs/exec-plans/active/` or write `N/A`)
 
 ## Constraints (checkpoint-specific, optional)
 
@@ -60,5 +80,11 @@ If this checkpoint has special constraints (e.g., “exactly 3 improvements”, 
 - [ ] Checkpoint report in `reports/`
 - [ ] Quality gates run **when available** (`lint`, `typecheck`, tests if applicable)
       If no scripts exist (e.g., no `package.json`), mark `N/A` and state why.
-- [ ] Plan updated to reflect reality (checkboxes / next step)
+- [ ] Plan updated to reflect reality (checkboxes / next step / step sheet)
 - [ ] Stop for human review
+
+## Parking lot (optional)
+
+Use this for ideas or follow-ups that are **not part of the current step**.
+
+- 

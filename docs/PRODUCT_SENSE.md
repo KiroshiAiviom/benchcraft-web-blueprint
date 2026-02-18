@@ -5,7 +5,7 @@ It helps prevent building “technically correct but unusable” features.
 
 ## Defaults
 
-- **The PRD is the contract.** If a requirement isn’t written, don’t assume it.
+- **The Product Spec is the contract.** If a requirement isn’t written, don’t assume it.
 - **Prefer the smallest shippable slice.** One clear flow beats many half-finished screens.
 - **User-visible correctness > internal cleverness.** Optimize for clarity and predictability.
 
@@ -30,5 +30,5 @@ If scope is unclear (“make it better”, “polish”), do an **audit-only** c
 
 ## References
 
-- Workflow loop: `docs/WORKFLOW.md`
+- Execution constraints + loop: `AGENTS.md`, `docs/PLANS.md`, `docs/exec-plans/active/NOW.md`
 - Reliability guardrails: `docs/RELIABILITY.md`
