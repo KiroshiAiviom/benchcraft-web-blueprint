@@ -26,7 +26,32 @@ Designed to work best with the **Codex App** (threads, worktrees, reviewable dif
   - `docs/DESIGN.md` + `docs/FRONTEND.md` — UI/UX + frontend defaults
   - `docs/SECURITY.md`, `docs/RELIABILITY.md`, `docs/PRODUCT_SENSE.md`
 - `reports/` — checkpoint report template.
-- `.github/` — PR template focused on quality gates and UI review.
+
+## Quickstart From Empty Next App
+
+Use the runbook for exact staged setup:
+
+- `docs/BOOTSTRAP_RUNBOOK.md`
+
+Minimal flow:
+
+1) Create app with Bun + Next:
+
+```bash
+bun create next-app@latest my-app \
+  --typescript \
+  --tailwind \
+  --biome \
+  --app \
+  --src-dir \
+  --import-alias "@/*" \
+  --use-bun \
+  --empty
+```
+
+2) Overlay this blueprint into `my-app` (`AGENTS.md`, `.codex/`, `docs/`, `reports/`).
+3) Run docs bootstrap checkpoint (create Product Spec + `docs/TECH_SPEC.md` + `docs/DESIGN_SYSTEM.md`).
+4) Enable Full Bundle in a dedicated approved checkpoint (Playwright + Stylelint + Chrome DevTools MCP).
 
 ## Canonical project docs (keep it lean)
 

@@ -16,3 +16,4 @@ Rules:
 - `tailwind-llms.txt` — Tailwind usage rules (avoid arbitrary values)
 - `shadcn-ui-llms.txt` — shadcn/ui usage + customization patterns
 - `doc-consistency-llms.txt` — quick checks for broken refs + naming drift
+- `full-bundle-llms.txt` — staged setup for Playwright + Stylelint + Chrome DevTools MCP in target repos

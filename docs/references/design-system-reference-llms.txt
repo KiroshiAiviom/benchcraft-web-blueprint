@@ -6,12 +6,19 @@ Golden rules:
 - Never invent new design tokens if a Design System exists.
 - Never introduce one-off hex colors / arbitrary spacing unless explicitly approved.
 - Prefer semantic tokens (bg/surface/foreground/primary/etc.) over raw values.
+- Prefer gap-based layout spacing over ad-hoc margin stacks.
 
 Minimum UI invariants (always check):
 - Focus-visible baseline for interactive elements
 - Keyboard navigation works for primary flows
 - Touch targets are reasonable on mobile (aim ~44x44 where applicable)
 - Reduced motion respected (prefers-reduced-motion)
+
+UI audit output (include in checkpoint reports):
+- List spacing values used (margin/padding/gap) and confirm they map to the spacing scale.
+- Confirm typography hierarchy/tokens used are consistent.
+- Confirm state coverage where applicable: hover/focus/active/disabled/loading/empty/error.
+- Include desktop + mobile render evidence (or N/A with reason).
 
 Where to look in this repo:
 - Guardrails: docs/DESIGN.md, docs/FRONTEND.md

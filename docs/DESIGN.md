@@ -22,12 +22,34 @@ Use this for any checkpoint that touches:
 - **Token discipline:** if a value repeats, it becomes a token in `docs/DESIGN_SYSTEM.md`.
   - No one-off hex colors for repeated usage.
   - No “just this one spacing tweak” if it repeats.
+- **Spacing rhythm first:** use a consistent spacing scale and stable vertical rhythm.
+  - Prefer `gap` in flex/grid stacks over ad-hoc vertical margins.
+  - Avoid relying on collapsing margins for layout spacing.
 - **Minimal DOM:** avoid wrapper-only nesting; prefer a small set of layout primitives.
 - **Accessibility baseline:**
   - visible focus ring
   - touch targets ~44×44px where applicable
   - text contrast suitable for common environments
 - **Motion is deliberate:** respect `prefers-reduced-motion`; avoid noisy animation.
+
+## UI feedback loop (required for UI checkpoints)
+
+For UI work, do not stop at “code compiles.”
+
+1) Implement with tokens + primitives.
+2) Render and review at required viewports.
+3) Run a UI audit (manual today; automated visual diffs when available).
+4) Patch any visual consistency issues before checkpoint handoff.
+
+## UI audit contract
+
+Every UI checkpoint should include a short audit summary in the report:
+
+- Spacing: list unique spacing values used for margin/padding/gap and confirm they map to the project spacing scale.
+- Typography: list type tokens/styles used and confirm a consistent hierarchy.
+- Accessibility quick checks: focus-visible, keyboard traversal on primary flow, contrast sanity check.
+- States: confirm required interaction states exist (hover/focus/active/disabled/loading/empty/error where applicable).
+- Responsive sanity: note desktop + mobile viewport checks and any intentional exceptions.
 
 ## Anti-patterns
 
@@ -36,6 +58,7 @@ Avoid by default:
 - generic hero + feature cards + gradient wash
 - random glow/blur/noise without a clear direction
 - deep `<div>` stacks used to “fix spacing”
+- random one-off spacing/color values scattered across pages
 - copying template aesthetics without an explicit design decision
 
 ## Operating modes
@@ -50,6 +73,7 @@ Avoid by default:
 - Viewports: 375×812, 768×1024, 1024×768, 1440×900
 - Keyboard: tab through controls; focus always visible
 - Reduced motion: verify with `prefers-reduced-motion`
+- Capture evidence: include before/after screenshots for UI-impacting checkpoints when practical
 
 ## How to request UI work (prompt formula)
 

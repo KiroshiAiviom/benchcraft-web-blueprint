@@ -32,4 +32,4 @@ Recommended naming:
 
 Add new design docs here as they are created:
 
-- (none yet)
+- `docs/design-docs/2026-02-19--ui-quality-tooling-with-dependencies.md` - accepted staged policy for Playwright visual diffs, Stylelint mechanical token linting, and Chrome DevTools MCP in target repos.

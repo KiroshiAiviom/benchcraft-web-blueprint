@@ -43,6 +43,22 @@ If you need a new package, version bump, or lockfile change:
 2) Provide the exact command(s) the human should run.
 3) Wait for confirmation before continuing.
 
+## Full Bundle policy (target repos)
+
+Default path is staged:
+
+1) Bootstrap app + docs first.
+2) Enable Full Bundle in a dedicated approved checkpoint:
+   - Playwright visual regression
+   - Stylelint mechanical lint
+   - Chrome DevTools MCP
+
+Important:
+
+- Do not add runtime/tooling scaffold files for Full Bundle in this blueprint root.
+- Add those files only in the target app repository after human dependency approval.
+- Command-level details: `docs/BOOTSTRAP_RUNBOOK.md` and `docs/references/full-bundle-llms.txt`.
+
 ## Skills / roles
 
 Pick the smallest role that matches the work:

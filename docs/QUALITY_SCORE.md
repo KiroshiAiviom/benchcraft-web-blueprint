@@ -7,7 +7,6 @@ Use it in:
 
 - `docs/exec-plans/active/NOW.md` (baseline)
 - checkpoint reports (`reports/TEMPLATE.md`)
-- PR review checklists (`.github/PULL_REQUEST_TEMPLATE.md`)
 
 ## Rating (quick, optional)
 
@@ -55,6 +54,13 @@ Read-only checkpoints (docs reviews, design audits): still update `docs/exec-pla
    - hover / focus / active / disabled / loading / empty / error.
 3) Motion respects `prefers-reduced-motion`.
 4) No obvious layout regressions across common breakpoints.
+5) UI audit summary is included in the checkpoint report:
+   - spacing values used are mapped to the project spacing scale,
+   - typography usage is consistent with the intended hierarchy,
+   - accessibility quick checks are explicitly noted (focus/keyboard/contrast sanity).
+6) UI evidence is included in the checkpoint report:
+   - screenshots or equivalent render evidence for at least one desktop and one mobile viewport (or `N/A` with reason).
+7) If the repository has visual regression tooling configured, run it for user-facing UI changes (or mark `N/A` with reason).
 
 References: `docs/DESIGN.md`, `docs/FRONTEND.md`.
 

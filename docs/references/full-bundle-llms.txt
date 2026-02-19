@@ -1,0 +1,58 @@
+FULL BUNDLE (TARGET REPOS ONLY)
+
+Purpose:
+- Enforce UI consistency with visual diffs + mechanical lint + browser diagnosis tooling.
+
+Scope:
+- Apply in the target app repository, not in this blueprint root.
+
+Includes:
+- Playwright visual regression
+- Stylelint token-drift enforcement
+- Chrome DevTools MCP
+
+Human-run commands (after approval):
+1) Install deps:
+   bun add -d @playwright/test stylelint stylelint-config-standard
+2) Install Playwright browser:
+   bunx playwright install
+3) Add MCP server:
+   codex mcp add chrome-devtools -- npx chrome-devtools-mcp@latest
+
+Agent-scaffold files (target repo):
+- playwright.config.ts
+- tests/visual/regression.spec.ts
+- .stylelintrc.cjs
+- .stylelintignore
+- scripts/check-ui-token-drift.sh
+- .github/workflows/ui-quality.yml (if GitHub Actions is used)
+
+Required scripts (target repo package.json):
+- lint:styles
+- lint:ui-tokens
+- test:visual
+- test:visual:update
+- quality:ui
+
+Env/CI contract:
+- VISUAL_BASE_URL: absolute URL for snapshot target
+- VISUAL_ROUTES: comma-separated routes (for example: /,/pricing,/dashboard)
+
+Baseline flow:
+1) bun run test:visual:update
+2) bun run lint:styles
+3) bun run lint:ui-tokens
+4) bun run test:visual
+
+CI checklist:
+- install deps with bun
+- install Playwright browser(s)
+- run lint:styles
+- run lint:ui-tokens
+- run test:visual
+- upload Playwright artifacts on failure
+
+Failure triage:
+- Snapshot noise: stabilize data/fonts/environment, then update baseline only for approved UI changes.
+- Lint false positives: tune patterns narrowly; keep exceptions explicit and reviewable.
+- MCP safety: use isolated profiles; avoid production secrets.
