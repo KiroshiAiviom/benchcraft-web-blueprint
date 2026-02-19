@@ -26,7 +26,7 @@ Recommended naming:
 ## Start here
 
 - Core beliefs: `docs/design-docs/core-beliefs.md`
-- Template: `docs/design-docs/_TEMPLATE.md`
+- Template: `docs/design-docs/DESIGN_DOC_TEMPLATE.md`
 
 ## Index
 

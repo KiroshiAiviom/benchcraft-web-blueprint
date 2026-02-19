@@ -6,7 +6,7 @@ It replaces the old “Definition of Done” doc by turning it into a compact, r
 Use it in:
 
 - `docs/exec-plans/active/NOW.md` (baseline)
-- checkpoint reports (`reports/TEMPLATE.md`)
+- checkpoint reports (`reports/REPORT_TEMPLATE.md`)
 
 ## Rating (quick, optional)
 

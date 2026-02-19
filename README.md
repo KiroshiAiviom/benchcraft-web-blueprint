@@ -59,7 +59,7 @@ For most projects, start with:
 
 1) Product specs
    - `docs/product-specs/index.md`
-   - at least one feature spec from `docs/product-specs/_TEMPLATE.md`
+   - at least one feature spec from `docs/product-specs/PRODUCT_SPEC_TEMPLATE.md`
 
 2) Design System
    - `docs/DESIGN_SYSTEM.md` from `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`

@@ -35,7 +35,7 @@ Baseline:
 Add as needed:
 
 - Product spec(s): `docs/product-specs/index.md` + `docs/product-specs/<spec>.md`
-  - (or start from `docs/product-specs/_TEMPLATE.md`)
+  - (or start from `docs/product-specs/PRODUCT_SPEC_TEMPLATE.md`)
 - Technical decisions: `docs/TECH_SPEC.md` (or `docs/templates/TECH_SPEC_TEMPLATE.md`)
 - Design system: `docs/DESIGN_SYSTEM.md` (or `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`)
 - Design beliefs/decisions: `docs/design-docs/core-beliefs.md` (and relevant design doc links)

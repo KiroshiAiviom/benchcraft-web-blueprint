@@ -20,7 +20,7 @@ Use this role to **reduce monotony** and keep execution unblocked:
 - `docs/templates/NOW_TEMPLATE.md` (template reference; `active/NOW.md` must remain runnable)
 
 If requirements are unclear:
-- create/point to a product spec first: `docs/product-specs/_TEMPLATE.md`
+- create/point to a product spec first: `docs/product-specs/PRODUCT_SPEC_TEMPLATE.md`
 - record questions + assumptions in `NOW.md`, then stop
 
 ## Where plans live (structure)
@@ -44,7 +44,7 @@ If `NOW.md → Active ExecPlan` is `N/A` but there is a clear objective:
    - `docs/exec-plans/active/YYYY-MM-DD--<slug>/`
 2) Create `EXECPLAN.md` from `docs/templates/EXECPLAN_TEMPLATE.md`.
 3) If no product spec exists yet, propose creating one from:
-   - `docs/product-specs/_TEMPLATE.md`
+   - `docs/product-specs/PRODUCT_SPEC_TEMPLATE.md`
    and stop (don’t invent requirements).
 
 ### 2) Select the next step

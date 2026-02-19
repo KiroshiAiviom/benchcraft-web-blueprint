@@ -20,7 +20,7 @@ Recommended naming:
 
 ## Template
 
-- Copy: `docs/product-specs/_TEMPLATE.md`
+- Copy: `docs/product-specs/PRODUCT_SPEC_TEMPLATE.md`
 
 ## How specs connect to plans
 

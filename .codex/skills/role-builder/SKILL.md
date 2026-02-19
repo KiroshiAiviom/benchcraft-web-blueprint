@@ -71,6 +71,6 @@ If the repo does not expose scripts yet, mark gates as `N/A` and state why.
 
 2) Provide a reviewable diff (or file list + key snippets).
 
-3) Write a checkpoint report in `reports/` using `reports/TEMPLATE.md`.
+3) Write a checkpoint report in `reports/` using `reports/REPORT_TEMPLATE.md`.
 
 4) Stop for human review.
