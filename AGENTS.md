@@ -87,6 +87,7 @@ Pick the smallest role that matches the work:
 ## Quality bar
 
 - Source of truth: `docs/QUALITY_SCORE.md`.
+- For key page UI work, produce variants first and stop for human selection before implementation.
 
 ## How instructions layer
 

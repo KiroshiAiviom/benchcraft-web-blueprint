@@ -1,6 +1,6 @@
 ---
 name: role-builder
-description: Implement the next planned step safely: small diff, run checks, update plans/reports, then stop for review.
+description: Implement the next planned step safely, small diff, run checks, update plans/reports, then stop for review.
 ---
 
 # Role: Builder

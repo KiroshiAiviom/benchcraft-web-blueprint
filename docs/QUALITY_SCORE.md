@@ -50,17 +50,23 @@ Read-only checkpoints (docs reviews, design audits): still update `docs/exec-pla
 1) Manual UI review completed:
    - at least one desktop viewport and one mobile viewport,
    - focus states and keyboard navigation checked.
-2) Interaction states exist where applicable:
+2) Variant exploration gate is satisfied where applicable:
+   - key pages: 5 variants produced before implementation,
+   - low-risk pages: 3 variants produced before implementation,
+   - selected variant ID is confirmed in thread and traceable in plan/step artifacts.
+3) Interaction states exist where applicable:
    - hover / focus / active / disabled / loading / empty / error.
-3) Motion respects `prefers-reduced-motion`.
-4) No obvious layout regressions across common breakpoints.
-5) UI audit summary is included in the checkpoint report:
+4) Motion respects `prefers-reduced-motion`.
+5) No obvious layout regressions across common breakpoints.
+6) UI audit summary is included in the checkpoint report:
    - spacing values used are mapped to the project spacing scale,
    - typography usage is consistent with the intended hierarchy,
+   - icon usage is consistent (single family/style strategy),
+   - hierarchy/density/elevation choices are explicitly checked against the micro-detail checklist,
    - accessibility quick checks are explicitly noted (focus/keyboard/contrast sanity).
-6) UI evidence is included in the checkpoint report:
+7) UI evidence is included in the checkpoint report:
    - screenshots or equivalent render evidence for at least one desktop and one mobile viewport (or `N/A` with reason).
-7) If the repository has visual regression tooling configured, run it for user-facing UI changes (or mark `N/A` with reason).
+8) If the repository has visual regression tooling configured, run it for user-facing UI changes (or mark `N/A` with reason).
 
 References: `docs/DESIGN.md`, `docs/FRONTEND.md`.
 

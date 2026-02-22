@@ -1,0 +1,166 @@
+UI TASTE PLAYBOOK (LLM REFERENCE)
+
+Purpose:
+- Raise UI quality from "correct" to "polished, cohesive, and readable."
+- Enforce full-stack micro-detail quality, not only shadows/depth.
+
+Scope:
+- Use for UI planning, UI audits, and implementation checkpoints.
+- Pair with: docs/DESIGN.md, docs/FRONTEND.md, docs/DESIGN_SYSTEM.md
+
+Defaults:
+- Icon system: Lucide (`lucide-react`) unless explicitly approved otherwise.
+- Font source: Google Fonts via `next/font/google` unless explicitly approved otherwise.
+- Variant-first exploration:
+  - key pages: 5 variants
+  - low-risk pages: 3 variants
+  - implementation starts only after human-selected variant.
+
+How to evaluate details:
+- Use this format for each principle:
+  Principle -> Do -> Avoid -> Quick check
+
+1) Hierarchy and contrast
+Principle:
+- Primary action and primary content must be obvious in <= 5 seconds.
+Do:
+- Use contrast and weight to separate primary/secondary/tertiary content.
+- Keep one clear dominant CTA per section.
+Avoid:
+- Equal visual weight across all elements.
+- Over-reliance on color alone to signal priority.
+Quick check:
+- Squint test: can you still identify primary action and main content blocks?
+
+2) Spacing rhythm and density
+Principle:
+- Spacing should feel intentional, breathable, and compact when needed.
+Do:
+- Use a consistent spacing scale and gap-based layout flow.
+- Define density mode per surface (comfortable or compact), not random per component.
+Avoid:
+- Ambiguous spacing where relationship between elements is unclear.
+- Ad-hoc margin patches for local fixes.
+Quick check:
+- List used spacing values; all values should map to design tokens/scale.
+
+3) Typography and readability
+Principle:
+- Text should scan fast and stay readable in long sessions.
+Do:
+- Use a stable type scale with consistent line-height and hierarchy.
+- Keep body line length around 45-75 characters.
+- Use letter spacing intentionally (especially uppercase/small labels).
+Avoid:
+- Tiny helper text used as default body.
+- Overly long line length in content-heavy views.
+Quick check:
+- Read a dense section on desktop and mobile; no crowding, no runaway lines.
+
+4) Color discipline and contrast
+Principle:
+- Color should support semantics, hierarchy, and accessibility.
+Do:
+- Define semantic roles and shade ramps up front.
+- Keep neutral system robust enough for subtle surfaces/dividers.
+Avoid:
+- One-off hex values for repeated usage.
+- Low-contrast text on colored surfaces.
+Quick check:
+- Primary content and controls meet intended contrast and remain readable in context.
+
+5) Icon consistency
+Principle:
+- Icons are a language system, not decoration snippets.
+Do:
+- Use one family (Lucide default), consistent sizes/stroke in comparable contexts.
+- Pair icons with labels where ambiguity risk is high.
+Avoid:
+- Mixing icon families/styles without explicit approval.
+- Inconsistent icon weight and optical size in the same row/panel.
+Quick check:
+- Compare a single screen: icon rhythm looks uniform across controls/lists.
+
+6) State quality (interaction and data)
+Principle:
+- Every interactive/data surface must communicate state clearly.
+Do:
+- Cover hover/focus/active/disabled/loading/empty/error where applicable.
+- Make recovery paths explicit in error and empty states.
+Avoid:
+- "Working only in happy path."
+- Hidden loading states or non-actionable errors.
+Quick check:
+- Can keyboard users and mouse users identify state changes immediately?
+
+7) Elevation and depth layering
+Principle:
+- Depth helps structure, but it is only one part of polish.
+Do:
+- Emulate a consistent light model; use tokenized elevation tiers.
+- Use layered shadow pairs when needed (ambient + direct).
+Avoid:
+- Random shadow presets or too many elevation levels.
+- Treating depth as the only polish mechanism.
+Quick check:
+- Surfaces that should feel closer/farther are distinguishable without visual noise.
+
+8) Motion restraint
+Principle:
+- Motion should clarify interactions, not distract.
+Do:
+- Keep transitions short and consistent; respect `prefers-reduced-motion`.
+- Animate state changes that benefit orientation.
+Avoid:
+- Decorative motion on every interaction.
+- Large movement on dense/productive screens.
+Quick check:
+- With reduced motion enabled, experience remains clear and usable.
+
+9) Content density and scanability
+Principle:
+- High information density can still feel calm with strong grouping and rhythm.
+Do:
+- Group related content; use clear headings and chunking.
+- Keep labels/copy concise and specific.
+Avoid:
+- Walls of undifferentiated text.
+- Generic labels ("Submit", "Click here") where context matters.
+Quick check:
+- A new user can identify what to do next on each major section.
+
+Design detail mapping (principles -> enforceable checks):
+- Hierarchy and emphasis -> hierarchy/contrast pass + one dominant action per section.
+- Layout and spacing -> spacing-scale mapping + no ambiguous spacing.
+- Typography and readability -> type-scale consistency + readable line length.
+- Color semantics -> semantic color roles + contrast sanity.
+- Elevation and layering -> tokenized elevation tiers + light-source consistency.
+- State and polish quality -> empty/error/loading states + subtle polish pass.
+
+Supplemental mapping:
+- Contrast/accessibility -> WCAG 2.2 quickref
+- Typography craft -> Practical Typography
+- Depth/elevation model -> Material elevation reference
+- Behavioral heuristics -> Laws of UX
+
+Variant scoring rubric (for page variants):
+- Clarity of primary action (1-5)
+- Scanning speed/readability (1-5)
+- Visual hierarchy quality (1-5)
+- Density balance (1-5)
+- Implementation risk (1-5, lower complexity scores higher)
+- Accessibility risk (1-5, lower risk scores higher)
+
+Selection rule:
+- For each key page, evaluate all variants using rubric and stop for human selection.
+- Do not implement page UI until selection is confirmed in thread.
+
+References:
+- Next.js fonts: https://nextjs.org/learn/dashboard-app/optimizing-fonts-images
+- Google Fonts: https://fonts.google.com/
+- Lucide React: https://lucide.dev/guide/packages/lucide-react
+- WCAG 2.2 quickref: https://www.w3.org/WAI/WCAG22/quickref/
+- Material elevation: https://m1.material.io/material-design/elevation-shadows.html
+- Practical Typography: https://practicaltypography.com/
+- Laws of UX: https://lawsofux.com/
+- Derived notes: `docs/references/ui-detail-principles.md`

@@ -28,6 +28,13 @@ If the project already has a structure, keep it — just document it in this fil
 - Avoid one-off raw values for spacing/colors in component/page code unless explicitly approved.
 - Prefer semantic styling hooks over ad-hoc values (for example: tokenized classes/CSS vars).
 
+### Icon consistency contract
+
+- Default icon library: Lucide (`lucide-react`) if icons are needed.
+- Keep one icon family per project/page set unless explicitly approved otherwise.
+- Standardize size/stroke per context (for example: nav, action buttons, dense data rows).
+- Do not mix icon weights/styles in the same UI context.
+
 ### Focus-visible (Tailwind)
 
 Use a visible focus ring by default:
@@ -48,11 +55,29 @@ focus-visible:ring-offset-2 focus-visible:ring-offset-background
 - Gate non-essential motion with `motion-safe:*`.
 - Provide `motion-reduce:*` fallbacks (trim transitions; remove transforms/parallax).
 
+### Elevation token usage
+
+- Use documented elevation tokens only; no ad-hoc shadow strings in page/component code.
+- Keep elevation tiers shallow (for example: base, raised, overlay) unless a design-system decision says otherwise.
+- Depth should support hierarchy, not decorate everything.
+
 ### Spacing and layout flow
 
 - Prefer `gap-*` for stack/grid spacing over manual sibling margins.
 - Keep spacing decisions in layout primitives and component internals, not scattered in pages.
 - Avoid margin-collapsing-dependent layout behavior.
+
+### Density modes and spacing ramps
+
+- Use explicit density modes (comfortable/compact) backed by tokens.
+- Compact mode reduces whitespace around content, not usability targets.
+- Keep touch target baseline intact even in compact layouts.
+
+### Content width and readability defaults
+
+- Long-form content surfaces should use readable line lengths (~45-75 chars).
+- Dense application surfaces can be compact, but preserve clear grouping and scanability.
+- Prefer max-width-constrained content containers for text-heavy screens.
 
 ## Component patterns
 
@@ -74,3 +99,4 @@ focus-visible:ring-offset-2 focus-visible:ring-offset-background
 
 - Design/UX guardrails: `docs/DESIGN.md`
 - Quality rubric: `docs/QUALITY_SCORE.md`
+- UI detail canon: `docs/references/ui-taste-playbook-llms.txt`

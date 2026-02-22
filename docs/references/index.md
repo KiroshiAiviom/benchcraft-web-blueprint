@@ -14,7 +14,9 @@ Rules:
 - `design-system-reference-llms.txt` — token discipline + UI invariants
 - `nextjs-app-router-llms.txt` — baseline conventions for Next.js App Router projects
 - `tailwind-llms.txt` — Tailwind usage rules (avoid arbitrary values)
-- `shadcn-ui-llms.txt` — shadcn/ui usage + customization patterns
 - `doc-consistency-llms.txt` — quick checks for broken refs + naming drift
 - `full-bundle-llms.txt` — staged setup for Playwright + Stylelint + Chrome DevTools MCP in target repos
+- `ui-taste-playbook-llms.txt` — micro-detail UI canon + variant scoring rubric
+- `ui-detail-principles.md` — extracted implementation-ready UI detail notes
 - `docs/templates/PROJECT_SEED_TEMPLATE.md` — canonical `<project_seed>` payload template for planning inputs
+- `docs/templates/UI_PAGE_VARIANTS_TEMPLATE.md` — docs-first page variant pack template (5/3 + selection gate)

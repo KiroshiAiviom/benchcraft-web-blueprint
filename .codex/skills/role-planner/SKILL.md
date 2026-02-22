@@ -1,6 +1,6 @@
 ---
 name: role-planner
-description: Maintain ExecPlans and step sheets: create plans, select the next step, keep NOW.md in sync, and archive completed plans.
+description: Maintain ExecPlans and step sheets, create plans, select the next step, keep NOW.md in sync, and archive completed plans.
 ---
 
 # Role: Planner (ExecPlans)

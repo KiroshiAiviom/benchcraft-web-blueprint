@@ -26,7 +26,13 @@
 - Display/heading: <font>
 - Mono (optional): <font>
 
-### 2.2 Type scale
+### 2.2 Font source standard
+
+- Default source: Google Fonts via `next/font/google`.
+- Use local fonts (`next/font/local`) only when project constraints require it.
+- Document font source decisions and licensing constraints in this file.
+
+### 2.3 Type scale
 
 Define a **small, enforceable** scale:
 
@@ -78,11 +84,16 @@ Add line-height + letter-spacing tokens if needed.
   - `--radius-sm`, `--radius-md`, `--radius-lg`
 - Elevation:
   - `--shadow-sm`, `--shadow-md` (add `--shadow-lg` only if truly needed)
+  - `--elevation-surface`, `--elevation-raised`, `--elevation-overlay` (tokenized layer usage)
+- Density:
+  - `--density-comfortable`, `--density-compact`
 - Motion:
   - `--ease-standard`, `--duration-fast`, `--duration-base`
 - Typography:
   - `--font-body`, `--font-display`
   - `--text-*` scale
+- Fine detail:
+  - `--divider-subtle`, `--border-subtle`, `--focus-ring`, `--focus-ring-offset`
 
 ### 4.2 Interaction/state conventions
 
@@ -90,8 +101,21 @@ Define how hover/active/disabled are derived:
 
 - Prefer tokenized variants (`--primary-hover`, `--primary-active`) **or** a documented derivation (e.g., `color-mix()`), but do not mix ad-hoc approaches.
 - Focus ring must be consistent across components.
+- Divider/border subtlety should be tokenized, not improvised per component.
 
-### 4.3 Implementation contract (copy/paste baseline)
+### 4.3 Detail token guidance
+
+- Elevation layers:
+  - define where `surface`, `raised`, and `overlay` layers are used.
+  - pair elevation with border contrast when needed for clear depth.
+- Density tokens:
+  - define compact vs comfortable spacing behavior per major surface type.
+- Fine-stroke details:
+  - use tokenized subtle borders/dividers for structure without visual clutter.
+- Focus styling:
+  - use tokenized ring color and offset for consistent focus affordance.
+
+### 4.4 Implementation contract (copy/paste baseline)
 
 > This contract makes tokens real: CSS variables → Tailwind mapping → component usage.
 
@@ -223,7 +247,7 @@ Card base  : rounded-md border bg-background shadow-sm
 
 ### 6.1 Component baseline
 
-- Use **shadcn/ui** as the baseline where appropriate.
+- Build and maintain project components in-house, aligned to this Design System.
 - Prefer composition over deep wrapper nesting.
 - Every interactive component must cover:
   - hover / focus-visible / active
@@ -240,6 +264,13 @@ Card base  : rounded-md border bg-background shadow-sm
 - Tooltip
 - Dialog / Sheet
 - Toast / inline error message
+
+### 6.3 Iconography standard
+
+- Default icon library: `lucide-react`.
+- Keep one icon family per project unless explicitly approved otherwise.
+- Define size/stroke usage by context (for example: nav, buttons, data rows).
+- Do not mix icon families/styles without explicit approval.
 
 ## 7) Motion (polish, not noise)
 
@@ -284,6 +315,7 @@ Focus-visible example:
   - Key components:
   - States (loading/empty/error):
   - Responsive notes:
+  - Variant reference (required for key routes): `<variant-file>#<variant-id>`
 
 ## 10) QA checklist
 

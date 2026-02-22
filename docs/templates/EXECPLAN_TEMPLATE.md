@@ -33,6 +33,7 @@ Each step should have a step sheet in `steps/`.
   - Goal (one sentence):
   - Output (what exists after this step):
   - Dependency preflight: `none` / `requires approval` (list dependency + step task bullet reference)
+  - UI variant gate: `required` / `N/A` (if required: include variant artifact path + selected variant ID)
   - Checks (commands) or `N/A`:
   - Stop condition (what to show before continuing):
 
@@ -41,6 +42,7 @@ Each step should have a step sheet in `steps/`.
   - Goal:
   - Output:
   - Dependency preflight: `none` / `requires approval` (list dependency + step task bullet reference)
+  - UI variant gate: `required` / `N/A` (if required: include variant artifact path + selected variant ID)
   - Checks:
   - Stop condition:
 
@@ -49,6 +51,7 @@ Each step should have a step sheet in `steps/`.
   - Goal:
   - Output:
   - Dependency preflight: `none` / `requires approval` (list dependency + step task bullet reference)
+  - UI variant gate: `required` / `N/A` (if required: include variant artifact path + selected variant ID)
   - Checks:
   - Stop condition:
 
@@ -57,6 +60,16 @@ Each step should have a step sheet in `steps/`.
 - Any new dependency? If yes, list it and mark: **requires approval**.
 - Every listed dependency must map to a specific step ID and task bullet.
 - Include exact human-run command(s) for each dependency request.
+
+## UI variant traceability (for UI implementation steps)
+
+- For key page UI work, create variants before implementation:
+  - 5 variants for key pages
+  - 3 variants for low-risk pages
+- Every UI implementation step must reference:
+  - variant artifact path
+  - selected variant ID
+- If selection is missing, the step is blocked.
 
 ## Risks / unknowns
 

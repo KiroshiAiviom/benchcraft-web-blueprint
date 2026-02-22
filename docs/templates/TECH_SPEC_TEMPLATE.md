@@ -13,7 +13,7 @@
 - React: <version>
 - TypeScript: <version>
 - Package manager: Bun <version>
-- UI: Tailwind CSS <version> + shadcn/ui
+- UI: Tailwind CSS <version> + in-house component system
 - Lint/format: Biome <version>
 - Testing (if used): <vitest/jest/playwright> <version>
 

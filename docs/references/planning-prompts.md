@@ -113,10 +113,49 @@ Inputs:
 Rules:
 - Steps must be checkpointable (15–30 min) and reference feature IDs/routes.
 - Each step must have a step sheet: goal, expected output, files, checks (or N/A), stop condition.
+- For key-page UI work, include a variant-exploration step before implementation (5 variants for key pages, 3 for low-risk pages).
+- No page UI build starts until variant selection is confirmed in thread.
 - Update docs/exec-plans/active/NOW.md to point to the new plan’s S01.
 
 Afterward:
 - Move docs/exec-plans/active/bootstrap--project-planning to docs/exec-plans/completed/
 - Write a checkpoint report in reports/
 - STOP.
+```
+
+## Prompt 5 — UI variant exploration (docs-only, pre-build)
+
+```text
+Use role-ui.
+
+Task: Generate page UI variants before implementation.
+
+Inputs:
+- Product spec sections for the page
+- docs/DESIGN_SYSTEM.md (or template if not created yet)
+- docs/DESIGN.md
+- docs/FRONTEND.md
+- docs/references/ui-taste-playbook-llms.txt
+
+Rules:
+- Create variants as docs-first outline blueprints (not code prototypes).
+- Key page: generate 5 variants.
+- Low-risk page: generate 3 variants.
+- Copy `docs/templates/UI_PAGE_VARIANTS_TEMPLATE.md` into a page-specific artifact path:
+  - `docs/ui-variants/<route-slug>-variants.md`
+- Fill the copied page-specific file (do not edit the template file itself).
+- Score each variant with rubric axes:
+  - clarity of primary action
+  - scanning speed
+  - visual hierarchy
+  - density balance
+  - implementation risk
+  - accessibility risk
+- Do not implement UI in this step.
+- Stop and wait for human-selected variant ID in thread.
+
+Deliverables:
+- Page-specific variant file (for example: `docs/ui-variants/<route-slug>-variants.md`) created from template
+- Brief recommendation (best 1-2 options + tradeoffs)
+- Explicit stop for human selection
 ```
