@@ -30,13 +30,27 @@ Agent-scaffold files (target repo):
 Required scripts (target repo package.json):
 - lint:styles
 - lint:ui-tokens
-- test:visual
-- test:visual:update
+- test:visual = playwright test tests/visual/regression.spec.ts
+- test:visual:update = playwright test tests/visual/regression.spec.ts --update-snapshots
 - quality:ui
 
 Env/CI contract:
 - VISUAL_BASE_URL: absolute URL for snapshot target
 - VISUAL_ROUTES: comma-separated routes (for example: /,/pricing,/dashboard)
+
+Dev Server Handshake (Chrome DevTools):
+- Human owns the active dev server by default.
+- Default URL is `http://localhost:3000` and should be auto-targeted first.
+- Agent may verify `http://localhost:3000` availability from terminal before browser checks.
+- Agent does not auto-switch ports or stop/restart the human's `bun dev` unless explicitly requested.
+
+Playwright preflight (run before visual assertions):
+1) Confirm env:
+   echo "$VISUAL_BASE_URL"
+   echo "$VISUAL_ROUTES"
+2) Confirm Playwright install:
+   bunx playwright --version
+3) Confirm target URL is reachable from test environment.
 
 Baseline flow:
 1) bun run test:visual:update
@@ -53,6 +67,14 @@ CI checklist:
 - upload Playwright artifacts on failure
 
 Failure triage:
+- Setup failure (fix before regression review):
+  - missing/unreachable VISUAL_BASE_URL
+  - missing/empty VISUAL_ROUTES
+  - missing Playwright browser/dependencies
+  - invalid script/config path
+- Regression failure (review product change):
+  - visual diffs after preflight passes
+  - intentional UI changes should update baselines explicitly
 - Snapshot noise: stabilize data/fonts/environment, then update baseline only for approved UI changes.
 - Lint false positives: tune patterns narrowly; keep exceptions explicit and reviewable.
 - MCP safety: use isolated profiles; avoid production secrets.

@@ -7,7 +7,7 @@ Make docs consistent and unambiguous so build steps won’t require guessing.
 ## Expected output
 
 - Minimal edits to remove contradictions / missing decisions
-- Open Questions list updated where human choice is required
+- Unresolved decisions reported in thread only; no Open Questions written to docs
 
 ## Files likely touched
 

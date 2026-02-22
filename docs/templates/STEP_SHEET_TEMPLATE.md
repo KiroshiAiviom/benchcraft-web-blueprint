@@ -20,6 +20,18 @@ Keep this lean (3–7 links max). Prefer deep links (`#section`).
 - 
 - 
 
+## Dependency preflight (approval-gated, mandatory)
+
+Before implementation, list all dependency requirements for this step.
+If none are needed, write one row with `none`.
+
+| Dependency | Why needed | Required by task bullet | Human-run command | Approval status |
+|---|---|---|---|---|
+|  |  |  |  | pending / approved / N/A |
+
+Rule:
+- If any required dependency is missing or unapproved, stop and request approval before implementation.
+
 ## Commands (optional)
 
 - 
@@ -36,6 +48,7 @@ Keep this lean (3–7 links max). Prefer deep links (`#section`).
 What should be shown to the human before continuing?
 
 -
+- If dependencies are missing/unapproved: stop with the dependency proposal + exact human-run command(s).
 
 ## Notes / findings (optional)
 

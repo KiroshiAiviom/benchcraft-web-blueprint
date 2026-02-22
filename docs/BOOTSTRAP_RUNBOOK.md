@@ -76,8 +76,8 @@ codex mcp add chrome-devtools -- npx chrome-devtools-mcp@latest
 2. Add scripts in `package.json`:
 - `lint:styles`
 - `lint:ui-tokens`
-- `test:visual`
-- `test:visual:update`
+- `test:visual = playwright test tests/visual/regression.spec.ts`
+- `test:visual:update = playwright test tests/visual/regression.spec.ts --update-snapshots`
 - `quality:ui`
 3. Add/adjust ignores:
 - `playwright-report`
@@ -98,14 +98,19 @@ Gate to complete Stage B:
 
 ### Agent does
 
-1. Configure route set and viewports for snapshots.
-2. Generate initial baselines:
+1. Run Playwright preflight checklist:
+   - dependencies installed (`@playwright/test`)
+   - browser installed (`bunx playwright install` already completed)
+   - `VISUAL_BASE_URL` is set and reachable
+   - `VISUAL_ROUTES` is set with approved routes
+2. Configure route set and viewports for snapshots.
+3. Generate initial baselines:
 
 ```bash
 bun run test:visual:update
 ```
 
-3. Run gates:
+4. Run gates:
 
 ```bash
 bun run lint:styles
@@ -113,7 +118,7 @@ bun run lint:ui-tokens
 bun run test:visual
 ```
 
-4. Wire CI variables and validate workflow behavior.
+5. Wire CI variables and validate workflow behavior.
 
 Gate to complete Stage C:
 - Snapshot baseline exists for approved routes.
@@ -126,14 +131,51 @@ Human:
 2. Approve dependency additions.
 3. Run dependency install and MCP setup commands.
 4. Provide initial critical visual routes and target environment URL.
+5. Share the active local URL for browser/DevTools checks when needed.
 
 Agent:
 1. Maintain blueprint docs and workflow contracts.
 2. Scaffold Full Bundle files/scripts in target repo.
 3. Configure and verify gates.
-4. Report all commands and results in checkpoint output.
+4. Use `http://localhost:3000` by default for browser/DevTools checks (or explicit human override); do not stop/restart the human dev server unless explicitly asked.
+5. Report all commands and results in checkpoint output.
+
+## Dev Server Handshake (Chrome DevTools + localhost)
+
+Default ownership:
+- Human owns the active `bun dev` session.
+- Default URL is `http://localhost:3000`.
+
+Rules:
+1. Agent should automatically use `http://localhost:3000` first.
+2. Agent may verify `http://localhost:3000` from terminal before browser checks.
+3. Do not auto-switch ports (for example 3000 -> 3001) unless the human explicitly asks.
+4. Do not stop or restart the human's running dev server unless explicitly requested.
+5. If `http://localhost:3000` is unavailable, report the check failure and ask for next action.
 
 ## Troubleshooting
+
+### Visual tests failing (setup vs regression triage)
+
+Treat failures in two buckets:
+
+1. Setup/config failure (fix setup first):
+   - `VISUAL_BASE_URL` missing/unreachable
+   - `VISUAL_ROUTES` missing/empty
+   - Playwright browser not installed
+   - snapshot path/config mismatch
+2. UI regression (product change):
+   - diffs appear after setup is confirmed healthy
+   - review and approve intentional updates, then run `bun run test:visual:update`
+
+Quick checks:
+
+```bash
+echo "$VISUAL_BASE_URL"
+echo "$VISUAL_ROUTES"
+bunx playwright --version
+bun run test:visual
+```
 
 ### Snapshot flakiness
 
@@ -155,7 +197,7 @@ Agent:
 
 ## Quick acceptance checks
 
-1. Template repo contains docs/agent artifacts only.
+1. Template repo contains docs and agent artifacts only.
 2. README points to this runbook.
 3. AGENTS references staged Full Bundle policy.
 4. `docs/references/full-bundle-llms.txt` exists for command-level details.

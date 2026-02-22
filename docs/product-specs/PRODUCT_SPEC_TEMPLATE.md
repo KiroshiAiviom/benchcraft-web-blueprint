@@ -65,7 +65,10 @@ Use stable IDs so ExecPlans can reference them.
 - Events:
 - Success metric:
 
-## Open questions
+## Assumptions resolved in thread (optional)
+
+Use this section only for decisions already resolved in thread.
+Do not store unresolved questions here.
 
 - 
 

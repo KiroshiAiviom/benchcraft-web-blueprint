@@ -10,22 +10,29 @@ Use role-planner.
 Task: Run “Interrogation only” for this project.
 
 Rules:
-- If a Technical Assignment (TA) PDF is attached: read it first and extract facts.
-- Do NOT ask questions already answered by the TA.
-- Ask 35–55 questions in ONE pass, grouped by category.
-- Each question must be concrete and answerable.
+- If an Architecture/TA PDF is attached: read it first and extract facts.
+- If a context dump transcript is provided: extract facts before asking questions.
+- Source precedence: explicit user overrides > extracted Architecture/TA PDF facts > extracted context dump facts > targeted follow-up questions.
+- Do NOT ask questions already answered by extracted inputs.
+- Ask as many targeted questions as needed to eliminate uncertainty before development (50-100 is acceptable when needed).
+- Continue questioning in follow-up rounds if required; do not force a fixed cap.
+- Each question must be concrete and answerable (no vague brainstorming prompts).
 - For most questions, provide 2–4 common options + “Other: ____”.
 - Tag each question MUST / SHOULD / NICE.
 - Provide an “Answer Sheet” at the end so I can reply quickly.
 - Do NOT write or modify repo files in this step.
+- Goal: resolve all material questions and uncertainties before development.
+- If critical decisions remain unresolved after a question pass: report unresolved questions + assumptions in thread only and stop for answers.
 
 Inputs I will provide:
-- <project_seed>
-- TA PDF (optional)
+- <project_seed> (use `docs/templates/PROJECT_SEED_TEMPLATE.md`)
+- Context dump transcript (recommended)
+- Architecture/TA PDF (optional)
 
 Output format:
 # 0) Inputs & precedence
-# 0.5) Facts extracted from TA (only if TA attached)
+# 0.5) Facts extracted from Architecture/TA PDF (only if attached)
+# 0.6) Facts extracted from context dump (only if provided)
 # 1) Understanding snapshot (max 6 bullets)
 # 2) Assumption ledger (table)
 # 3) Questions (grouped)
@@ -41,9 +48,12 @@ Task: Generate project-specific canonical docs from my answers.
 
 Source precedence:
 1) Explicit overrides in my message
-2) TA facts (if attached)
-3) My interrogation answers
-4) If still unknown: write “TBD” + add to Open Questions (do not guess)
+2) Extracted Architecture/TA PDF facts (if attached)
+3) Extracted context dump facts (if provided)
+4) My interrogation answers
+5) Apply baseline defaults where defined (for example in `docs/templates/PROJECT_SEED_TEMPLATE.md` NFR defaults)
+6) If still unknown and non-critical: write “TBD” and report unresolved items + assumptions in thread only (do not guess)
+7) If still unknown and critical: stop and request answers before continuing
 
 Deliverables (edit repo files):
 - docs/product-specs/index.md
@@ -54,7 +64,7 @@ Deliverables (edit repo files):
 Rules:
 - Product Specs are the contract. No guessing.
 - Keep cross-doc consistency: routes, feature IDs, terminology.
-- Conflicts: don’t guess; mark TBD + note the conflict.
+- Conflicts: don’t guess; mark TBD and report the conflict in thread only.
 
 After writing:
 - Create a checkpoint report in reports/.
@@ -78,7 +88,7 @@ Scope:
 Rules:
 - Identify the top 3 contradictions / missing decisions that would block or mislead build.
 - Apply minimal edits directly to resolve them.
-- If resolution requires human choice: add an Open Question (do not guess).
+- If resolution requires human choice: do not guess; report unresolved decision(s) in thread only.
 
 After patching:
 - Write a checkpoint report in reports/.

@@ -6,7 +6,7 @@ Ask all missing questions needed to write the project docs without guessing.
 
 ## Expected output
 
-- 35–55 concrete questions in one pass (grouped)
+- As many concrete questions as needed to eliminate uncertainty before development (including very large sets if needed)
 - Copy/paste-friendly Answer Sheet
 
 ## Files likely touched

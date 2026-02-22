@@ -32,6 +32,7 @@ Each step should have a step sheet in `steps/`.
   - Step sheet: `steps/S01-<slug>.md`
   - Goal (one sentence):
   - Output (what exists after this step):
+  - Dependency preflight: `none` / `requires approval` (list dependency + step task bullet reference)
   - Checks (commands) or `N/A`:
   - Stop condition (what to show before continuing):
 
@@ -39,6 +40,7 @@ Each step should have a step sheet in `steps/`.
   - Step sheet: `steps/S02-<slug>.md`
   - Goal:
   - Output:
+  - Dependency preflight: `none` / `requires approval` (list dependency + step task bullet reference)
   - Checks:
   - Stop condition:
 
@@ -46,12 +48,15 @@ Each step should have a step sheet in `steps/`.
   - Step sheet: `steps/S03-<slug>.md`
   - Goal:
   - Output:
+  - Dependency preflight: `none` / `requires approval` (list dependency + step task bullet reference)
   - Checks:
   - Stop condition:
 
 ## Dependencies (approval-gated)
 
 - Any new dependency? If yes, list it and mark: **requires approval**.
+- Every listed dependency must map to a specific step ID and task bullet.
+- Include exact human-run command(s) for each dependency request.
 
 ## Risks / unknowns
 

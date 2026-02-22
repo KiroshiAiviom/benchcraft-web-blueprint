@@ -17,3 +17,4 @@ Rules:
 - `shadcn-ui-llms.txt` — shadcn/ui usage + customization patterns
 - `doc-consistency-llms.txt` — quick checks for broken refs + naming drift
 - `full-bundle-llms.txt` — staged setup for Playwright + Stylelint + Chrome DevTools MCP in target repos
+- `docs/templates/PROJECT_SEED_TEMPLATE.md` — canonical `<project_seed>` payload template for planning inputs

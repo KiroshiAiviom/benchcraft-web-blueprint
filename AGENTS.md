@@ -27,7 +27,7 @@ Rules:
 ## Non-negotiables
 
 - **One checkpoint per thread.** Small diff, then stop for human review.
-- **Don’t invent requirements.** If something is unclear, write the question + assumption(s) into `docs/exec-plans/active/NOW.md`, then stop.
+- **Don’t invent requirements.** If something is unclear, report unresolved question(s) + assumption(s) in the thread, then stop.
 - **Report honestly.** Include commands run + results (or `N/A` + a reason).
 - **No surprise dependencies.** Do not edit `package.json` or lockfiles unless the human explicitly approves.
 
@@ -35,6 +35,9 @@ Rules:
 
 If you need a new package, version bump, or lockfile change:
 
+0) Run dependency preflight before executing step tasks:
+   - identify missing dependencies needed by the current step
+   - cite the exact step task bullet that requires each dependency
 1) Stop and write a short proposal:
    - what you want to change
    - why
@@ -58,6 +61,18 @@ Important:
 - Do not add runtime/tooling scaffold files for Full Bundle in this blueprint root.
 - Add those files only in the target app repository after human dependency approval.
 - Command-level details: `docs/BOOTSTRAP_RUNBOOK.md` and `docs/references/full-bundle-llms.txt`.
+
+## Dev server ownership (target repos)
+
+- Default: the human owns the active dev server session.
+- Default browser/DevTools URL: `http://localhost:3000`.
+- Agent should auto-target `http://localhost:3000` first and may verify availability from terminal (for example, health check/curl) before browser diagnostics.
+- Do not stop/restart or replace the human's `bun dev` process unless explicitly requested.
+
+## Commit message helper
+
+- When the human asks for a commit message, use: `docs/templates/COMMIT_MESSAGE_TEMPLATE.md`.
+- Keep message format stable and derive bullet points from the current thread context.
 
 ## Skills / roles
 

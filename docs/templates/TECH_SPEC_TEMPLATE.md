@@ -21,6 +21,7 @@ Dependency policy:
 
 - Do not add new dependencies without explicit approval.
 - When a dependency is approved, record: rationale, alternatives, and doc link.
+- If dependency decisions are unresolved, surface them in thread until approved (do not persist unresolved dependency questions in this doc).
 
 ## 2) Runtime + environments
 
@@ -97,6 +98,6 @@ Dependency policy:
   - build steps:
   - runtime environment vars
 
-## 11) Open risks / questions
+## 11) Open risks
 
 - <Risk>
