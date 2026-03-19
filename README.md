@@ -36,10 +36,9 @@ This blueprint tries to solve those problems with a simple operating model:
 ## Current status
 
 - Public OSS baseline is being established now
-- The workflow is already informing a large private enterprise application under NDA
 - Public proof artifacts and examples are the next improvement area
 
-The private application cannot be shared directly, so this repository needs to stand on its own public artifacts and documentation.
+This repository is intended to stand on its own public artifacts, documentation, and workflow clarity.
 
 ## What is included
 
