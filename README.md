@@ -1,41 +1,101 @@
 # Benchcraft Web Blueprint
 
-A docs-first workflow blueprint for **Codex-first** development of production-grade **Next.js (App Router)** applications.
+Benchcraft Web Blueprint is a docs-first, checkpoint-driven workflow for building production-oriented Next.js applications with Codex or similar coding agents.
 
-Designed to work best with the **Codex App** (threads, worktrees, reviewable diffs), while remaining compatible with the Codex IDE extension and CLI.
+The emphasis is not one-shot code generation. The emphasis is predictable planning, small reviewable diffs, docs as contracts, and explicit quality gates.
+
+This repository is early-stage as a public open-source project. It is being packaged in public while the workflow continues to evolve.
+
+## What this project is
+
+- A reusable blueprint for agent-assisted web application work
+- A structured planning and execution system for small checkpoints
+- A set of templates, guardrails, and repo conventions for production-minded teams
+- A Codex-first workflow that still stays readable without relying on chat history
+
+## What this project is not
+
+- A complete application starter with runtime code
+- A claim of broad adoption or finished ecosystem status
+- A replacement for product specs, engineering judgment, or human review
+
+## Why it exists
+
+Many AI-assisted app workflows fail in the same places:
+
+- requirements get invented mid-build
+- changes become too large to review comfortably
+- docs drift away from implementation
+- dependency changes slip in without clear approval
+- teams cannot tell what the agent actually did
+
+This blueprint tries to solve those problems with a simple operating model:
+
+**1 task -> 1 checkpoint -> 1 report -> stop for review**
+
+## Current status
+
+- Public OSS baseline is being established now
+- The workflow is already informing a large private enterprise application under NDA
+- Public proof artifacts and examples are the next improvement area
+
+The private application cannot be shared directly, so this repository needs to stand on its own public artifacts and documentation.
+
+## What is included
+
+- `AGENTS.md`
+  Concise operating rules for the repository.
+- `.codex/`
+  Codex skills and environment configuration for planner, builder, tests, refactor, and UI roles.
+- `docs/`
+  Templates, planning artifacts, guardrails, and workflow references.
+- `reports/`
+  Checkpoint report template for traceable work.
+- `ARCHITECTURE.md`
+  A short architecture map that links deeper docs.
+
+Important docs:
+
+- `docs/PLANS.md` for ExecPlan lifecycle
+- `docs/QUALITY_SCORE.md` for checkpoint quality expectations
+- `docs/BOOTSTRAP_RUNBOOK.md` for staged setup in a target app repo
+- `docs/SECURITY.md` and `docs/RELIABILITY.md` for baseline safety guardrails
+- `docs/DESIGN.md` and `docs/FRONTEND.md` for UI/frontend defaults
 
 ## Baseline stack
 
-- Next.js (App Router) + React + TypeScript
-- Bun (package manager + task runner)
-- Tailwind CSS + shadcn/ui (component baseline)
-- Biome (format/lint) + TypeScript typecheck
+The default baseline described by this blueprint is:
 
-## What’s included
+- Next.js App Router
+- React
+- TypeScript
+- Bun
+- Tailwind CSS
+- Biome
 
-- `AGENTS.md` — concise operating rules (kept intentionally short).
-- `ARCHITECTURE.md` — architecture map (keep it short; link out).
-- `.codex/` — Codex configuration + skills (Planner, Builder, Refactor, Tests, UI).
-- `docs/` — guardrails, templates, and planning artifacts.
-  - `docs/PLANS.md` — plan structure + lifecycle
-  - `docs/exec-plans/` — active/completed plans + tech debt tracker
-  - `docs/product-specs/` — product specs (what + acceptance criteria)
-  - `docs/design-docs/` — decision records + core beliefs
-  - `docs/references/` — LLM-friendly tool references
-  - `docs/QUALITY_SCORE.md` — quality rubric
-  - `docs/DESIGN.md` + `docs/FRONTEND.md` — UI/UX + frontend defaults
-  - `docs/SECURITY.md`, `docs/RELIABILITY.md`, `docs/PRODUCT_SENSE.md`
-- `reports/` — checkpoint report template.
+Projects using the blueprint can diverge, but this is the default operating target today.
 
-## Quickstart From Empty Next App
+## How the workflow works
 
-Use the runbook for exact staged setup:
+1. Product specs define what is being built and how success is evaluated.
+2. ExecPlans turn that scope into checkpoint-sized steps.
+3. `docs/exec-plans/active/NOW.md` holds the single active checkpoint.
+4. Each checkpoint produces a small diff and a report, then stops for review.
 
-- `docs/BOOTSTRAP_RUNBOOK.md`
+The repository is designed to preserve project memory in files instead of relying on thread context alone.
+
+## Quickstart
+
+Use the staged setup in `docs/BOOTSTRAP_RUNBOOK.md`.
 
 Minimal flow:
 
-1) Create app with Bun + Next:
+1. Create or open a Next.js project.
+2. Overlay this blueprint into the project root.
+3. Bootstrap the project docs.
+4. Drive implementation through `docs/exec-plans/active/NOW.md`.
+
+Example app creation:
 
 ```bash
 bun create next-app@latest my-app \
@@ -49,39 +109,42 @@ bun create next-app@latest my-app \
   --empty
 ```
 
-2) Overlay this blueprint into `my-app` (`AGENTS.md`, `.codex/`, `docs/`, `reports/`).
-3) Run docs bootstrap checkpoint (create Product Spec + `docs/TECH_SPEC.md` + `docs/DESIGN_SYSTEM.md`).
-4) Enable Full Bundle in a dedicated approved checkpoint (Playwright + Stylelint + Chrome DevTools MCP).
+## Who this is for
 
-## Canonical project docs (keep it lean)
+- Solo builders who want stronger process around AI-assisted work
+- Small teams that care about reviewability and explicit scope control
+- Maintainers experimenting with Codex-first or agent-assisted development workflows
 
-For most projects, start with:
+## Who this is not for
 
-1) Product specs
-   - `docs/product-specs/index.md`
-   - at least one feature spec from `docs/product-specs/PRODUCT_SPEC_TEMPLATE.md`
+- Teams looking for a full batteries-included app framework
+- People who want the agent to bypass planning and review
+- Projects that do not want repo-level process or documentation discipline
 
-2) Design System
-   - `docs/DESIGN_SYSTEM.md` from `docs/templates/DESIGN_SYSTEM_TEMPLATE.md`
+## Roadmap
 
-3) Technical Spec
-   - `docs/TECH_SPEC.md` from `docs/templates/TECH_SPEC_TEMPLATE.md`
+Near-term public hardening:
 
-Optional (high-value for enterprise):
+- add sanitized public proof artifacts
+- tighten examples and onboarding
+- improve public OSS contribution surfaces
 
-- `docs/design-docs/` (decision records)
-- `ARCHITECTURE.md` (short map; links to specs)
+Longer-term:
 
-## How to use this blueprint
+- refine the workflow from real usage
+- add more public examples and decision records
+- make the blueprint easier for outside maintainers to adopt
 
-1) Start from an existing Next.js repo or create a new one (your preferred bootstrap).
-2) Overlay this blueprint into the project root (docs + .codex + guardrails).
-3) Run the first checkpoint:
-   - open `docs/exec-plans/active/NOW.md`
-   - execute the single checkbox (or use `.codex/skills/role-planner` to create a new plan)
+## Contributing
 
-## Key idea
+Contributions are welcome, especially around documentation clarity, workflow sharpness, and public examples.
 
-**1 task → 1 checkpoint (15–30 min) → report → stop**.
+Start with:
 
-Small diffs are what keep quality high and speed predictable.
+- `CONTRIBUTING.md`
+- `AGENTS.md`
+- `docs/PLANS.md`
+
+## License
+
+MIT. See `LICENSE`.
